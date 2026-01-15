@@ -16,26 +16,24 @@
             padding: 10px 40px 15px 40px;
         }
 
-        .h-red { color: #FF0000; font-weight: 950; text-transform: uppercase; border-left: 8px solid #FF0000; padding-left: 15px; margin: 25px 0 15px 0; display: block; font-size: 1.8rem; }
+        .h-red { color: #FF0000; font-weight: 950; text-transform: uppercase; border-left: 8px solid #FF0000; padding-left: 15px; margin: 30px 0 15px 0; display: block; font-size: 1.8rem; }
         .card { background: #0f0f0f; border: 1px solid #222; border-radius: 12px; padding: 15px; }
         .stat-label { color: #888; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; }
         .stack-lg { font-size: 2.2rem; font-weight: 900; line-height: 1; }
         
-        .filter-pill { background: #111; border: 1px solid #333; padding: 6px 12px; border-radius: 6px; font-size: 10px; font-weight: 900; text-transform: uppercase; cursor: pointer; transition: 0.2s; color: #666; }
-        .filter-pill:hover { border-color: #FF0000; color: #fff; }
-        .pill-active { background: #FF0000 !important; color: white !important; border-color: #FF0000 !important; }
-
         table { width: 100%; border-collapse: collapse; }
         th { color:#ffffff; font-size:12px; text-transform:uppercase; font-weight: 900; letter-spacing: 1px; padding:15px 12px; border-bottom:2px solid #333; text-align: left; background: #111; }
-        td { padding:15px 12px; border-bottom: 1px solid #1a1a1a; font-size:1rem; font-weight: 700; }
+        td { padding:15px 12px; border-bottom: 1px solid #1a1a1a; font-size:1rem; font-weight: 700; cursor: pointer; }
+        tr:hover { background: #111; }
         
-        .staff-name { color: #ffffff; font-size: 1.1rem; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; decoration-color: #FF0000; }
+        .click-text { color: #FF0000; font-size: 0.6rem; font-weight: 900; vertical-align: middle; margin-left: 8px; }
         .hidden-row { display: none !important; }
         
-        #resetBtn { display: none; background: #FF0000; color: white; font-size: 10px; font-weight: 900; padding: 5px 12px; border-radius: 4px; cursor: pointer; text-transform: uppercase; }
+        #resetBtn { display: none; background: #FF0000; color: white; font-size: 10px; font-weight: 900; padding: 5px 12px; border-radius: 4px; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
         .grid-container { padding: 0 40px; }
 
         .leader-box { background: #111; border: 1px solid #333; border-right: 4px solid #FF0000; padding: 8px 15px; border-radius: 4px; text-align: right; }
+        select { background: #111; border: 1px solid #333; color: white; font-size: 10px; font-weight: 900; padding: 4px; border-radius: 4px; text-transform: uppercase; }
     </style>
 </head>
 
@@ -46,8 +44,14 @@
         <header class="flex justify-between items-start mb-4">
             <div>
                 <h1 class="text-5xl font-black tracking-tighter uppercase leading-none">SURUKA<span class="text-red-600">SALES</span></h1>
-                <p id="viewStatus" class="text-zinc-400 font-bold uppercase text-[10px] tracking-[5px] mt-1">Executive Audit | Jan 2026</p>
-                <div id="resetBtn" class="mt-2" onclick="resetAudit()">Reset View ✕</div>
+                <div class="flex items-center gap-3 mt-1">
+                    <select id="monthFilter">
+                        <option>January 2026</option>
+                        <option disabled>February 2026</option>
+                    </select>
+                    <p id="viewStatus" class="text-zinc-400 font-bold uppercase text-[10px] tracking-[5px]">Executive Audit</p>
+                </div>
+                <div id="resetBtn" onclick="resetAudit()">Reset View ✕</div>
             </div>
             
             <div class="leader-box">
@@ -57,83 +61,93 @@
             </div>
         </header>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div class="card border-red-900/40"><p class="stat-label">Total Revenue</p><p id="hRev" class="stack-lg text-red-600">₦24.3m</p></div>
             <div class="card border-zinc-700"><p class="stat-label">Total Customers</p><p id="hCust" class="stack-lg">415</p></div>
+            <div class="card border-zinc-700"><p class="stat-label">Units Sold</p><p id="hUnits" class="stack-lg">3,040</p></div>
             <div class="card border-zinc-700"><p class="stat-label">Return %</p><p id="hRet" class="stack-lg">39.2%</p></div>
-            <div class="card border-zinc-700"><p class="stat-label">Returns</p><p id="hRetC" class="stack-lg">163</p></div>
-        </div>
-
-        <div class="flex flex-wrap gap-2">
-            <span class="text-[9px] font-black text-zinc-500 uppercase flex items-center mr-2">Filters:</span>
-            <div class="filter-pill" onclick="filterByAttr('dept', 'Digital', this)">Digital Marketers</div>
-            <div class="filter-pill" onclick="filterByAttr('dept', 'Sales', this)">Sales Team</div>
-            <div class="filter-pill" onclick="filterByAttr('dept', 'Care', this)">Customer Care</div>
-            <div class="filter-pill" onclick="filterByAttr('zone', 'Lagos', this)">Lagos</div>
-            <div class="filter-pill" onclick="filterByAttr('zone', 'Benin', this)">Benin</div>
-            <div class="filter-pill" onclick="filterByAttr('zone', 'Abuja', this)">Abuja</div>
         </div>
     </div>
 
     <div class="grid-container">
         
-        <span class="h-red">Individual Performance Audit</span>
+        <span class="h-red">Departmental Audit <span class="click-text">(Click row to filter)</span></span>
         <div class="card mb-10 p-0 overflow-hidden">
-            <table id="mainAudit">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Revenue</th>
+                        <th>Customers</th>
+                        <th class="text-right">Units</th>
+                    </tr>
+                </thead>
+                <tbody id="deptBody">
+                    <tr onclick="filterItem('Digital Marketer', '14.3m', '284', '1,972', '58.8%')">
+                        <td>Digital Marketer</td>
+                        <td>₦14.3m</td>
+                        <td>284</td>
+                        <td class="text-right">1,972</td>
+                    </tr>
+                    <tr onclick="filterItem('Sales Team', '6.7m', '84', '693', '27.9%')">
+                        <td>Sales Team</td>
+                        <td>₦6.7m</td>
+                        <td>84</td>
+                        <td class="text-right">693</td>
+                    </tr>
+                    <tr onclick="filterItem('Customer Care', '3.1m', '50', '375', '13.1%')">
+                        <td>Customer Care</td>
+                        <td>₦3.1m</td>
+                        <td>50</td>
+                        <td class="text-right">375</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <span class="h-red">Sales Team (Individuals) <span class="click-text">(Click row to filter)</span></span>
+        <div class="card mb-10 p-0 overflow-hidden">
+            <table>
                 <thead>
                     <tr>
                         <th>Staff Name</th>
                         <th>Revenue</th>
-                        <th>Customers</th>
+                        <th>Cust</th>
                         <th>Units</th>
-                        <th class="text-right">% From Target</th>
+                        <th class="text-right">% Target</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="rep-row" data-name="Mary" data-dept="Sales" data-zone="Lagos" data-rev="6.8m" data-cust="143" data-ret="39.2%" data-retc="163">
-                        <td><span class="staff-name" onclick="filterStaff(this)">Mary</span></td>
+                <tbody id="staffBody">
+                    <tr onclick="filterItem('Mary', '6.8m', '143', '884', '1.37%')">
+                        <td>Mary</td>
                         <td>₦6.8m</td>
                         <td>143</td>
                         <td>884</td>
                         <td class="text-right text-red-600">1.37%</td>
                     </tr>
-                    <tr class="rep-row" data-name="Bolu" data-dept="Digital" data-zone="Lagos" data-rev="4.8m" data-cust="64" data-ret="39.2%" data-retc="163">
-                        <td><span class="staff-name" onclick="filterStaff(this)">Bolu</span></td>
+                    <tr onclick="filterItem('Bolu', '4.8m', '64', '543', '1.22%')">
+                        <td>Bolu</td>
                         <td>₦4.8m</td>
                         <td>64</td>
                         <td>543</td>
                         <td class="text-right text-red-600">1.22%</td>
                     </tr>
-                    <tr class="rep-row" data-name="Susan" data-dept="Sales" data-zone="Benin" data-rev="3.1m" data-cust="37" data-ret="39.2%" data-retc="163">
-                        <td><span class="staff-name" onclick="filterStaff(this)">Susan</span></td>
+                    <tr onclick="filterItem('Susan', '3.1m', '37', '384', '3.17%')">
+                        <td>Susan</td>
                         <td>₦3.1m</td>
                         <td>37</td>
                         <td>384</td>
                         <td class="text-right text-red-600">3.17%</td>
                     </tr>
-                    <tr class="rep-row" data-name="Rachel" data-dept="Care" data-zone="Abuja" data-rev="2.3m" data-cust="40" data-ret="39.2%" data-retc="163">
-                        <td><span class="staff-name" onclick="filterStaff(this)">Rachel</span></td>
+                    <tr onclick="filterItem('Rachel', '2.3m', '40', '267', '2.30%')">
+                        <td>Rachel</td>
                         <td>₦2.3m</td>
                         <td>40</td>
                         <td>267</td>
                         <td class="text-right text-red-600">2.30%</td>
                     </tr>
-                    <tr class="rep-row" data-name="Jaya" data-dept="Sales" data-zone="Benin" data-rev="1.8m" data-cust="32" data-ret="39.2%" data-retc="163">
-                        <td><span class="staff-name" onclick="filterStaff(this)">Jaya</span></td>
-                        <td>₦1.8m</td>
-                        <td>32</td>
-                        <td>253</td>
-                        <td class="text-right text-red-600">1.26%</td>
-                    </tr>
-                    <tr class="rep-row" data-name="Lewa" data-dept="Sales" data-zone="Lagos" data-rev="1.8m" data-cust="36" data-ret="39.2%" data-retc="163">
-                        <td><span class="staff-name" onclick="filterStaff(this)">Lewa</span></td>
-                        <td>₦1.8m</td>
-                        <td>36</td>
-                        <td>271</td>
-                        <td class="text-right text-red-600">0.74%</td>
-                    </tr>
-                    <tr class="rep-row" data-name="Divine" data-dept="Sales" data-zone="Abuja" data-rev="1.4m" data-cust="29" data-ret="39.2%" data-retc="163">
-                        <td><span class="staff-name" onclick="filterStaff(this)">Divine</span></td>
+                    <tr onclick="filterItem('Divine', '1.4m', '29', '172', '1.40%')">
+                        <td>Divine</td>
                         <td>₦1.4m</td>
                         <td>29</td>
                         <td>172</td>
@@ -143,94 +157,38 @@
             </table>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            <div>
-                <span class="h-red">Zonal Data</span>
-                <div class="card p-0 overflow-hidden">
-                    <table>
-                        <thead><tr><th>Zone</th><th>Revenue</th><th>Customers</th><th class="text-right">Market %</th></tr></thead>
-                        <tbody>
-                            <tr><td>Lagos</td><td>₦12.0m</td><td>189</td><td class="text-right text-red-600">49.5%</td></tr>
-                            <tr class="highlight-row"><td>Benin</td><td>₦8.0m</td><td>156</td><td class="text-right text-red-600">33.1%</td></tr>
-                            <tr><td>Abuja</td><td>₦4.1m</td><td>75</td><td class="text-right text-red-600">17.0%</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div>
-                <span class="h-red">Department Data</span>
-                <div class="card p-0 overflow-hidden">
-                    <table>
-                        <thead><tr><th>Department</th><th>Revenue</th><th>Units</th><th class="text-right">Share %</th></tr></thead>
-                        <tbody>
-                            <tr><td>Digital Marketer</td><td>₦14.3m</td><td>1,972</td><td class="text-right text-red-600">58.8%</td></tr>
-                            <tr class="highlight-row"><td>Sales Team</td><td>₦6.7m</td><td>693</td><td class="text-right text-red-600">27.9%</td></tr>
-                            <tr><td>Customer Care</td><td>₦3.1m</td><td>375</td><td class="text-right text-red-600">13.1%</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <span class="h-red">Digital Revenue Report</span>
+        <span class="h-red">Zonal Data</span>
         <div class="card mb-20 p-0 overflow-hidden">
             <table>
-                <thead>
-                    <tr>
-                        <th>Lead Source</th>
-                        <th>Revenue</th>
-                        <th class="text-right">Audit Status</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Zone</th><th>Revenue</th><th>Customers</th><th class="text-right">Units</th></tr></thead>
                 <tbody>
-                    <tr><td>Digital - IG</td><td>₦7.1m</td><td class="text-right text-red-600">High Volume</td></tr>
-                    <tr class="highlight-row"><td>Digital - Landing Page</td><td>₦6.3m</td><td class="text-right text-red-600">Stable</td></tr>
-                    <tr><td>Digital - Whatsapp Dm</td><td>₦451k</td><td class="text-right text-zinc-500">Active</td></tr>
-                    <tr class="highlight-row"><td>Digital - Facebook</td><td>₦174k</td><td class="text-right text-zinc-500">Low Volume</td></tr>
+                    <tr><td>Lagos</td><td>₦12.0m</td><td>189</td><td class="text-right">1,530</td></tr>
+                    <tr class="highlight-row"><td>Benin</td><td>₦8.0m</td><td>156</td><td class="text-right">1,023</td></tr>
+                    <tr><td>Abuja</td><td>₦4.1m</td><td>75</td><td class="text-right">475</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
     <script>
-        function filterByAttr(attr, value, pill) {
-            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('pill-active'));
-            pill.classList.add('pill-active');
-            const rows = document.querySelectorAll('.rep-row');
-            rows.forEach(r => {
-                if (r.getAttribute(`data-${attr}`).includes(value)) {
-                    r.classList.remove('hidden-row');
-                } else {
-                    r.classList.add('hidden-row');
-                }
-            });
-            document.getElementById('viewStatus').innerText = `FILTERED: ${value} VIEW`;
-            document.getElementById('resetBtn').style.display = 'inline-block';
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        function filterStaff(element) {
-            const row = element.closest('tr');
-            const rows = document.querySelectorAll('.rep-row');
-            rows.forEach(r => r.classList.add('hidden-row'));
-            row.classList.remove('hidden-row');
-            document.getElementById('hRev').innerText = '₦' + row.getAttribute('data-rev');
-            document.getElementById('hCust').innerText = row.getAttribute('data-cust');
-            document.getElementById('hRet').innerText = row.getAttribute('data-ret');
-            document.getElementById('hRetC').innerText = row.getAttribute('data-retc');
-            document.getElementById('viewStatus').innerText = "FOCUS: " + row.getAttribute('data-name');
+        function filterItem(name, rev, cust, units, ret) {
+            document.getElementById('hRev').innerText = '₦' + rev;
+            document.getElementById('hCust').innerText = cust;
+            document.getElementById('hUnits').innerText = units;
+            document.getElementById('hRet').innerText = ret;
+            
+            document.getElementById('viewStatus').innerText = "FOCUS: " + name;
             document.getElementById('resetBtn').style.display = 'inline-block';
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function resetAudit() {
-            document.querySelectorAll('.rep-row').forEach(r => r.classList.remove('hidden-row'));
-            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('pill-active'));
             document.getElementById('hRev').innerText = '₦24.3m';
             document.getElementById('hCust').innerText = '415';
+            document.getElementById('hUnits').innerText = '3,040';
             document.getElementById('hRet').innerText = '39.2%';
-            document.getElementById('hRetC').innerText = '163';
-            document.getElementById('viewStatus').innerText = "Executive Audit | Jan 2026";
+            
+            document.getElementById('viewStatus').innerText = "Executive Audit";
             document.getElementById('resetBtn').style.display = 'none';
         }
     </script>
