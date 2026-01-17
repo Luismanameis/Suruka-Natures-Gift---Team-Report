@@ -3,125 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SURUKA TEAM REPORT - RESPONSIVE MASTER</title>
+    <title>SURUKA SALES TEAM - JAN 17</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #ffffff; margin: 0; padding: 0; line-height: 1.2; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #ffffff; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
         
-        /* RESPONSIVE FIXED HEADER */
+        /* FIXED HEADER */
         .fixed-header { 
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            background: rgba(5, 5, 5, 0.96); backdrop-filter: blur(20px);
-            padding: 1rem; border-bottom: 1px solid #1a1a1a;
+            background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(20px);
+            padding: 1rem; border-bottom: 2px solid #1a1a1a;
         }
 
-        /* Adjust content padding for mobile vs desktop */
-        .content-area { padding: 220px 1rem 4rem 1rem; max-width: 1200px; margin: 0 auto; } 
-        @media (min-width: 768px) { .content-area { padding: 200px 2.5rem 4rem 2.5rem; } .fixed-header { padding: 1.5rem 2.5rem; } }
+        .content-area { padding: 310px 1rem 5rem 1rem; max-width: 1400px; margin: 0 auto; } 
+        @media (min-width: 768px) { .content-area { padding: 260px 2.5rem 5rem 2.5rem; } }
 
         .glass-card { background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 12px; padding: 0.8rem; height: 100%; }
         
-        /* FIGURE COLOR SCHEME */
-        .txt-emerald { color: #00ff88; } /* Revenue/Success */
-        .txt-amber { color: #ffb300; }   /* Units/Volume */
-        .txt-sky { color: #00d4ff; }     /* Customers/Leads */
-        .txt-violet { color: #bd00ff; }  /* Percentages/Retention */
-        .brand-yellow { color: #FFD700; }
+        /* TEAM COLORS */
+        .txt-emerald { color: #00ff88; } .txt-sky { color: #00d4ff; } 
+        .txt-amber { color: #ffb300; } .txt-violet { color: #bd00ff; } .txt-red { color: #ff3333; } 
 
-        .section-header { margin: 2rem 0 1rem 0; border-left: 5px solid #FFD700; padding-left: 1rem; }
-        .section-header h2 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; font-style: italic; letter-spacing: 1px; }
-        
-        /* AUTO-SCALING TEXT FOR CARDS */
+        .filter-scroll { display: flex; overflow-x: auto; gap: 8px; padding: 10px 0; scrollbar-width: none; border-top: 1px solid #1a1a1a; margin-top: 10px; }
+        .rep-btn { background: #111; border: 1px solid #222; padding: 6px 12px; border-radius: 6px; font-size: 9px; font-weight: 800; text-transform: uppercase; white-space: nowrap; color: #666; }
+        .rep-btn.active { border-color: #00ff88; color: #fff; }
+
         .stat-huge { font-size: clamp(1.2rem, 5vw, 2.2rem); font-weight: 900; line-height: 1; letter-spacing: -1px; }
-        .stat-label { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: #666; letter-spacing: 1px; margin-bottom: 0.2rem; }
+        .stat-label { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: #555; margin-bottom: 0.2rem; }
 
-        /* TABLE SCROLL FOR MOBILE */
-        .table-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; background: #0d0d0d; border: 1px solid #1a1a1a; }
-        table { width: 100%; border-collapse: collapse; min-width: 500px; }
-        th { padding: 10px; text-align: left; font-size: 9px; color: #444; text-transform: uppercase; border-bottom: 1px solid #222; white-space: nowrap; }
-        td { padding: 12px 10px; font-size: 0.85rem; font-weight: 700; border-bottom: 1px solid #111; }
+        .table-wrap { width: 100%; overflow-x: auto; border-radius: 12px; background: #0d0d0d; border: 1px solid #1a1a1a; margin-bottom: 2rem; }
+        table { width: 100%; border-collapse: collapse; min-width: 850px; }
+        th { padding: 12px; text-align: left; font-size: 9px; color: #444; text-transform: uppercase; border-bottom: 1px solid #222; }
+        td { padding: 14px 12px; font-size: 0.85rem; font-weight: 700; border-bottom: 1px solid #111; }
+        
+        .section-header { margin: 2rem 0 1rem 0; border-left: 5px solid #00ff88; padding-left: 1rem; }
+        .section-header h2 { font-size: 1rem; font-weight: 900; text-transform: uppercase; font-style: italic; color: #fff; }
     </style>
 </head>
 <body>
 
     <div class="fixed-header">
-        <div class="flex justify-between items-start mb-4">
+        <div class="flex justify-between items-center mb-3">
             <div>
-                <h1 class="text-2xl md:text-4xl font-black italic uppercase tracking-tighter leading-none">SURUKA<span class="brand-yellow">TEAM</span></h1>
-                <p class="text-[8px] md:text-[10px] font-bold tracking-[0.2em] opacity-40 uppercase mt-1">Audit • Jan 16, 2026</p>
+                <h1 class="text-2xl md:text-3xl font-black italic uppercase tracking-tighter leading-none text-emerald-500">SURUKA<span class="text-white">TEAM</span></h1>
+                <p class="text-[9px] font-bold tracking-[0.3em] opacity-40 uppercase">Sales Performance • JAN 17, 2026</p>
             </div>
             <div class="text-right">
-                <p class="stat-label">Daily Revenue</p>
-                <p class="text-xl md:text-2xl font-black txt-emerald">₦477k</p>
+                <p class="stat-label">Today's Revenue</p>
+                <p class="text-xl font-black txt-emerald">₦1.18m</p>
             </div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
-            <div class="glass-card"><p class="stat-label">MTD Revenue</p><p class="stat-huge txt-emerald">₦26.4m</p></div>
-            <div class="glass-card"><p class="stat-label">Customers</p><p class="stat-huge txt-sky">456</p></div>
-            <div class="glass-card"><p class="stat-label">Units Sold</p><p class="stat-huge txt-amber">3,286</p></div>
-            <div class="glass-card"><p class="stat-label">Retention</p><p class="stat-huge txt-violet">35.8%</p></div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3">
+            <div class="glass-card"><p class="stat-label">MTD Gross</p><p class="stat-huge txt-emerald">₦29.0m</p></div>
+            <div class="glass-card"><p class="stat-label">Total Units</p><p class="stat-huge txt-amber">3,534</p></div>
+            <div class="glass-card"><p class="stat-label">Total Cust.</p><p class="stat-huge txt-sky">491</p></div>
+            <div class="glass-card"><p class="stat-label">Retention</p><p class="stat-huge txt-violet">39.71%</p></div>
+        </div>
+
+        <div class="filter-scroll">
+            <div class="rep-btn active">TEAM OVERVIEW</div><div class="rep-btn">BOLU</div><div class="rep-btn">MARY</div><div class="rep-btn">JAYA</div><div class="rep-btn">LEWA</div><div class="rep-btn">SUSAN</div><div class="rep-btn">AMAYA</div><div class="rep-btn">RACHEL</div><div class="rep-btn">ESTHER</div><div class="rep-btn">DIVINE</div>
         </div>
     </div>
 
     <div class="content-area">
         
-        <div class="section-header"><h2>01. Individual Performance</h2></div>
-        <div class="table-container">
+        <div class="section-header"><h2>Segment 1 - Sales Medium Breakdown</h2></div>
+        <div class="table-wrap">
             <table>
-                <thead><tr><th>Staff</th><th>Revenue</th><th>Cust</th><th>Units</th><th>% Target</th></tr></thead>
+                <thead><tr><th>MEDIUM</th><th>REVENUE</th><th>STATUS</th></tr></thead>
                 <tbody>
-                    <tr><td>Mary</td><td class="txt-emerald">₦7,190,796</td><td class="txt-sky">151</td><td class="txt-amber">933</td><td class="txt-violet">1.44%</td></tr>
-                    <tr><td>Bolu</td><td class="txt-emerald">₦5,362,573</td><td class="txt-sky">71</td><td class="txt-amber">582</td><td class="txt-violet">1.34%</td></tr>
-                    <tr><td>Susan</td><td class="txt-emerald">₦3,373,296</td><td class="txt-sky">42</td><td class="txt-amber">420</td><td class="txt-violet">3.37%</td></tr>
-                    <tr><td>Rachel</td><td class="txt-emerald">₦2,334,311</td><td class="txt-sky">41</td><td class="txt-amber">273</td><td class="txt-violet">2.33%</td></tr>
-                    <tr><td>Jaya</td><td class="txt-emerald">₦2,177,640</td><td class="txt-sky">37</td><td class="txt-amber">268</td><td class="txt-violet">1.45%</td></tr>
-                    <tr><td>Lewa</td><td class="txt-emerald">₦2,021,000</td><td class="txt-sky">40</td><td class="txt-amber">301</td><td class="txt-violet">0.81%</td></tr>
-                    <tr><td>Divine</td><td class="txt-emerald">₦1,753,200</td><td class="txt-sky">36</td><td class="txt-amber">210</td><td class="txt-violet">1.75%</td></tr>
-                    <tr><td>Esther</td><td class="txt-emerald">₦723,000</td><td class="txt-sky">15</td><td class="txt-amber">65</td><td class="txt-violet">0.72%</td></tr>
+                    <tr><td>Digital - Instagram</td><td class="txt-emerald">₦8,987,936.00</td><td class="txt-sky">ACTIVE</td></tr>
+                    <tr><td>Digital - Landing Page</td><td class="txt-emerald">₦6,650,800.00</td><td class="txt-sky">ACTIVE</td></tr>
+                    <tr><td>Digital - Whatsapp Dm</td><td class="txt-emerald">₦518,600.00</td><td class="txt-sky">ACTIVE</td></tr>
+                    <tr><td>Digital - Facebook</td><td class="txt-emerald">₦174,600.00</td><td class="txt-sky">ACTIVE</td></tr>
+                    <tr style="background:#111;"><td>TOTAL MEDIUM REVENUE</td><td class="txt-emerald font-black">₦16,331,936.00</td><td>-</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="section-header"><h2>02. Zones & Mediums</h2></div>
+        <div class="section-header"><h2>Segment 2 - Todays Performance (Rep Focus)</h2></div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>REP NAME</th><th>CUSTOMERS</th><th>REVENUE</th><th>UNITS</th></tr></thead>
+                <tbody>
+                    <tr><td>Lewa</td><td class="txt-sky">1</td><td class="txt-emerald">₦547,200.00</td><td class="txt-amber">?</td></tr>
+                    <tr><td>Bolu</td><td class="txt-sky">2</td><td class="txt-emerald">₦259,600.00</td><td class="txt-amber">?</td></tr>
+                    <tr><td>Mary</td><td class="txt-sky">2</td><td class="txt-emerald">₦100,800.00</td><td class="txt-amber">?</td></tr>
+                    <tr><td>Jaya</td><td class="txt-sky">1</td><td class="txt-emerald">₦67,200.00</td><td class="txt-amber">?</td></tr>
+                    <tr><td>Others (Susan to Esther)</td><td class="txt-sky">0</td><td class="txt-emerald">₦0.00</td><td class="txt-amber">0</td></tr>
+                    <tr style="background:#111;"><td>DAILY TOTALS</td><td class="txt-sky">10</td><td class="txt-emerald">₦1,178,000</td><td class="txt-amber">76 Units</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-header"><h2>Segment 3 - Departmental Contribution</h2></div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>DEPARTMENT</th><th>REVENUE</th><th>CUSTOMERS</th><th>UNITS</th><th>% CONTRIB.</th></tr></thead>
+                <tbody>
+                    <tr><td>Digital Marketer</td><td class="txt-emerald">₦16.5m</td><td class="txt-sky">328</td><td class="txt-amber">2,258</td><td class="txt-violet">56.98%</td></tr>
+                    <tr><td>Sales Team</td><td class="txt-emerald">₦8.4m</td><td class="txt-sky">107</td><td class="txt-amber">828</td><td class="txt-violet">28.95%</td></tr>
+                    <tr><td>Customer Care</td><td class="txt-emerald">₦4.0m</td><td class="txt-sky">60</td><td class="txt-amber">448</td><td class="txt-violet">14.06%</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-header"><h2>Segment 4 - Zone Sales Distribution</h2></div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>ZONE</th><th>REVENUE</th><th>CUSTOMERS</th><th>UNITS</th><th>% CONTRIB.</th></tr></thead>
+                <tbody>
+                    <tr><td>Lagos</td><td class="txt-emerald">₦14.5m</td><td class="txt-sky">227</td><td class="txt-amber">1,766</td><td class="txt-violet">49.99%</td></tr>
+                    <tr><td>Benin</td><td class="txt-emerald">₦9.7m</td><td class="txt-sky">185</td><td class="txt-amber">1,224</td><td class="txt-violet">33.75%</td></tr>
+                    <tr><td>Abuja</td><td class="txt-emerald">₦4.6m</td><td class="txt-sky">86</td><td class="txt-amber">532</td><td class="txt-violet">16.03%</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-header"><h2>Segment 5 - Individual Performance 2026</h2></div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>STAFF</th><th>REVENUE</th><th>CUST</th><th>UNITS</th><th>% OF TARGET</th></tr></thead>
+                <tbody>
+                    <tr><td>Mary</td><td class="txt-emerald">₦7,459,596</td><td>158</td><td>981</td><td class="txt-violet">1.49%</td></tr>
+                    <tr><td>Bolu</td><td class="txt-emerald">₦6,049,773</td><td>79</td><td>628</td><td class="txt-violet">1.51%</td></tr>
+                    <tr><td>Susan</td><td class="txt-emerald">₦3,502,496</td><td>45</td><td>433</td><td class="txt-violet">3.50%</td></tr>
+                    <tr><td>Jaya</td><td class="txt-emerald">₦2,696,640</td><td>43</td><td>331</td><td class="txt-violet">1.80%</td></tr>
+                    <tr><td>Lewa</td><td class="txt-emerald">₦2,601,800</td><td>42</td><td>320</td><td class="txt-violet">1.04%</td></tr>
+                    <tr><td>Rachel</td><td class="txt-emerald">₦2,468,711</td><td>45</td><td>297</td><td class="txt-violet">2.47%</td></tr>
+                    <tr><td>Divine</td><td class="txt-emerald">₦1,990,000</td><td>41</td><td>241</td><td class="txt-violet">1.99%</td></tr>
+                    <tr><td>Esther</td><td class="txt-emerald">₦723,000</td><td>15</td><td>65</td><td class="txt-violet">0.72%</td></tr>
+                    <tr><td>Amaya</td><td class="txt-emerald">₦152,173</td><td>4</td><td>19</td><td class="txt-violet">0.15%</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-header"><h2>Segment 6 & 8 - Monthly Aggregates</h2></div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="table-container">
-                <table>
-                    <thead><tr><th>Zone</th><th>Revenue</th><th>Cust</th><th>Units</th></tr></thead>
-                    <tbody>
-                        <tr><td>Lagos</td><td class="txt-emerald">₦13.0m</td><td class="txt-sky">209</td><td class="txt-amber">1,658</td></tr>
-                        <tr><td>Benin</td><td class="txt-emerald">₦8.9m</td><td class="txt-sky">172</td><td class="txt-amber">1,107</td></tr>
-                        <tr><td>Abuja</td><td class="txt-emerald">₦4.5m</td><td class="txt-sky">81</td><td class="txt-amber">507</td></tr>
-                    </tbody>
-                </table>
+            <div class="glass-card">
+                <p class="stat-label">January Gross Revenue</p>
+                <p class="text-3xl font-black txt-emerald">₦29,015,189</p>
             </div>
-            <div class="table-container">
-                <table>
-                    <thead><tr><th>Medium</th><th>Revenue</th><th>Cust</th><th>Units</th></tr></thead>
-                    <tbody>
-                        <tr><td>Instagram</td><td class="txt-emerald">₦8.0m</td><td class="txt-sky">139</td><td class="txt-amber">1,082</td></tr>
-                        <tr><td>Landing Page</td><td class="txt-emerald">₦6.5m</td><td class="txt-sky">155</td><td class="txt-amber">961</td></tr>
-                        <tr><td>Care/Others</td><td class="txt-emerald">₦11.9m</td><td class="txt-sky">160</td><td class="txt-amber">1,241</td></tr>
-                    </tbody>
-                </table>
+            <div class="glass-card">
+                <p class="stat-label">Retention Efficiency</p>
+                <p class="text-3xl font-black txt-violet">39.71%</p>
+                <p class="text-[10px] opacity-40 mt-1 uppercase">195 Return Customers</p>
             </div>
         </div>
 
-        <div class="section-header"><h2>03. Department Summary</h2></div>
-        <div class="table-container">
+        <div class="section-header"><h2>Segment 7 - This Month By Channel</h2></div>
+        <div class="table-wrap">
             <table>
-                <thead><tr><th>Dept</th><th>Revenue</th><th>Cust</th><th>Units</th><th>%</th></tr></thead>
+                <thead><tr><th>CHANNEL</th><th>CUSTOMERS</th><th>REVENUE</th><th>UNITS</th></tr></thead>
                 <tbody>
-                    <tr><td>Digital Marketer</td><td class="txt-emerald">₦15.4m</td><td class="txt-sky">307</td><td class="txt-amber">2,120</td><td class="txt-violet">58.2%</td></tr>
-                    <tr><td>Sales Team</td><td class="txt-emerald">₦7.6m</td><td class="txt-sky">97</td><td class="txt-amber">753</td><td class="txt-violet">28.9%</td></tr>
-                    <tr><td>Customer Care</td><td class="txt-emerald">₦3.4m</td><td class="txt-sky">55</td><td class="txt-amber">411</td><td class="txt-violet">12.9%</td></tr>
+                    <tr><td>Instagram Ad</td><td class="txt-sky">155</td><td class="txt-emerald">₦8,987,936</td><td>1,190</td></tr>
+                    <tr><td>Landing Page</td><td class="txt-sky">159</td><td class="txt-emerald">₦6,650,800</td><td>985</td></tr>
+                    <tr><td>Customer Care</td><td class="txt-sky">60</td><td class="txt-emerald">₦4,080,511</td><td>448</td></tr>
+                    <tr><td>Others/Direct</td><td class="txt-sky">115</td><td class="txt-emerald">₦9,121,342</td><td>904</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <footer style="margin-top: 40px; padding: 20px; text-align: center; opacity: 0.2;">
-            <p style="font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 5px;">Suruka Nature's Strategy</p>
+        <footer style="margin-top: 40px; padding: 40px; text-align: center; opacity: 0.1;">
+            <p style="font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 10px;">Suruka Sales Force • Team Audit Division</p>
         </footer>
     </div>
 </body>
