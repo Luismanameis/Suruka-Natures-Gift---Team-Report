@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SURUKA TEAM REPORT</title>
+    <title>SURUKA TEAM REPORT - JAN 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -11,19 +11,27 @@
         
         .fixed-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(20px); padding: 1rem; border-bottom: 2px solid #1a1a1a; }
         
-        .content-area { padding: 240px 1rem 5rem 1rem; max-width: 1400px; margin: 0 auto; } 
-        @media (min-width: 768px) { .content-area { padding: 200px 2rem 5rem 2rem; } }
+        .content-area { padding: 260px 1rem 5rem 1rem; max-width: 1400px; margin: 0 auto; } 
+        @media (min-width: 768px) { .content-area { padding: 220px 2rem 5rem 2rem; } }
 
         .glass-card { background: #0d0d0d; border: 1px solid #222; border-radius: 10px; padding: 0.8rem; }
-        .txt-emerald { color: #00ff88; } .txt-sky { color: #00d4ff; } .txt-amber { color: #ffb300; } .txt-violet { color: #bd00ff; }
+        
+        /* Theming Constants */
+        .txt-emerald { color: #00ff88; } /* Revenue Green */
+        .txt-sky { color: #00d4ff; } 
+        .txt-amber { color: #ffb300; } 
+        .txt-violet { color: #bd00ff; }
+        .txt-red { color: #ff3333; }
+        .txt-white { color: #ffffff; } /* Metrics White */
         
         .table-wrap { width: 100%; overflow-x: auto; border-radius: 12px; background: #0d0d0d; border: 1px solid #1a1a1a; margin-bottom: 2rem; }
         table { width: 100%; border-collapse: collapse; min-width: 800px; }
         th { padding: 14px; text-align: left; font-size: 11px; color: #666; text-transform: uppercase; border-bottom: 2px solid #222; letter-spacing: 1px; }
         td { padding: 14px 15px; font-size: 0.95rem; font-weight: 700; border-bottom: 1px solid #111; color: #efefef; }
         
-        .section-header { margin: 1.5rem 0 1rem 0; border-left: 5px solid #00ff88; padding-left: 1rem; }
-        .section-header h2 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; font-style: italic; color: #fff; }
+        /* Heading Styles - Bold Red per instructions */
+        .section-header { margin: 1.5rem 0 1rem 0; border-left: 5px solid #ff3333; padding-left: 1rem; }
+        .section-header h2 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; font-style: italic; color: #ff3333; }
     </style>
 </head>
 <body>
@@ -31,19 +39,19 @@
     <div class="fixed-header">
         <div class="flex justify-between items-center mb-3">
             <div>
-                <h1 class="text-2xl md:text-3xl font-black italic uppercase text-emerald-500 leading-none">SURUKA<span class="text-white">TEAM</span></h1>
+                <h1 class="text-2xl md:text-3xl font-black italic uppercase text-red-600 leading-none">SURUKA<span class="text-white">TEAM</span></h1>
                 <p class="text-[9px] font-bold tracking-[0.3em] opacity-50 uppercase mt-1">Audit Report 2026</p>
             </div>
             <div class="text-right">
-                <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest">Today</p>
-                <p class="text-xl font-black txt-emerald">₦0</p>
+                <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest">Today's Rev</p>
+                <p class="text-xl font-black txt-emerald">₦1.04m</p>
             </div>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-            <div class="glass-card"><p class="text-[10px] font-bold text-gray-500 mb-0.5">MTD REV</p><p class="text-xl font-black txt-emerald">₦38.1m</p></div>
-            <div class="glass-card"><p class="text-[10px] font-bold text-gray-500 mb-0.5">UNITS</p><p class="text-xl font-black txt-amber">4,387</p></div>
-            <div class="glass-card"><p class="text-[10px] font-bold text-gray-500 mb-0.5">CUST</p><p class="text-xl font-black txt-sky">620</p></div>
-            <div class="glass-card"><p class="text-[10px] font-bold text-gray-500 mb-0.5">RET%</p><p class="text-xl font-black txt-violet">46.77%</p></div>
+            <div class="glass-card"><p class="text-[10px] font-bold text-gray-500 mb-0.5">MTD REV</p><p class="text-xl font-black txt-emerald">₦40.7m</p></div>
+            <div class="glass-card"><p class="text-[10px] font-bold text-gray-500 mb-0.5">UNITS</p><p class="text-xl font-black txt-white">4,658</p></div>
+            <div class="glass-card"><p class="text-[10px] font-bold text-gray-500 mb-0.5">CUST</p><p class="text-xl font-black txt-white">656</p></div>
+            <div class="glass-card"><p class="text-[10px] font-bold text-gray-500 mb-0.5">RET %</p><p class="text-xl font-black txt-red">44.21%</p></div>
         </div>
     </div>
 
@@ -54,24 +62,25 @@
             <table>
                 <thead><tr><th>Channel</th><th>Revenue</th></tr></thead>
                 <tbody>
-                    <tr><td>Digital - IG</td><td class="txt-emerald">₦11.8m</td></tr>
+                    <tr><td>Digital - IG</td><td class="txt-emerald">₦12.6m</td></tr>
                     <tr><td>Digital - Facebook</td><td class="txt-emerald">₦174.6k</td></tr>
-                    <tr><td>Digital - Whatsapp Dm</td><td class="txt-emerald">₦1.16m</td></tr>
-                    <tr><td>Digital - Landing Page</td><td class="txt-emerald">₦7.19m</td></tr>
-                    <tr class="bg-zinc-900 font-bold"><td>TOTAL REVENUE (Ads)</td><td class="txt-emerald">₦20.4m</td></tr>
+                    <tr><td>Digital - Whatsapp Dm</td><td class="txt-emerald">₦1.33m</td></tr>
+                    <tr><td>Digital - Landing Page</td><td class="txt-emerald">₦7.59m</td></tr>
+                    <tr class="bg-zinc-900 font-bold"><td>TOTAL REVENUE (Ads)</td><td class="txt-emerald">₦21.7m</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="section-header"><h2>Segment 2 - Todays Numbers</h2></div>
+        <div class="section-header"><h2>Segment 2 - Today's Numbers (Jan 26)</h2></div>
         <div class="table-wrap">
             <table>
                 <thead><tr><th>Sales Rep</th><th>Customers</th><th>Revenue</th></tr></thead>
                 <tbody>
-                    <tr><td>Bolu</td><td>0</td><td class="txt-emerald">₦0</td></tr>
-                    <tr><td>Mary</td><td>0</td><td class="txt-emerald">₦0</td></tr>
-                    <tr><td>Jaya</td><td>0</td><td class="txt-emerald">₦0</td></tr>
-                    <tr class="bg-zinc-900 font-bold"><td>TOTAL TODAY</td><td>0</td><td class="txt-emerald">₦0 (0 Units)</td></tr>
+                    <tr><td>Bolu</td><td class="txt-white">9</td><td class="txt-emerald">₦671.6k</td></tr>
+                    <tr><td>Mary</td><td class="txt-white">1</td><td class="txt-emerald">₦67.2k</td></tr>
+                    <tr><td>Jaya</td><td class="txt-white">1</td><td class="txt-emerald">₦33.6k</td></tr>
+                    <tr><td>Susan</td><td class="txt-white">1</td><td class="txt-emerald">₦67.2k</td></tr>
+                    <tr class="bg-zinc-900 font-bold"><td>TOTAL TODAY</td><td class="txt-white">15</td><td class="txt-emerald">₦1.04m (153 Units)</td></tr>
                 </tbody>
             </table>
         </div>
@@ -81,21 +90,9 @@
             <table>
                 <thead><tr><th>Department</th><th>Revenue</th><th>Customers</th><th>Unit</th><th>% Contrib</th></tr></thead>
                 <tbody>
-                    <tr><td>Digital Marketer</td><td class="txt-emerald">₦20.8m</td><td>390</td><td>2,611</td><td>54.58%</td></tr>
-                    <tr><td>Sales Team</td><td class="txt-emerald">₦11.9m</td><td>158</td><td>1,189</td><td>31.26%</td></tr>
-                    <tr><td>Customer Care</td><td class="txt-emerald">₦5.4m</td><td>80</td><td>587</td><td>14.15%</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="section-header"><h2>Segment 4 - Zone Sales Breakdown</h2></div>
-        <div class="table-wrap">
-            <table>
-                <thead><tr><th>Zone</th><th>Revenue</th><th>Customers</th><th>Unit</th><th>% Contrib</th></tr></thead>
-                <tbody>
-                    <tr><td>Lagos</td><td class="txt-emerald">₦19.0m</td><td>297</td><td>2,247</td><td>49.84%</td></tr>
-                    <tr><td>Benin</td><td class="txt-emerald">₦12.6m</td><td>234</td><td>1,511</td><td>33.00%</td></tr>
-                    <tr><td>Abuja</td><td class="txt-emerald">₦6.5m</td><td>110</td><td>629</td><td>17.16%</td></tr>
+                    <tr><td>Digital Marketer</td><td class="txt-emerald">₦22.3m</td><td class="txt-white">414</td><td class="txt-white">2,771</td><td class="txt-emerald">54.89%</td></tr>
+                    <tr><td>Sales Team</td><td class="txt-emerald">₦12.9m</td><td class="txt-white">168</td><td class="txt-white">1,288</td><td class="txt-red">31.70%</td></tr>
+                    <tr><td>Customer Care</td><td class="txt-emerald">₦5.5m</td><td class="txt-white">82</td><td class="txt-white">599</td><td class="txt-red">13.41%</td></tr>
                 </tbody>
             </table>
         </div>
@@ -105,28 +102,12 @@
             <table>
                 <thead><tr><th>Staff</th><th>Revenue</th><th>Customers</th><th>Unit</th><th>% Target</th></tr></thead>
                 <tbody>
-                    <tr><td>Bolu</td><td class="txt-emerald">₦8.3m</td><td>110</td><td>855</td><td>2.08%</td></tr>
-                    <tr><td>Mary</td><td class="txt-emerald">₦9.2m</td><td>185</td><td>1,203</td><td>1.83%</td></tr>
-                    <tr><td>Jaya</td><td class="txt-emerald">₦4.3m</td><td>61</td><td>423</td><td>2.88%</td></tr>
-                    <tr><td>Lewa</td><td class="txt-emerald">₦3.2m</td><td>51</td><td>418</td><td>1.28%</td></tr>
-                    <tr><td>Susan</td><td class="txt-emerald">₦4.3m</td><td>60</td><td>515</td><td>4.28%</td></tr>
-                    <tr><td>Amaya</td><td class="txt-emerald">₦152.2k</td><td>4</td><td>19</td><td>0.15%</td></tr>
-                    <tr><td>Rachel</td><td class="txt-emerald">₦3.2m</td><td>57</td><td>344</td><td>3.21%</td></tr>
-                    <tr><td>Esther</td><td class="txt-emerald">₦1.5m</td><td>24</td><td>103</td><td>1.46%</td></tr>
-                    <tr><td>Divine</td><td class="txt-emerald">₦2.5m</td><td>49</td><td>281</td><td>2.49%</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="section-header"><h2>Segment 6 & 8 - Monthly Overview (JAN)</h2></div>
-        <div class="table-wrap">
-            <table>
-                <thead><tr><th>Metric</th><th>Amount</th><th>Details</th></tr></thead>
-                <tbody>
-                    <tr><td>Total Revenue</td><td class="txt-emerald">₦38.1m</td><td>Jan 2026</td></tr>
-                    <tr><td>Total Units</td><td class="txt-amber">4,387</td><td>MTD</td></tr>
-                    <tr><td>Total Customers</td><td class="txt-sky">620</td><td>New & Return</td></tr>
-                    <tr><td>Return Customers</td><td class="txt-violet">290</td><td>46.77% Rate</td></tr>
+                    <tr><td>Bolu</td><td class="txt-emerald">₦9.1m</td><td class="txt-white">120</td><td class="txt-white">955</td><td class="txt-red">2.28%</td></tr>
+                    <tr><td>Mary</td><td class="txt-emerald">₦9.8m</td><td class="txt-white">194</td><td class="txt-white">1,260</td><td class="txt-red">1.97%</td></tr>
+                    <tr><td>Susan</td><td class="txt-emerald">₦4.4m</td><td class="txt-white">63</td><td class="txt-white">539</td><td class="txt-red">4.41%</td></tr>
+                    <tr><td>Jaya</td><td class="txt-emerald">₦4.4m</td><td class="txt-white">63</td><td class="txt-white">430</td><td class="txt-red">2.95%</td></tr>
+                    <tr><td>Rachel</td><td class="txt-emerald">₦3.3m</td><td class="txt-white">59</td><td class="txt-white">356</td><td class="txt-red">3.28%</td></tr>
+                    <tr><td>Divine</td><td class="txt-emerald">₦2.8m</td><td class="txt-white">52</td><td class="txt-white">318</td><td class="txt-red">2.83%</td></tr>
                 </tbody>
             </table>
         </div>
@@ -136,11 +117,9 @@
             <table>
                 <thead><tr><th>Medium</th><th>Customers</th><th>Revenue</th><th>Unit</th></tr></thead>
                 <tbody>
-                    <tr><td>Instagram Ad</td><td>198</td><td class="txt-emerald">₦11.8m</td><td>1,415</td></tr>
-                    <tr><td>Facebook Ad</td><td>2</td><td class="txt-emerald">₦174.6k</td><td>7</td></tr>
-                    <tr><td>Landing Page Ad</td><td>171</td><td class="txt-emerald">₦7.2m</td><td>1,081</td></tr>
-                    <tr><td>Customer Care</td><td>80</td><td class="txt-emerald">₦5.4m</td><td>587</td></tr>
-                    <tr><td>Others</td><td>169</td><td class="txt-emerald">₦13.5m</td><td>1,297</td></tr>
+                    <tr><td>Instagram Ad</td><td class="txt-white">210</td><td class="txt-emerald">₦12.6m</td><td class="txt-white">1,492</td></tr>
+                    <tr><td>Landing Page Ad</td><td class="txt-white">180</td><td class="txt-emerald">₦7.6m</td><td class="txt-white">1,131</td></tr>
+                    <tr><td>Others</td><td class="txt-white">182</td><td class="txt-emerald">₦14.9m</td><td class="txt-white">1,429</td></tr>
                 </tbody>
             </table>
         </div>
