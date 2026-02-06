@@ -24,8 +24,8 @@
         .card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: #ff0000; }
         .stat-label { color: #555; font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
         
-        .rev-green { color: #00ff41 !important; filter: blur(4px); transition: filter 0.3s; cursor: pointer; }
-        .rev-green:hover { filter: blur(0px); }
+        /* Visibility explicitly forced to 100% - No Blur */
+        .rev-green { color: #00ff41 !important; filter: none !important; }
         .pct-green { color: #00ff41 !important; }
         .pct-red { color: #ff0000 !important; }
         .metric-white { color: #ffffff !important; }
@@ -83,9 +83,9 @@
             <table>
                 <thead><tr><th>Dept</th><th>Units</th><th class="text-right">Contrib %</th></tr></thead>
                 <tbody>
-                    <tr><td>Sales Team</td><td class="metric-white">352</td><td class="val-col pct-red">49.2%</td></tr>
-                    <tr><td>Digital Marketers</td><td class="metric-white">479</td><td class="val-col pct-red">43.9%</td></tr>
-                    <tr><td>Customer Care</td><td class="metric-white">81</td><td class="val-col pct-red">7.0%</td></tr>
+                    <tr><td>Sales Team</td><td class="metric-white">352</td><td class="val-col pct-red">49.15%</td></tr>
+                    <tr><td>Digital Marketers</td><td class="metric-white">479</td><td class="val-col pct-red">43.88%</td></tr>
+                    <tr><td>Customer Care</td><td class="metric-white">81</td><td class="val-col pct-red">6.97%</td></tr>
                 </tbody>
             </table>
         </div>
@@ -118,15 +118,19 @@
         </table>
     </div>
 
-    <div class="seg-title">04 - Monthly Tracking Summary</div>
-    <div class="card text-center py-6">
-        <p class="stat-label">February Total Revenue</p>
-        <p class="text-4xl font-black rev-green">₦9.3m</p>
-        <div class="flex justify-around mt-4 border-t border-white/5 pt-4">
-            <div><p class="stat-label">Customers</p><p class="text-xl font-bold metric-white">142</p></div>
-            <div><p class="stat-label">Retention</p><p class="text-xl font-bold pct-green">59.9%</p></div>
-            <div><p class="stat-label">Units</p><p class="text-xl font-bold metric-white">912</p></div>
-        </div>
+    <div class="seg-title">04 - Today's Performance</div>
+    <div class="card p-0 overflow-hidden">
+        <table class="data-table">
+            <thead><tr><th>Staff</th><th>Cust</th><th class="text-right">Revenue</th></tr></thead>
+            <tbody>
+                <tr><td>Bolu</td><td>3</td><td class="val-col rev-green">₦281k</td></tr>
+                <tr><td>Jaya</td><td>2</td><td class="val-col rev-green">₦118.6k</td></tr>
+                <tr><td>Mary</td><td>2</td><td class="val-col rev-green">₦67.2k</td></tr>
+                <tr><td>Susan</td><td>1</td><td class="val-col rev-green">₦67.2k</td></tr>
+                <tr><td>Esther</td><td>1</td><td class="val-col rev-green">₦67.2k</td></tr>
+                <tr class="bg-zinc-900"><td>TOTAL TODAY</td><td>11</td><td class="val-col rev-green">₦696.8k</td></tr>
+            </tbody>
+        </table>
     </div>
 
     <footer class="mt-20 pb-10 text-center opacity-20">
