@@ -4,137 +4,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <title>SURUKA SALES TEAM AUDIT - FEB 2026</title>
+    <title>SURUKA SALES TEAM AUDIT - 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { background-color: #000000; color: #ffffff; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
-        
         .fixed-header { 
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000; 
-            background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); 
-            border-bottom: 2px solid #ff0000; padding: 15px; 
+            background: rgba(0,0,0,0.98); backdrop-filter: blur(20px); 
+            border-bottom: 2px solid #ff0000; padding: 10px 15px; 
         }
-        .scroll-container { padding-top: 220px; padding-left: 15px; padding-right: 15px; padding-bottom: 50px; max-width: 650px; margin: 0 auto; }
-        
-        .h-suruka { font-family: 'Syncopate', sans-serif; font-weight: 700; color: #ff0000; text-transform: uppercase; letter-spacing: -1px; font-size: 1.2rem; }
-        .seg-title { border-left: 3px solid #ff0000; padding-left: 8px; margin: 25px 0 10px 0; font-weight: 900; text-transform: uppercase; font-size: 11px; color: #ff0000; }
-        
-        .card { background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 4px; padding: 10px; position: relative; margin-bottom: 10px; }
-        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: #ff0000; }
-        .stat-label { color: #555; font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* Visibility explicitly forced to 100% - No Blur */
-        .rev-green { color: #00ff41 !important; filter: none !important; }
-        .pct-green { color: #00ff41 !important; }
-        .pct-red { color: #ff0000 !important; }
-        .metric-white { color: #ffffff !important; }
-        .stack-lg { font-size: 1.5rem; font-weight: 900; line-height: 1; }
-
+        .scroll-container { padding-top: 185px; padding-left: 15px; padding-right: 15px; padding-bottom: 60px; max-width: 650px; margin: 0 auto; }
+        .metrics-row { display: flex; overflow-x: auto; gap: 8px; padding: 5px 0; scrollbar-width: none; }
+        .metrics-row::-webkit-scrollbar { display: none; }
+        .stat-box { min-width: 100px; flex: 1; background: #0a0a0a; border: 1px solid #222; border-radius: 4px; padding: 6px 10px; border-left: 3px solid #ff0000; }
+        .h-suruka { font-family: 'Syncopate', sans-serif; font-size: 0.9rem; color: #fff; text-transform: uppercase; letter-spacing: -1px; }
+        .h-red { color: #ff0000; }
+        .stat-label { color: #555; font-size: 7px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; display: block; }
+        .rev-green { color: #00ff41 !important; font-weight: 900; }
+        .stack-sm { font-size: 1.1rem; font-weight: 900; display: block; line-height: 1; }
+        .seg-title { border-left: 3px solid #ff0000; padding-left: 10px; margin: 30px 0 12px 0; font-weight: 900; text-transform: uppercase; font-size: 11px; color: #ff0000; letter-spacing: 1px; }
+        .card { background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 4px; padding: 0; overflow: hidden; margin-bottom: 15px; }
         table { width: 100%; border-collapse: collapse; }
-        th { color: #444; font-size: 9px; text-transform: uppercase; text-align: left; padding: 8px; border-bottom: 1px solid #222; }
-        td { padding: 8px; font-size: 12px; font-weight: 700; border-bottom: 1px solid #111; }
+        th { color: #444; font-size: 8px; text-transform: uppercase; text-align: left; padding: 10px; border-bottom: 1px solid #222; }
+        td { padding: 10px; font-size: 13px; font-weight: 800; border-bottom: 1px solid #111; }
         .val-col { text-align: right; }
-
-        #filterInput { background: #111; border: 1px solid #333; color: white; padding: 10px; width: 100%; border-radius: 4px; margin-top: 10px; font-size: 12px; outline: none; }
+        #filterInput { background: #111; border: 1px solid #333; color: white; padding: 8px 12px; width: 100%; border-radius: 4px; margin-top: 8px; font-size: 12px; outline: none; }
     </style>
 </head>
 <body>
 
 <div class="fixed-header">
     <div class="max-w-[650px] mx-auto">
-        <div class="flex justify-between items-center">
-            <h1 class="h-suruka">SURUKA AUDIT</h1>
-            <div class="text-right">
-                <span class="stat-label">FEB MTD:</span>
-                <span class="text-sm font-black rev-green ml-1">₦9.3m</span>
-            </div>
+        <div class="flex justify-between items-center mb-1">
+            <h1 class="h-suruka">SURUKA<span class="h-red">AUDIT</span></h1>
+            <span class="text-[10px] font-black rev-green">FEB 2026</span>
         </div>
-        
-        <div class="grid grid-cols-4 gap-2 mt-3">
-            <div class="card"><p class="stat-label">REVENUE</p><p class="stack-lg rev-green">₦9.3m</p></div>
-            <div class="card"><p class="stat-label">UNITS</p><p class="stack-lg metric-white">912</p></div>
-            <div class="card"><p class="stat-label">CUSTOMERS</p><p class="stack-lg metric-white">142</p></div>
-            <div class="card"><p class="stat-label">RETURN %</p><p class="stack-lg pct-green">59.9%</p></div>
+        <div class="metrics-row">
+            <div class="stat-box"><span class="stat-label">MTD REV</span><span class="stack-sm rev-green">₦9.3m</span></div>
+            <div class="stat-box"><span class="stat-label">MTD UNITS</span><span class="stack-sm text-white">912</span></div>
+            <div class="stat-box"><span class="stat-label">TODAY REV</span><span class="stack-sm rev-green">₦696.8k</span></div>
+            <div class="stat-box"><span class="stat-label">RET %</span><span class="stack-sm text-emerald-400">59.86%</span></div>
         </div>
-
         <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="🔍 Search Staff, Zone or Medium...">
     </div>
 </div>
 
 <div class="scroll-container">
 
-    <div class="seg-title">01 - Sales Medium (MTD)</div>
-    <div class="card p-0 overflow-hidden">
-        <table class="data-table">
+    <div class="seg-title">01 • Sales Medium Breakdown</div>
+    <div class="card">
+        <table>
             <tbody>
                 <tr><td>Digital - IG</td><td class="val-col rev-green">₦2.1m</td></tr>
+                <tr><td>Digital - Tik Tok</td><td class="val-col">₦0.00</td></tr>
                 <tr><td>Digital - Facebook</td><td class="val-col rev-green">₦238k</td></tr>
+                <tr><td>Digital - Whatsapp Dm</td><td class="val-col rev-green">₦684.2k</td></tr>
                 <tr><td>Digital - Landing Page</td><td class="val-col rev-green">₦940.8k</td></tr>
-                <tr><td>Digital - Whatsapp DM</td><td class="val-col rev-green">₦684.2k</td></tr>
-                <tr class="bg-zinc-900"><td>TOTAL DIGITAL</td><td class="val-col rev-green">₦3.9m</td></tr>
+                <tr class="bg-zinc-900 border-t border-green-500"><td>TOTAL REVENUE</td><td class="val-col rev-green">₦3.9m</td></tr>
             </tbody>
         </table>
     </div>
 
-    <div class="seg-title">02 - Department & Zone Performance</div>
-    <div class="grid grid-cols-1 gap-4">
-        <div class="card p-0 overflow-hidden">
-            <table>
-                <thead><tr><th>Dept</th><th>Units</th><th class="text-right">Contrib %</th></tr></thead>
-                <tbody>
-                    <tr><td>Sales Team</td><td class="metric-white">352</td><td class="val-col pct-red">49.15%</td></tr>
-                    <tr><td>Digital Marketers</td><td class="metric-white">479</td><td class="val-col pct-red">43.88%</td></tr>
-                    <tr><td>Customer Care</td><td class="metric-white">81</td><td class="val-col pct-red">6.97%</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="card p-0 overflow-hidden">
-            <table>
-                <thead><tr><th>Zone</th><th>Units</th><th class="text-right">Rev</th></tr></thead>
-                <tbody>
-                    <tr><td>Lagos</td><td class="metric-white">403</td><td class="val-col rev-green">₦4.6m</td></tr>
-                    <tr><td>Benin</td><td class="metric-white">387</td><td class="val-col rev-green">₦3.0m</td></tr>
-                    <tr><td>Abuja</td><td class="metric-white">122</td><td class="val-col rev-green">₦1.6m</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="seg-title">03 - Staff Annual Stats (2026)</div>
-    <div class="card p-0 overflow-hidden">
-        <table class="data-table">
-            <thead><tr><th>Staff</th><th>Cust</th><th>Units</th><th class="text-right">Rev</th></tr></thead>
-            <tbody>
-                <tr><td>Mary</td><td>287</td><td>1,949</td><td class="val-col rev-green">₦16.2m</td></tr>
-                <tr><td>Bolu</td><td>170</td><td>1,297</td><td class="val-col rev-green">₦13.4m</td></tr>
-                <tr><td>Jaya</td><td>88</td><td>614</td><td class="val-col rev-green">₦6.5m</td></tr>
-                <tr><td>Susan</td><td>91</td><td>704</td><td class="val-col rev-green">₦5.7m</td></tr>
-                <tr><td>Lewa</td><td>64</td><td>559</td><td class="val-col rev-green">₦4.2m</td></tr>
-                <tr><td>Divine</td><td>74</td><td>466</td><td class="val-col rev-green">₦4.0m</td></tr>
-                <tr><td>Rachel</td><td>70</td><td>420</td><td class="val-col rev-green">₦4.0m</td></tr>
-                <tr><td>Esther</td><td>54</td><td>272</td><td class="val-col rev-green">₦3.3m</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="seg-title">04 - Today's Performance</div>
-    <div class="card p-0 overflow-hidden">
-        <table class="data-table">
-            <thead><tr><th>Staff</th><th>Cust</th><th class="text-right">Revenue</th></tr></thead>
+    <div class="seg-title">02 • Today's Numbers (Staff)</div>
+    <div class="card">
+        <table>
+            <thead><tr><th>Staff</th><th>Cust</th><th class="val-col">Revenue</th></tr></thead>
             <tbody>
                 <tr><td>Bolu</td><td>3</td><td class="val-col rev-green">₦281k</td></tr>
-                <tr><td>Jaya</td><td>2</td><td class="val-col rev-green">₦118.6k</td></tr>
                 <tr><td>Mary</td><td>2</td><td class="val-col rev-green">₦67.2k</td></tr>
+                <tr><td>Jaya</td><td>2</td><td class="val-col rev-green">₦118.6k</td></tr>
+                <tr><td>Lewa</td><td>1</td><td class="val-col rev-green">₦62k</td></tr>
                 <tr><td>Susan</td><td>1</td><td class="val-col rev-green">₦67.2k</td></tr>
                 <tr><td>Esther</td><td>1</td><td class="val-col rev-green">₦67.2k</td></tr>
-                <tr class="bg-zinc-900"><td>TOTAL TODAY</td><td>11</td><td class="val-col rev-green">₦696.8k</td></tr>
+                <tr class="bg-zinc-900"><td>AGGREGATE</td><td>11</td><td class="val-col rev-green">₦696.8k</td></tr>
             </tbody>
         </table>
     </div>
 
-    <footer class="mt-20 pb-10 text-center opacity-20">
-        <p class="text-[8px] tracking-[10px] uppercase font-black">Suruka Master Audit System</p>
+    <div class="seg-title">03 • Department Breakdown</div>
+    <div class="card">
+        <table>
+            <thead><tr><th>Dept</th><th>Units</th><th class="val-col">Revenue</th><th class="val-col">%</th></tr></thead>
+            <tbody>
+                <tr><td>Sales Team</td><td>352</td><td class="val-col">₦4.6m</td><td class="val-col">49.15%</td></tr>
+                <tr><td>Digital Marketer</td><td>479</td><td class="val-col">₦4.1m</td><td class="val-col">43.88%</td></tr>
+                <tr><td>Customer Care</td><td>81</td><td class="val-col">₦645.8k</td><td class="val-col">6.97%</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="seg-title">04 • Zone Sales Breakdown</div>
+    <div class="card">
+        <table>
+            <thead><tr><th>Zone</th><th>Units</th><th class="val-col">Revenue</th><th class="val-col">%</th></tr></thead>
+            <tbody>
+                <tr><td>Lagos</td><td>403</td><td class="val-col rev-green">₦4.6m</td><td class="val-col">50.13%</td></tr>
+                <tr><td>Benin</td><td>387</td><td class="val-col rev-green">₦3.0m</td><td class="val-col">32.29%</td></tr>
+                <tr><td>Abuja</td><td>122</td><td class="val-col rev-green">₦1.6m</td><td class="val-col">17.58%</td></tr>
+                <tr><td>Ghana</td><td>--</td><td class="val-col">GHS 0.00</td><td class="val-col">0%</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="seg-title">05 • Individuals 2026 Numbers (YTD)</div>
+    <div class="card">
+        <table class="data-table">
+            <thead><tr><th>Staff</th><th>Units</th><th class="val-col">Revenue</th><th class="val-col">% Target</th></tr></thead>
+            <tbody>
+                <tr><td>Mary</td><td>1,949</td><td class="val-col rev-green">₦16.2m</td><td class="val-col">3.23%</td></tr>
+                <tr><td>Bolu</td><td>1,297</td><td class="val-col rev-green">₦13.4m</td><td class="val-col">3.36%</td></tr>
+                <tr><td>Jaya</td><td>614</td><td class="val-col rev-green">₦6.5m</td><td class="val-col">4.30%</td></tr>
+                <tr><td>Susan</td><td>704</td><td class="val-col rev-green">₦5.7m</td><td class="val-col">5.67%</td></tr>
+                <tr><td>Lewa</td><td>559</td><td class="val-col rev-green">₦4.2m</td><td class="val-col">1.67%</td></tr>
+                <tr><td>Divine</td><td>466</td><td class="val-col rev-green">₦4.0m</td><td class="val-col">4.02%</td></tr>
+                <tr><td>Rachel</td><td>420</td><td class="val-col rev-green">₦4.0m</td><td class="val-col">3.99%</td></tr>
+                <tr><td>Esther</td><td>272</td><td class="val-col rev-green">₦3.3m</td><td class="val-col">3.32%</td></tr>
+                <tr><td>Amaya</td><td>25</td><td class="val-col">₦185.8k</td><td class="val-col">0.19%</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="seg-title">06 • Monthly Performance (Feb)</div>
+    <div class="card">
+        <table>
+            <tbody>
+                <tr><td>MTD Revenue</td><td class="val-col rev-green">₦9.3m</td></tr>
+                <tr><td>MTD Customers</td><td class="val-col">142</td></tr>
+                <tr><td>Return Customers</td><td class="val-col">85</td></tr>
+                <tr><td>Return %</td><td class="val-col text-emerald-400">59.86%</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="seg-title">07 • Monthly Medium Performance</div>
+    <div class="card">
+        <table>
+            <thead><tr><th>Medium</th><th>Units</th><th class="val-col">Revenue</th></tr></thead>
+            <tbody>
+                <tr><td>Instagram Ad</td><td>231</td><td class="val-col rev-green">₦2.1m</td></tr>
+                <tr><td>Facebook Ad</td><td>31</td><td class="val-col rev-green">₦238k</td></tr>
+                <tr><td>Landing Page Ad</td><td>168</td><td class="val-col rev-green">₦940.8k</td></tr>
+                <tr><td>Customer Care</td><td>81</td><td class="val-col rev-green">₦645.8k</td></tr>
+                <tr><td>Others</td><td>401</td><td class="val-col rev-green">₦5.4m</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="mt-20 text-center opacity-10">
+        <p class="text-[7px] tracking-[10px] uppercase font-black">Suruka Sales Intelligence</p>
     </footer>
 </div>
 
