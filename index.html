@@ -3,148 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SURUKA SALES COMMAND v2.6</title>
+    <title>SURUKA SALES COMMAND v3.2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&display=swap" rel="stylesheet">
     <style>
         :root { --neon-red: #FF0000; --neon-green: #00FF41; --bg-black: #050505; }
-        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-black); color: white; line-height: 1.2; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-black); color: white; line-height: 1.2; margin: 0; }
         
-        .glass-header { 
-            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(20px); 
+        /* TIGHTENED FIXED SUMMARY HUD */
+        .fixed-hud { 
+            background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px); 
             border-bottom: 2px solid var(--neon-red); position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 12px 20px; /* Reduced padding */
         }
 
-        .h-bold-red { color: var(--neon-red); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem; margin-top: 40px; margin-bottom: 15px; display: block; border-left: 4px solid var(--neon-red); padding-left: 12px; }
+        .h-bold-red { color: var(--neon-red); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem; margin-top: 25px; margin-bottom: 12px; display: block; border-left: 4px solid var(--neon-red); padding-left: 12px; }
         
         .stat-card { background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 12px; padding: 18px; transition: 0.3s ease; }
-        .stat-card:hover { border-color: var(--neon-red); transform: translateY(-2px); }
-
         .rev-green { color: var(--neon-green) !important; font-weight: 700; }
         .metric-white { color: #ffffff; font-weight: 600; }
         
         table { width: 100%; border-collapse: separate; border-spacing: 0 4px; }
-        th { text-align: left; padding: 12px; font-size: 10px; color: #555; text-transform: uppercase; font-weight: 900; }
-        td { padding: 14px; background: #0d0d0d; font-size: 14px; border-top: 1px solid #111; border-bottom: 1px solid #111; }
+        th { text-align: left; padding: 10px; font-size: 10px; color: #555; text-transform: uppercase; font-weight: 900; }
+        td { padding: 12px; background: #0d0d0d; font-size: 14px; border-top: 1px solid #111; border-bottom: 1px solid #111; }
+
+        .hud-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 1100px; margin: 0 auto; }
+        .hud-item { border-left: 2px solid #222; padding-left: 12px; }
+        .hud-label { font-size: 9px; color: #666; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+        .hud-val { font-size: 1.25rem; font-weight: 900; line-height: 1; }
+
+        /* REDUCED GAP IN MAIN CONTAINER */
+        .main-container { padding: 180px 20px 60px 20px; max-width: 1100px; margin: 0 auto; }
+        
+        @media (max-width: 768px) {
+            .hud-grid { grid-template-columns: repeat(2, 1fr); }
+            .main-container { padding-top: 260px; }
+        }
 
         /* Search Effects */
         .match { border: 1px solid var(--neon-red) !important; box-shadow: 0 0 20px rgba(255, 0, 0, 0.15); opacity: 1 !important; }
-        .no-match { opacity: 0.1; filter: blur(1px); }
+        .no-match { opacity: 0.1; filter: grayscale(1); }
 
         #filterInput {
-            background: #111; border: 1px solid #333; color: white; border-radius: 12px;
-            padding: 15px; width: 100%; outline: none; margin-top: 15px; font-size: 16px;
+            background: #111; border: 1px solid #333; color: white; border-radius: 8px;
+            padding: 10px; width: 100%; outline: none; margin-top: 12px; font-size: 14px;
         }
-        #filterInput:focus { border-color: var(--neon-red); }
-
-        .main-container { padding: 240px 20px 100px 20px; max-width: 1100px; margin: 0 auto; }
     </style>
 </head>
 <body>
 
-    <header class="glass-header p-6">
+    <header class="fixed-hud">
         <div class="max-w-[1100px] mx-auto">
-            <div class="flex justify-between items-end">
-                <div>
-                    <h1 class="text-4xl font-black tracking-tighter uppercase italic">SURUKA<span class="text-red-600">SALES</span></h1>
-                    <p class="text-[10px] text-zinc-500 font-bold tracking-[3px]">TEAM PERFORMANCE PROTOCOL 2026</p>
+            <div class="flex justify-between items-center mb-3">
+                <h1 class="text-xl font-black italic uppercase">SURUKA<span class="text-red-600">COMMAND</span></h1>
+                <div class="px-2 py-0.5 bg-red-600 text-[9px] font-black rounded uppercase">Live Feed</div>
+            </div>
+            
+            <div class="hud-grid">
+                <div class="hud-item border-l-green-500">
+                    <p class="hud-label">Gross Revenue</p>
+                    <p class="hud-val rev-green">₦19.3m</p>
                 </div>
-                <div class="text-right">
-                    <p class="text-[10px] text-zinc-500 font-bold uppercase">Feb MTD Revenue</p>
-                    <p class="text-4xl font-black rev-green">₦19.3m</p>
+                <div class="hud-item">
+                    <p class="hud-label">Volume</p>
+                    <p class="hud-val">1.9k</p>
+                </div>
+                <div class="hud-item">
+                    <p class="hud-label">Customers</p>
+                    <p class="hud-val">265</p>
+                </div>
+                <div class="hud-item border-l-green-500">
+                    <p class="hud-label">Return Rate</p>
+                    <p class="hud-val text-green-400">61.5%</p>
                 </div>
             </div>
-            <input type="text" id="filterInput" onkeyup="liveSearch()" placeholder="🔍 Search Agent, Zone, or Channel...">
+
+            <input type="text" id="filterInput" onkeyup="liveSearch()" placeholder="🔍 Search Agent, Zone, or Year...">
         </div>
     </header>
 
     <div class="main-container">
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
-            <div class="stat-card searchable lg:col-span-1">
-                <span class="h-bold-red !mt-0 !mb-4">Segment 2 // Today</span>
-                <div class="space-y-3">
-                    <div class="flex justify-between"><span>Revenue</span><span class="rev-green">₦3.0m</span></div>
-                    <div class="flex justify-between"><span>Units</span><span class="metric-white">104</span></div>
-                    <div class="flex justify-between text-xs text-zinc-400"><span>Top Agent</span><span class="text-white">Bolu (₦2.5m)</span></div>
+        <span class="h-bold-red">Segment 1 // Revenue Source</span>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <table class="searchable">
+                <tbody>
+                    <tr><td>Instagram Ad</td><td class="text-right rev-green">₦3.6m</td></tr>
+                    <tr><td>Whatsapp DM</td><td class="text-right rev-green">₦3.0m</td></tr>
+                    <tr><td>Landing Page</td><td class="text-right rev-green">₦1.1m</td></tr>
+                    <tr class="font-black border-t border-zinc-800"><td>Total Channel Rev</td><td class="text-right rev-green">₦8.4m</td></tr>
+                </tbody>
+            </table>
+            
+            <div class="stat-card searchable">
+                <p class="hud-label !mb-2">Today's Pulse</p>
+                <div class="flex justify-between items-end">
+                    <div>
+                        <p class="text-3xl font-black rev-green">₦2.97m</p>
+                        <p class="text-[10px] text-zinc-500 uppercase font-bold">104 Units Sold</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[9px] text-zinc-400 uppercase">Top: Bolu</p>
+                        <p class="text-sm font-bold">₦2.5m</p>
+                    </div>
                 </div>
             </div>
-            <div class="lg:col-span-2">
-                <span class="h-bold-red !mt-0">Segment 3 // Dept Breakdown</span>
-                <table>
-                    <thead><tr><th>Department</th><th class="text-right">Revenue</th><th class="text-right">Units</th><th class="text-right">Contrib%</th></tr></thead>
-                    <tbody>
-                        <tr class="searchable"><td>Sales Team</td><td class="text-right rev-green">₦9.1m</td><td class="text-right metric-white">672</td><td class="text-right text-red-500">47.3%</td></tr>
-                        <tr class="searchable"><td>Digital Marketers</td><td class="text-right rev-green">₦8.5m</td><td class="text-right metric-white">1,037</td><td class="text-right text-red-500">44.3%</td></tr>
-                        <tr class="searchable"><td>Customer Care</td><td class="text-right rev-green">₦1.6m</td><td class="text-right metric-white">199</td><td class="text-right text-red-500">8.3%</td></tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
 
-        <span class="h-bold-red">Segment 5 & 6 // Individual Agent Audit (2026)</span>
-        <div class="overflow-x-auto">
+        <span class="h-bold-red">Segment 6 // Staff Performance 2026</span>
+        <div class="overflow-x-auto mb-8">
             <table>
                 <thead>
-                    <tr>
-                        <th>Agent</th>
-                        <th class="text-right">Feb Rev</th>
-                        <th class="text-right">Feb Units</th>
-                        <th class="text-right">2026 YTD</th>
-                        <th class="text-right">Target Achieved</th>
-                    </tr>
+                    <tr><th>Agent</th><th class="text-right">YTD Rev</th><th class="text-right">Units</th><th class="text-right">Achievement %</th></tr>
                 </thead>
                 <tbody>
-                    <tr class="searchable"><td>Mary</td><td class="text-right rev-green">₦4.4m</td><td class="text-right metric-white">542</td><td class="text-right rev-green">₦17.9m</td><td class="text-right text-red-500">3.59%</td></tr>
-                    <tr class="searchable"><td>Bolu</td><td class="text-right rev-green">₦5.9m</td><td class="text-right metric-white">300</td><td class="text-right rev-green">₦16.9m</td><td class="text-right text-red-500">4.22%</td></tr>
-                    <tr class="searchable"><td>Jaya</td><td class="text-right rev-green">₦1.7m</td><td class="text-right metric-white">180</td><td class="text-right rev-green">₦7.0m</td><td class="text-right text-red-500">4.70%</td></tr>
-                    <tr class="searchable"><td>Esther</td><td class="text-right rev-green">₦2.4m</td><td class="text-right metric-white">265</td><td class="text-right rev-green">₦4.8m</td><td class="text-right text-red-500">4.81%</td></tr>
-                    <tr class="searchable"><td>Divine</td><td class="text-right rev-green">₦1.5m</td><td class="text-right metric-white">202</td><td class="text-right rev-green">₦5.0m</td><td class="text-right text-red-500">4.98%</td></tr>
-                    <tr class="searchable"><td>Susan</td><td class="text-right rev-green">₦1.1m</td><td class="text-right metric-white">163</td><td class="text-right rev-green">₦6.0m</td><td class="text-right text-red-500">6.03%</td></tr>
-                    <tr class="searchable"><td>Rachel</td><td class="text-right rev-green">₦806k</td><td class="text-right metric-white">94</td><td class="text-right rev-green">₦4.5m</td><td class="text-right text-red-500">4.48%</td></tr>
+                    <tr class="searchable"><td>Mary</td><td class="text-right rev-green">₦17.9m</td><td class="text-right">2,201</td><td class="text-right text-red-500 font-bold">3.59%</td></tr>
+                    <tr class="searchable"><td>Bolu</td><td class="text-right rev-green">₦16.9m</td><td class="text-right">1,447</td><td class="text-right text-red-500 font-bold">4.22%</td></tr>
+                    <tr class="searchable"><td>Jaya</td><td class="text-right rev-green">₦7.0m</td><td class="text-right">705</td><td class="text-right text-red-500 font-bold">4.70%</td></tr>
+                    <tr class="searchable"><td>Esther</td><td class="text-right rev-green">₦4.8m</td><td class="text-right">435</td><td class="text-right text-red-500 font-bold">4.81%</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
-            <div>
-                <span class="h-bold-red">Segment 8 // Sales Medium</span>
-                <table>
-                    <tbody>
-                        <tr class="searchable"><td>Instagram Ads</td><td class="text-right rev-green">₦3.6m</td><td class="text-right metric-white">429 U</td></tr>
-                        <tr class="searchable"><td>Landing Page</td><td class="text-right rev-green">₦1.1m</td><td class="text-right metric-white">204 U</td></tr>
-                        <tr class="searchable"><td>Customer Care</td><td class="text-right rev-green">₦1.6m</td><td class="text-right metric-white">199 U</td></tr>
-                        <tr class="searchable"><td>Others</td><td class="text-right rev-green">₦12.3m</td><td class="text-right metric-white">990 U</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <span class="h-bold-red">Segment 4 // Zone Sales</span>
-                <table>
-                    <tbody>
-                        <tr class="searchable"><td>Lagos</td><td class="text-right rev-green">₦9.1m</td><td class="text-right text-red-500">47.1%</td></tr>
-                        <tr class="searchable"><td>Benin</td><td class="text-right rev-green">₦5.6m</td><td class="text-right text-red-500">29.1%</td></tr>
-                        <tr class="searchable"><td>Abuja</td><td class="text-right rev-green">₦4.6m</td><td class="text-right text-red-500">23.8%</td></tr>
-                        <tr class="searchable opacity-30"><td>Ghana</td><td class="text-right">GHS 0.00</td><td class="text-right">0%</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <span class="h-bold-red">Segment 10 // CS Quality Control</span>
-        <div class="stat-box overflow-hidden rounded-xl border border-zinc-900">
+        <span class="h-bold-red">Segment 10 // Quality Audit</span>
+        <div class="stat-box">
             <table>
-                <thead><tr class="bg-zinc-950"><th>Year</th><th>Sat%</th><th>Contacted</th><th class="text-right">Revenue</th></tr></thead>
+                <thead><tr><th>Year</th><th>Sat%</th><th>Contacted</th><th class="text-right">Generated</th></tr></thead>
                 <tbody>
-                    <tr class="searchable"><td>2026</td><td class="text-green-500 font-bold">97.2%</td><td>1,915</td><td class="text-right rev-green">₦8.1m</td></tr>
-                    <tr class="searchable"><td>2025</td><td class="text-green-500 font-bold">96.1%</td><td>14,367</td><td class="text-right rev-green">₦90.9m</td></tr>
-                    <tr class="searchable"><td>2024</td><td class="text-green-500 font-bold">96.7%</td><td>8,437</td><td class="text-right rev-green">₦26.5m</td></tr>
+                    <tr class="searchable"><td>2026</td><td class="text-green-400 font-bold">97.2%</td><td>1,915</td><td class="text-right rev-green">₦8.1m</td></tr>
+                    <tr class="searchable"><td>2025</td><td class="text-green-400 font-bold">96.1%</td><td>14,367</td><td class="text-right rev-green">₦90.9m</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <footer class="mt-20 text-center opacity-20 pb-10">
-            <p class="text-[10px] tracking-[15px] uppercase font-black">Suruka OS // Sales Protocol</p>
+        <footer class="mt-16 text-center opacity-20 pb-10">
+            <p class="text-[9px] tracking-[12px] uppercase font-black">Suruka OS Intelligence</p>
         </footer>
     </div>
 
@@ -152,7 +145,6 @@
         function liveSearch() {
             let filter = document.getElementById("filterInput").value.toUpperCase();
             let items = document.querySelectorAll(".searchable");
-            
             items.forEach(item => {
                 let text = item.innerText.toUpperCase();
                 if (filter === "") {
