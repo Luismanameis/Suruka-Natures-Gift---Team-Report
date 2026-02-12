@@ -13,37 +13,38 @@
         .fixed-hud { 
             background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(25px); 
             border-bottom: 2px solid var(--neon-red); position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding: 12px 20px;
+            padding: 8px 20px;
         }
 
-        .h-bold-red { color: var(--neon-red); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 1rem; margin-top: 25px; margin-bottom: 12px; display: block; border-left: 4px solid var(--neon-red); padding-left: 12px; }
+        .h-bold-red { color: var(--neon-red); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-top: 15px; margin-bottom: 8px; display: block; border-left: 4px solid var(--neon-red); padding-left: 12px; }
         .rev-green { color: var(--neon-green) !important; font-weight: 700; }
         .metric-white { color: #ffffff; font-weight: 600; }
         .perc-high { color: var(--neon-green); font-weight: 700; }
         .perc-low { color: var(--neon-red); font-weight: 700; }
         
         table { width: 100%; border-collapse: separate; border-spacing: 0 4px; }
-        th { text-align: left; padding: 10px; font-size: 10px; color: #555; text-transform: uppercase; font-weight: 900; }
-        td { padding: 12px; background: #0d0d0d; font-size: 14px; border-top: 1px solid #111; border-bottom: 1px solid #111; }
+        th { text-align: left; padding: 6px 10px; font-size: 9px; color: #555; text-transform: uppercase; font-weight: 900; }
+        td { padding: 10px; background: #0d0d0d; font-size: 13px; border-top: 1px solid #111; border-bottom: 1px solid #111; }
 
-        .hud-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; }
+        .hud-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 1200px; margin: 0 auto; }
         .hud-item { border-left: 2px solid #222; padding-left: 10px; }
-        .hud-label { font-size: 8px; color: #666; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
-        .hud-val { font-size: 1.2rem; font-weight: 900; line-height: 1; }
+        .hud-label { font-size: 8px; color: #666; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1px; }
+        .hud-val { font-size: 1.1rem; font-weight: 900; line-height: 1; }
 
-        .main-container { padding: 175px 20px 60px 20px; max-width: 1200px; margin: 0 auto; }
+        /* MINIMAL TOP SPACE */
+        .main-container { padding: 140px 20px 40px 20px; max-width: 1200px; margin: 0 auto; }
         
         @media (max-width: 1024px) {
-            .hud-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .main-container { padding-top: 280px; }
+            .hud-grid { grid-template-columns: repeat(2, 1fr); }
+            .main-container { padding-top: 210px; }
         }
 
-        .match { border: 1px solid var(--neon-red) !important; box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); opacity: 1 !important; }
+        .match { border: 1px solid var(--neon-red) !important; box-shadow: 0 0 15px rgba(255, 0, 0, 0.1); opacity: 1 !important; }
         .no-match { opacity: 0.15; filter: grayscale(1); }
 
         #filterInput {
-            background: #111; border: 1px solid #333; color: white; border-radius: 6px;
-            padding: 10px; width: 100%; outline: none; margin-top: 12px; font-size: 13px;
+            background: #111; border: 1px solid #333; color: white; border-radius: 4px;
+            padding: 8px; width: 100%; outline: none; margin-top: 6px; font-size: 12px;
         }
     </style>
 </head>
@@ -51,79 +52,68 @@
 
     <header class="fixed-hud">
         <div class="max-w-[1200px] mx-auto">
-            <div class="flex justify-between items-center mb-3">
-                <h1 class="text-xl font-black italic uppercase">SURUKA<span class="text-red-600">SALES</span></h1>
-                <div class="text-[9px] font-black text-zinc-500 tracking-widest uppercase">Feb 2026 Team Report</div>
+            <div class="flex justify-between items-center mb-1">
+                <h1 class="text-lg font-black italic uppercase">SURUKA<span class="text-red-600">SALES</span></h1>
+                <div class="text-[8px] font-black text-zinc-500 tracking-widest uppercase">Feb 2026 Team Report</div>
             </div>
             
             <div class="hud-grid">
-                <div class="hud-item border-l-green-500">
-                    <p class="hud-label">Monthly Revenue</p>
-                    <p class="hud-val rev-green">₦19.3m</p>
-                </div>
-                <div class="hud-item">
-                    <p class="hud-label">Monthly Customers</p>
-                    <p class="hud-val">266</p>
-                </div>
-                <div class="hud-item">
-                    <p class="hud-label">Units Sold</p>
-                    <p class="hud-val">1.9k</p>
-                </div>
-                <div class="hud-item">
-                    <p class="hud-label">Return Rate</p>
-                    <p class="hud-val perc-high">61.28%</p>
-                </div>
+                <div class="hud-item border-l-green-500"><p class="hud-label">Monthly Revenue</p><p class="hud-val rev-green">₦19.7m</p></div>
+                <div class="hud-item"><p class="hud-label">Customers</p><p class="hud-val">271</p></div>
+                <div class="hud-item"><p class="hud-label">Units Sold</p><p class="hud-val">2.0k</p></div>
+                <div class="hud-item"><p class="hud-label">Return Rate</p><p class="hud-val perc-high">64.58%</p></div>
             </div>
 
-            <input type="text" id="filterInput" onkeyup="globalSearch()" placeholder="🔍 Filter Segment (e.g. 'Lagos', 'Instagram', 'Bolu')...">
+            <input type="text" id="filterInput" onkeyup="globalSearch()" placeholder="🔍 Filter Segment (e.g. 'Lagos', 'Bolu', 'Esther')...">
         </div>
     </header>
 
     <div class="main-container">
 
-        <span class="h-bold-red">Segment 1 // Sales Medium Audit</span>
-        <div class="overflow-x-auto mb-8 searchable">
+        <span class="h-bold-red !mt-0">Segment 1 // Sales Medium Audit (Feb)</span>
+        <div class="overflow-x-auto mb-6 searchable">
             <table>
                 <tbody>
-                    <tr><td>Digital - IG</td><td class="text-right rev-green">₦3.6m</td></tr>
-                    <tr><td>Digital - Facebook</td><td class="text-right rev-green">₦625k</td></tr>
+                    <tr><td>Digital - IG</td><td class="text-right rev-green">₦3.8m</td></tr>
                     <tr><td>Digital - Whatsapp DM</td><td class="text-right rev-green">₦3.0m</td></tr>
                     <tr><td>Digital - Landing Page</td><td class="text-right rev-green">₦1.1m</td></tr>
-                    <tr class="font-black bg-zinc-950"><td>TOTAL REVENUE</td><td class="text-right rev-green">₦8.4m</td></tr>
+                    <tr><td>Digital - Facebook</td><td class="text-right rev-green">₦625k</td></tr>
+                    <tr class="font-black bg-zinc-950"><td>TOTAL AD REVENUE</td><td class="text-right rev-green">₦8.5m</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <span class="h-bold-red">Segment 2 // Today's Activity</span>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <div class="bg-[#0d0d0d] p-5 rounded-lg border border-zinc-900 searchable">
+        <span class="h-bold-red">Segment 2 // Today's Numbers</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-[#0d0d0d] p-4 rounded-lg border border-zinc-900 searchable">
                 <div class="grid grid-cols-3 gap-2">
-                    <div><p class="hud-label">Today Rev</p><p class="text-xl font-black rev-green">₦3.0m</p></div>
-                    <div><p class="hud-label">Customers</p><p class="text-xl font-black">12</p></div>
-                    <div><p class="hud-label">Units</p><p class="text-xl font-black">116</p></div>
+                    <div><p class="hud-label">Today Rev</p><p class="text-xl font-black rev-green">₦3.4m</p></div>
+                    <div><p class="hud-label">Customers</p><p class="text-xl font-black">17</p></div>
+                    <div><p class="hud-label">Units</p><p class="text-xl font-black">154</p></div>
                 </div>
             </div>
             <div class="overflow-x-auto searchable">
                 <table>
                     <thead><tr><th>Agent</th><th class="text-right">Today Rev</th></tr></thead>
                     <tbody>
-                        <tr><td>Bolu</td><td class="text-right rev-green">₦2.6m</td></tr>
+                        <tr><td>Bolu</td><td class="text-right rev-green">₦2.7m</td></tr>
                         <tr><td>Esther</td><td class="text-right rev-green">₦168k</td></tr>
+                        <tr><td>Mary</td><td class="text-right rev-green">₦119k</td></tr>
                         <tr><td>Lewa</td><td class="text-right rev-green">₦67k</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             <div>
-                <span class="h-bold-red">Segment 3 // Department Breakdown</span>
+                <span class="h-bold-red">Segment 3 // Department Contribution</span>
                 <table class="searchable">
                     <thead><tr><th>Team</th><th class="text-right">Revenue</th><th class="text-right">%</th></tr></thead>
                     <tbody>
-                        <tr><td>Sales Team</td><td class="text-right rev-green">₦9.1m</td><td class="text-right perc-low">47.16%</td></tr>
-                        <tr><td>Digital Marketer</td><td class="text-right rev-green">₦8.6m</td><td class="text-right perc-low">44.51%</td></tr>
-                        <tr><td>Customer Care</td><td class="text-right rev-green">₦1.6m</td><td class="text-right perc-low">8.33%</td></tr>
+                        <tr><td>Sales Team</td><td class="text-right rev-green">₦9.3m</td><td class="text-right">47.11%</td></tr>
+                        <tr><td>Digital Marketers</td><td class="text-right rev-green">₦8.8m</td><td class="text-right">44.71%</td></tr>
+                        <tr><td>Customer Care</td><td class="text-right rev-green">₦1.6m</td><td class="text-right">8.19%</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -132,65 +122,76 @@
                 <table class="searchable">
                     <thead><tr><th>Zone</th><th class="text-right">Revenue</th><th class="text-right">%</th></tr></thead>
                     <tbody>
-                        <tr><td>Lagos</td><td class="text-right rev-green">₦9.1m</td><td class="text-right perc-low">47.32%</td></tr>
-                        <tr><td>Benin</td><td class="text-right rev-green">₦5.6m</td><td class="text-right perc-low">28.96%</td></tr>
-                        <tr><td>Abuja</td><td class="text-right rev-green">₦4.6m</td><td class="text-right perc-low">23.72%</td></tr>
+                        <tr><td>Lagos</td><td class="text-right rev-green">₦9.4m</td><td class="text-right">47.75%</td></tr>
+                        <tr><td>Benin</td><td class="text-right rev-green">₦5.7m</td><td class="text-right">28.94%</td></tr>
+                        <tr><td>Abuja</td><td class="text-right rev-green">₦4.6m</td><td class="text-right">23.31%</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <span class="h-bold-red">Segment 5 // Individual Pulse (Feb)</span>
-        <div class="overflow-x-auto mb-8 searchable">
+        <span class="h-bold-red">Segment 5 // Individual Pulse (February)</span>
+        <div class="overflow-x-auto mb-6 searchable">
             <table>
                 <thead><tr><th>Agent</th><th>Revenue</th><th>Customers</th><th>Units</th></tr></thead>
                 <tbody>
-                    <tr><td>Bolu</td><td class="rev-green">₦5.9m</td><td>53</td><td class="metric-white">312</td></tr>
-                    <tr><td>Mary</td><td class="rev-green">₦4.4m</td><td>69</td><td class="metric-white">542</td></tr>
-                    <tr><td>Esther</td><td class="rev-green">₦2.4m</td><td>30</td><td class="metric-white">265</td></tr>
-                    <tr><td>Jaya</td><td class="rev-green">₦1.7m</td><td>28</td><td class="metric-white">180</td></tr>
+                    <tr><td>Bolu</td><td class="rev-green">₦6.1m</td><td>55</td><td>325</td></tr>
+                    <tr><td>Mary</td><td class="rev-green">₦4.6m</td><td>70</td><td>549</td></tr>
+                    <tr><td>Esther</td><td class="rev-green">₦2.4m</td><td>30</td><td>265</td></tr>
+                    <tr><td>Jaya</td><td class="rev-green">₦1.7m</td><td>28</td><td>180</td></tr>
+                    <tr><td>Divine</td><td class="rev-green">₦1.6m</td><td>29</td><td>220</td></tr>
+                    <tr><td>Susan</td><td class="rev-green">₦1.1m</td><td>26</td><td>163</td></tr>
+                    <tr><td>Lewa</td><td class="rev-green">₦888k</td><td>14</td><td>106</td></tr>
+                    <tr><td>Rachel</td><td class="rev-green">₦806k</td><td>12</td><td>94</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <span class="h-bold-red">Segment 6 // Annual Agent Standing (2026)</span>
-        <div class="overflow-x-auto mb-8 searchable">
+        <span class="h-bold-red">Segment 6 // Annual Standing (2026 YTD)</span>
+        <div class="overflow-x-auto mb-6 searchable">
             <table>
-                <thead><tr><th>Agent</th><th>2026 Revenue</th><th>Units</th><th>Target Status</th></tr></thead>
+                <thead><tr><th>Agent</th><th>2026 Revenue</th><th>Units</th><th class="text-right">Progress</th></tr></thead>
                 <tbody>
-                    <tr><td>Mary</td><td class="rev-green">₦17.9m</td><td>2,201</td><td class="perc-low">3.59%</td></tr>
-                    <tr><td>Bolu</td><td class="rev-green">₦16.9m</td><td>1,459</td><td class="perc-low">4.24%</td></tr>
-                    <tr><td>Jaya</td><td class="rev-green">₦7.0m</td><td>705</td><td class="perc-low">4.70%</td></tr>
-                    <tr><td>Susan</td><td class="rev-green">₦6.0m</td><td>753</td><td class="perc-low">6.03%</td></tr>
+                    <tr><td>Mary</td><td class="rev-green">₦18.0m</td><td>2.2k</td><td class="text-right perc-low">3.61%</td></tr>
+                    <tr><td>Bolu</td><td class="rev-green">₦17.1m</td><td>1.5k</td><td class="text-right perc-low">4.27%</td></tr>
+                    <tr><td>Jaya</td><td class="rev-green">₦7.0m</td><td>705</td><td class="text-right perc-low">4.70%</td></tr>
+                    <tr><td>Susan</td><td class="rev-green">₦6.0m</td><td>753</td><td class="text-right perc-low">6.03%</td></tr>
+                    <tr><td>Divine</td><td class="rev-green">₦5.1m</td><td>630</td><td class="text-right perc-low">5.08%</td></tr>
+                    <tr><td>Esther</td><td class="rev-green">₦4.8m</td><td>435</td><td class="text-right perc-low">4.81%</td></tr>
+                    <tr><td>Lewa</td><td class="rev-green">₦4.7m</td><td>616</td><td class="text-right perc-low">1.89%</td></tr>
+                    <tr><td>Rachel</td><td class="rev-green">₦4.5m</td><td>482</td><td class="text-right perc-low">4.48%</td></tr>
+                    <tr><td>Amaya</td><td class="rev-green">₦186k</td><td>25</td><td class="text-right perc-low">0.19%</td></tr>
                 </tbody>
             </table>
         </div>
 
         <span class="h-bold-red">Segment 8 // Medium Performance Detail</span>
-        <div class="overflow-x-auto mb-8 searchable">
+        <div class="overflow-x-auto mb-6 searchable">
             <table>
                 <thead><tr><th>Medium</th><th>Revenue</th><th>Customers</th><th>Units</th></tr></thead>
                 <tbody>
-                    <tr><td>Instagram Ad</td><td class="rev-green">₦3.6m</td><td>69</td><td>429</td></tr>
-                    <tr><td>Facebook Ad</td><td class="rev-green">₦625k</td><td>13</td><td>86</td></tr>
+                    <tr><td>Instagram Ad</td><td class="rev-green">₦3.8m</td><td>72</td><td>454</td></tr>
                     <tr><td>Landing Page</td><td class="rev-green">₦1.1m</td><td>33</td><td>204</td></tr>
-                    <tr><td>Others</td><td class="rev-green">₦12.4m</td><td>126</td><td>1,002</td></tr>
+                    <tr><td>Customer Care</td><td class="rev-green">₦1.6m</td><td>25</td><td>199</td></tr>
+                    <tr><td>Facebook Ad</td><td class="rev-green">₦625k</td><td>13</td><td>86</td></tr>
+                    <tr class="bg-zinc-950 font-bold"><td>Others (Direct)</td><td class="rev-green">₦12.5m</td><td>128</td><td>1.0k</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <span class="h-bold-red">Segment 10 // CS Quality Control</span>
+        <span class="h-bold-red">Segment 10 // CS Quality Control (Lifetime)</span>
         <div class="overflow-x-auto searchable">
             <table>
                 <thead><tr><th>Fiscal Year</th><th>Sat%</th><th>Contacted</th><th class="text-right">Generated</th></tr></thead>
                 <tbody>
-                    <tr><td>2026</td><td class="perc-high">97.29%</td><td>1,918</td><td class="text-right rev-green">₦8.1m</td></tr>
-                    <tr><td>2025</td><td class="perc-high">96.10%</td><td>14,367</td><td class="text-right rev-green">₦90.9m</td></tr>
+                    <tr><td>2026</td><td class="perc-high">97.06%</td><td>1.9k</td><td class="text-right rev-green">₦8.1m</td></tr>
+                    <tr><td>2025</td><td class="perc-high">96.10%</td><td>14.4k</td><td class="text-right rev-green">₦90.9m</td></tr>
+                    <tr><td>2024</td><td class="perc-high">96.68%</td><td>8.4k</td><td class="text-right rev-green">₦26.5m</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <footer class="mt-16 text-center opacity-20 pb-10">
+        <footer class="mt-12 text-center opacity-20 pb-10">
             <p class="text-[9px] tracking-[12px] uppercase font-black">Suruka OS // Sales Team Protocol</p>
         </footer>
     </div>
