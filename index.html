@@ -12,39 +12,39 @@
         
         .fixed-hud { 
             background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(20px); 
-            border-bottom: 2px solid var(--neon-red); position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding: 10px 20px;
+            border-bottom: 3px solid var(--neon-red); position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 15px 20px;
         }
 
-        .h-bold-red { color: var(--neon-red); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-top: 20px; margin-bottom: 10px; display: block; border-left: 4px solid var(--neon-red); padding-left: 12px; }
+        .h-bold-red { color: var(--neon-red); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-top: 25px; margin-bottom: 12px; display: block; border-left: 5px solid var(--neon-red); padding-left: 12px; }
         .rev-green { color: var(--neon-green) !important; font-weight: 700; }
         .metric-white { color: #ffffff; font-weight: 700; }
         .perc-high { color: var(--neon-green); font-weight: 700; }
         .perc-low { color: var(--neon-red); font-weight: 700; }
         
         table { width: 100%; border-collapse: separate; border-spacing: 0 2px; }
-        th { text-align: left; padding: 4px 10px; font-size: 8px; color: #555; text-transform: uppercase; font-weight: 900; }
-        td { padding: 8px 10px; background: #0d0d0d; font-size: 13px; border-top: 1px solid #111; }
+        th { text-align: left; padding: 6px 10px; font-size: 9px; color: #555; text-transform: uppercase; font-weight: 900; }
+        td { padding: 10px 10px; background: #0d0d0d; font-size: 14px; border-top: 1px solid #111; }
 
-        .hud-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 1200px; margin: 0 auto; }
-        .hud-item { border-left: 2px solid #222; padding-left: 10px; }
-        .hud-label { font-size: 7px; color: #666; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
-        .hud-val { font-size: 1.2rem; font-weight: 950; line-height: 1; }
+        .hud-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 1200px; margin: 0 auto; }
+        .hud-item { border-left: 2px solid #333; padding-left: 15px; }
+        .hud-label { font-size: 8px; color: #777; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .hud-val { font-size: 1.5rem; font-weight: 950; line-height: 1; }
 
-        .main-container { padding: 155px 20px 40px 20px; max-width: 1200px; margin: 0 auto; }
+        .main-container { padding: 185px 20px 40px 20px; max-width: 1200px; margin: 0 auto; }
         
         @media (max-width: 768px) {
-            .hud-grid { grid-template-columns: repeat(2, 1fr); row-gap: 8px; }
-            .main-container { padding-top: 230px; }
-            .hud-val { font-size: 1.1rem; }
+            .hud-grid { grid-template-columns: repeat(2, 1fr); row-gap: 12px; }
+            .main-container { padding-top: 270px; }
+            .hud-val { font-size: 1.3rem; }
         }
 
         .match { border: 1px solid var(--neon-red) !important; opacity: 1 !important; }
         .no-match { opacity: 0.1; filter: grayscale(1); }
 
         #filterInput {
-            background: #111; border: 1px solid #222; color: white; border-radius: 4px;
-            padding: 10px; width: 100%; outline: none; margin-top: 10px; font-size: 12px; font-weight: 600;
+            background: #111; border: 1px solid #333; color: white; border-radius: 4px;
+            padding: 12px; width: 100%; outline: none; margin-top: 15px; font-size: 13px; font-weight: 600;
         }
     </style>
 </head>
@@ -52,47 +52,47 @@
 
     <header class="fixed-hud">
         <div class="max-w-[1200px] mx-auto">
-            <div class="flex justify-between items-center mb-2">
-                <h1 class="text-xl font-black italic uppercase tracking-tighter">SURUKA<span class="text-red-600">SALES</span></h1>
-                <div class="text-[8px] font-black text-zinc-500 tracking-[3px] uppercase">Feb 2026 Live Audit</div>
+            <div class="flex justify-between items-center mb-3">
+                <h1 class="text-2xl font-black italic uppercase tracking-tighter">SURUKA<span class="text-red-600">SALES</span></h1>
+                <div class="text-[9px] font-black text-zinc-400 tracking-[4px] uppercase border border-zinc-800 px-2 py-1">Feb 2026 AUDIT</div>
             </div>
             
             <div class="hud-grid">
-                <div class="hud-item border-l-green-500"><p class="hud-label">Feb Revenue</p><p class="hud-val rev-green">₦21.0m</p></div>
-                <div class="hud-item"><p class="hud-label">Customers</p><p class="hud-val">296</p></div>
-                <div class="hud-item"><p class="hud-label">Units Sold</p><p class="hud-val">2.2k</p></div>
-                <div class="hud-item"><p class="hud-label">Return %</p><p class="hud-val perc-high">61.82%</p></div>
+                <div class="hud-item border-l-red-600"><p class="hud-label">Feb Revenue</p><p class="hud-val rev-green">₦22.7m</p></div>
+                <div class="hud-item"><p class="hud-label">Customers</p><p class="hud-val">320</p></div>
+                <div class="hud-item"><p class="hud-label">Units Sold</p><p class="hud-val">2.3k</p></div>
+                <div class="hud-item"><p class="hud-label">Return %</p><p class="hud-val perc-high">62.19%</p></div>
             </div>
 
-            <input type="text" id="filterInput" onkeyup="globalSearch()" placeholder="FILTER AGENT, ZONE, OR MEDIUM...">
+            <input type="text" id="filterInput" onkeyup="globalSearch()" placeholder="SEARCH AGENT, ZONE, OR CHANNEL...">
         </div>
     </header>
 
     <div class="main-container">
 
-        <span class="h-bold-red !mt-0">01 // Medium Performance (Feb)</span>
-        <div class="card overflow-x-auto mb-4 searchable">
+        <span class="h-bold-red !mt-0">01 // Digital Channel Breakdown</span>
+        <div class="card overflow-x-auto mb-6 searchable">
             <table>
-                <thead><tr><th>Medium</th><th class="text-right">Revenue</th><th class="text-right">Customers</th><th class="text-right">Units</th></tr></thead>
+                <thead><tr><th>Channel</th><th class="text-right">Revenue</th><th class="text-right">Customers</th><th class="text-right">Units</th></tr></thead>
                 <tbody>
-                    <tr><td>Instagram Ad</td><td class="text-right rev-green">₦3.8m</td><td class="text-right">74</td><td class="text-right">466</td></tr>
-                    <tr><td>Landing Page</td><td class="text-right rev-green">₦1.9m</td><td class="text-right">48</td><td class="text-right">342</td></tr>
-                    <tr><td>Facebook Ad</td><td class="text-right rev-green">₦659k</td><td class="text-right">14</td><td class="text-right">92</td></tr>
-                    <tr><td>Customer Care</td><td class="text-right rev-green">₦1.6m</td><td class="text-right">25</td><td class="text-right">199</td></tr>
-                    <tr class="font-black bg-zinc-950"><td>Others (Direct)</td><td class="text-right rev-green">₦13.0m</td><td class="text-right">135</td><td class="text-right">1.1k</td></tr>
+                    <tr><td>Instagram Ad</td><td class="text-right rev-green">₦4.0m</td><td class="text-right">78</td><td class="text-right">490</td></tr>
+                    <tr><td>Landing Page</td><td class="text-right rev-green">₦2.4m</td><td class="text-right">61</td><td class="text-right">415</td></tr>
+                    <tr><td>Facebook Ad</td><td class="text-right rev-green">₦721k</td><td class="text-right">15</td><td class="text-right">93</td></tr>
+                    <tr><td>Customer Care</td><td class="text-right rev-green">₦1.8m</td><td class="text-right">28</td><td class="text-right">241</td></tr>
+                    <tr class="font-black bg-zinc-950"><td>Others (Direct/Referral)</td><td class="text-right rev-green">₦13.8m</td><td class="text-right">138</td><td class="text-right">1.1k</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div class="searchable">
                 <span class="h-bold-red">02 // Department Contribution</span>
                 <table>
                     <thead><tr><th>Team</th><th class="text-right">Revenue</th><th class="text-right">Perf %</th></tr></thead>
                     <tbody>
-                        <tr><td>Digital Marketers</td><td class="text-right rev-green">₦9.9m</td><td class="text-right">47.11%</td></tr>
-                        <tr><td>Sales Team</td><td class="text-right rev-green">₦9.4m</td><td class="text-right">44.62%</td></tr>
-                        <tr><td>Customer Care</td><td class="text-right rev-green">₦1.6m</td><td class="text-right">7.65%</td></tr>
+                        <tr><td>Digital Marketers</td><td class="text-right rev-green">₦10.6m</td><td class="text-right">46.45%</td></tr>
+                        <tr><td>Sales Team</td><td class="text-right rev-green">₦10.3m</td><td class="text-right">45.44%</td></tr>
+                        <tr><td>Customer Care</td><td class="text-right rev-green">₦1.8m</td><td class="text-right">8.11%</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -101,73 +101,76 @@
                 <table>
                     <thead><tr><th>Zone</th><th class="text-right">Revenue</th><th class="text-right">Units</th></tr></thead>
                     <tbody>
-                        <tr><td>Lagos</td><td class="text-right rev-green">₦10.1m</td><td class="text-right">823</td></tr>
-                        <tr><td>Benin</td><td class="text-right rev-green">₦5.8m</td><td class="text-right">785</td></tr>
+                        <tr><td>Lagos</td><td class="text-right rev-green">₦10.6m</td><td class="text-right">867</td></tr>
+                        <tr><td>Benin</td><td class="text-right rev-green">₦7.0m</td><td class="text-right">899</td></tr>
                         <tr><td>Abuja</td><td class="text-right rev-green">₦5.2m</td><td class="text-right">545</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <span class="h-bold-red">04 // Individual Pulse (Feb)</span>
-        <div class="overflow-x-auto mb-4 searchable">
+        <span class="h-bold-red">04 // Monthly Pulse (Individual Agent)</span>
+        <div class="overflow-x-auto mb-6 searchable">
             <table>
                 <thead><tr><th>Agent</th><th>Revenue</th><th>Customers</th><th>Units</th></tr></thead>
                 <tbody>
-                    <tr><td>Bolu</td><td class="rev-green">₦6.1m</td><td>57</td><td>337</td></tr>
-                    <tr><td>Mary</td><td class="rev-green">₦5.4m</td><td>86</td><td>694</td></tr>
-                    <tr><td>Esther</td><td class="rev-green">₦2.5m</td><td>33</td><td>283</td></tr>
-                    <tr><td>Jaya</td><td class="rev-green">₦1.7m</td><td>29</td><td>186</td></tr>
-                    <tr><td>Divine</td><td class="rev-green">₦1.6m</td><td>29</td><td>220</td></tr>
-                    <tr><td>Susan</td><td class="rev-green">₦1.1m</td><td>26</td><td>163</td></tr>
-                    <tr><td>Lewa</td><td class="rev-green">₦888k</td><td>14</td><td>106</td></tr>
+                    <tr><td>Mary</td><td class="rev-green">₦6.5m</td><td>99</td><td>771</td></tr>
+                    <tr><td>Bolu</td><td class="rev-green">₦6.4m</td><td>59</td><td>345</td></tr>
+                    <tr><td>Esther</td><td class="rev-green">₦2.6m</td><td>36</td><td>301</td></tr>
+                    <tr><td>Jaya</td><td class="rev-green">₦2.0m</td><td>32</td><td>195</td></tr>
+                    <tr><td>Susan</td><td class="rev-green">₦1.2m</td><td>27</td><td>169</td></tr>
+                    <tr><td>Lewa</td><td class="rev-green">₦1.1m</td><td>17</td><td>148</td></tr>
+                    <tr><td>Divine</td><td class="rev-green">₦1.7m</td><td>31</td><td>232</td></tr>
                     <tr><td>Rachel</td><td class="rev-green">₦806k</td><td>12</td><td>94</td></tr>
+                    <tr><td>Amaya / Joy</td><td class="rev-green">₦0</td><td>0</td><td>0</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <span class="h-bold-red">05 // Annual Efficiency (YTD)</span>
-        <div class="overflow-x-auto mb-4 searchable">
+        <span class="h-bold-red">05 // 2026 Annual Command (YTD)</span>
+        <div class="overflow-x-auto mb-6 searchable">
             <table>
-                <thead><tr><th>Agent</th><th>2026 Rev</th><th>Units</th><th class="text-right">Target Progress</th></tr></thead>
+                <thead><tr><th>Agent</th><th>Total Rev</th><th>Units</th><th class="text-right">Progress</th></tr></thead>
                 <tbody>
-                    <tr><td>Mary</td><td class="rev-green">₦18.9m</td><td>2.4k</td><td class="text-right perc-low">3.79%</td></tr>
-                    <tr><td>Bolu</td><td class="rev-green">₦17.1m</td><td>1.5k</td><td class="text-right perc-low">4.29%</td></tr>
-                    <tr><td>Jaya</td><td class="rev-green">₦7.1m</td><td>711</td><td class="text-right perc-low">4.72%</td></tr>
-                    <tr><td>Susan</td><td class="rev-green">₦6.0m</td><td>753</td><td class="text-right perc-low">6.03%</td></tr>
-                    <tr><td>Divine</td><td class="rev-green">₦5.1m</td><td>630</td><td class="text-right perc-low">5.08%</td></tr>
-                    <tr><td>Esther</td><td class="rev-green">₦4.9m</td><td>453</td><td class="text-right perc-low">4.91%</td></tr>
+                    <tr><td>Mary</td><td class="rev-green">₦20.0m</td><td>2.4k</td><td class="text-right perc-low">3.99%</td></tr>
+                    <tr><td>Bolu</td><td class="rev-green">₦17.4m</td><td>1.5k</td><td class="text-right perc-low">4.36%</td></tr>
+                    <tr><td>Jaya</td><td class="rev-green">₦7.3m</td><td>720</td><td class="text-right perc-low">4.88%</td></tr>
+                    <tr><td>Susan</td><td class="rev-green">₦6.1m</td><td>759</td><td class="text-right perc-low">6.06%</td></tr>
+                    <tr><td>Divine</td><td class="rev-green">₦5.1m</td><td>642</td><td class="text-right perc-low">5.14%</td></tr>
+                    <tr><td>Esther</td><td class="rev-green">₦5.0m</td><td>471</td><td class="text-right perc-low">5.01%</td></tr>
+                    <tr><td>Lewa</td><td class="rev-green">₦5.0m</td><td>658</td><td class="text-right perc-low">1.99%</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div class="searchable">
-                <span class="h-bold-red">06 // CS Quality (Historical)</span>
+                <span class="h-bold-red">06 // CS & Retention Quality</span>
                 <table>
-                    <thead><tr><th>Year</th><th>Sat %</th><th class="text-right">Gen Rev</th></tr></thead>
+                    <thead><tr><th>Metric</th><th class="text-right">Stat</th></tr></thead>
                     <tbody>
-                        <tr><td>2026</td><td class="perc-high">97.06%</td><td class="text-right rev-green">₦8.1m</td></tr>
-                        <tr><td>2025</td><td class="perc-high">96.10%</td><td class="text-right rev-green">₦90.9m</td></tr>
-                        <tr class="bg-zinc-950 font-black"><td>TOTAL</td><td>97%</td><td class="text-right rev-green">₦134.6m</td></tr>
+                        <tr><td>CS Satisfaction (2026)</td><td class="text-right perc-high">97.04%</td></tr>
+                        <tr><td>CS Generated Rev</td><td class="text-right rev-green">₦8.3m</td></tr>
+                        <tr><td>Lifetime CS Rev</td><td class="text-right rev-green">₦134.8m</td></tr>
                     </tbody>
                 </table>
             </div>
             <div class="searchable">
-                <span class="h-bold-red">07 // Max Single Day Revenue</span>
+                <span class="h-bold-red">07 // Daily High-Water Mark</span>
                 <table>
-                    <thead><tr><th>Agent</th><th class="text-right">Max Hit</th></tr></thead>
+                    <thead><tr><th>Agent</th><th class="text-right">Max Hit (1 Day)</th></tr></thead>
                     <tbody>
                         <tr><td>Bolu</td><td class="text-right rev-green">₦2.8m</td></tr>
-                        <tr><td>Mary</td><td class="text-right rev-green">₦1.1m</td></tr>
+                        <tr><td>Mary</td><td class="text-right rev-green">₦1.7m</td></tr>
                         <tr><td>Susan</td><td class="text-right rev-green">₦855k</td></tr>
+                        <tr><td>Rachel</td><td class="text-right rev-green">₦588k</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <footer class="mt-8 text-center opacity-10 pb-6">
-            <p class="text-[7px] tracking-[10px] uppercase font-black">Suruka OS // Sales Team Protocol</p>
+        <footer class="mt-8 text-center opacity-10 pb-10">
+            <p class="text-[8px] tracking-[15px] uppercase font-black">SURUKA OS // SALES FORCE PROTOCOL</p>
         </footer>
     </div>
 
