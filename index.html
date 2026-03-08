@@ -296,6 +296,54 @@ tr:hover td { background: #F8F9FF; }
 
 /* ── FOOTNOTE ── */
 .footnote { font-size: 11px; color: var(--muted); margin-top: 10px; font-style: italic; }
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border2);
+  padding: 10px 48px;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.filter-label {
+  font-size: 10px; font-weight: 700; color: var(--muted);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-right: 4px; white-space: nowrap;
+}
+.filter-select {
+  appearance: none;
+  background: var(--white);
+  border: 1px solid var(--border2);
+  border-radius: 3px;
+  padding: 6px 28px 6px 11px;
+  font-size: 12px; font-weight: 600;
+  font-family: 'Barlow', sans-serif;
+  color: var(--ink);
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239096A8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 9px center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-width: 140px;
+}
+.filter-select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(24,66,204,0.1); }
+.filter-select.active { border-color: var(--accent); background-color: rgba(24,66,204,0.04); color: var(--accent); }
+.filter-divider { width: 1px; height: 22px; background: var(--border2); margin: 0 4px; }
+.filter-reset {
+  margin-left: auto;
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: 3px;
+  font-size: 11px; font-weight: 700;
+  font-family: 'Barlow', sans-serif;
+  color: var(--muted);
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  transition: all 0.2s;
+}
+.filter-reset:hover { border-color: var(--red); color: var(--red); }
+tr.filter-hidden { display: none; }
+.rep-card.filter-hidden { display: none; }
 </style>
 </head>
 <body>
@@ -364,10 +412,61 @@ tr:hover td { background: #F8F9FF; }
       </div>
     </div>
   </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar" id="filterBar">
+    <span class="filter-label">Filter:</span>
+
+    <select class="filter-select" id="filterRep" onchange="applyFilters()">
+      <option value="all">All Reps</option>
+      <option value="Mary">Mary</option>
+      <option value="Bolu">Bolu</option>
+      <option value="Jaya">Jaya</option>
+      <option value="Lewa">Lewa</option>
+      <option value="Susan">Susan</option>
+      <option value="Rachel">Rachel</option>
+      <option value="Esther">Esther</option>
+      <option value="Divine">Divine</option>
+      <option value="Jane">Jane</option>
+    </select>
+
+    <div class="filter-divider"></div>
+
+    <select class="filter-select" id="filterDept" onchange="applyFilters()">
+      <option value="all">All Departments</option>
+      <option value="Digital Marketer">Digital Marketer</option>
+      <option value="Sales Team">Sales Team</option>
+      <option value="Customer Care">Customer Care</option>
+    </select>
+
+    <div class="filter-divider"></div>
+
+    <select class="filter-select" id="filterZone" onchange="applyFilters()">
+      <option value="all">All Zones</option>
+      <option value="Lagos">Lagos</option>
+      <option value="Benin">Benin</option>
+      <option value="Abuja">Abuja</option>
+      <option value="Ghana">Ghana</option>
+    </select>
+
+    <div class="filter-divider"></div>
+
+    <select class="filter-select" id="filterYear" onchange="applyFilters()">
+      <option value="all">All Years</option>
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+      <option value="2024">2024</option>
+      <option value="2025">2025</option>
+      <option value="2026">2026 YTD</option>
+    </select>
+
+    <button class="filter-reset" onclick="resetFilters()">✕ Reset</button>
+  </div>
+
 </div>
 
 <!-- ──────────────── PAGE BODY ──────────────── -->
-<div class="page" style="padding-top: 148px;">
+<div class="page" style="padding-top: 244px;">
 
 <!-- ════════ SEG 1 — SALES MEDIUM ════════ -->
 <section class="fade d1">
@@ -440,15 +539,15 @@ tr:hover td { background: #F8F9FF; }
     <table>
       <thead><tr><th>Sales Rep</th><th>Customers Today</th><th>Revenue Today</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td><strong>Bolu</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
-        <tr><td><strong>Mary</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
-        <tr><td><strong>Jaya</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
-        <tr><td><strong>Lewa</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
-        <tr><td><strong>Susan</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
-        <tr><td><strong>Rachel</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
-        <tr><td><strong>Esther</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
-        <tr><td><strong>Divine</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
-        <tr><td><strong>Jane</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
+        <tr data-rep="Bolu"><td><strong>Bolu</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
+        <tr data-rep="Mary"><td><strong>Mary</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
+        <tr data-rep="Jaya"><td><strong>Jaya</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
+        <tr data-rep="Lewa"><td><strong>Lewa</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
+        <tr data-rep="Susan"><td><strong>Susan</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
+        <tr data-rep="Rachel"><td><strong>Rachel</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
+        <tr data-rep="Esther"><td><strong>Esther</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
+        <tr data-rep="Divine"><td><strong>Divine</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
+        <tr data-rep="Jane"><td><strong>Jane</strong></td><td class="mu">0</td><td class="mu">₦0.00</td><td><span class="chip chip-r">Pending</span></td></tr>
         <tr class="tr-total"><td>TEAM TOTAL</td><td>0</td><td>₦0.00</td><td></td></tr>
       </tbody>
     </table>
@@ -483,17 +582,17 @@ tr:hover td { background: #F8F9FF; }
     <table>
       <thead><tr><th>Department</th><th>Revenue</th><th>Customers</th><th>Units</th><th>% Contribution</th></tr></thead>
       <tbody>
-        <tr>
+        <tr data-dept="Digital Marketer">
           <td><strong>Digital Marketer</strong></td>
           <td class="acc">₦6,150,500.00</td><td>110</td><td>789</td>
           <td><span class="chip chip-acc">43.16%</span></td>
         </tr>
-        <tr>
+        <tr data-dept="Sales Team">
           <td><strong>Sales Team</strong></td>
           <td class="g">₦5,749,800.00</td><td>58</td><td>506</td>
           <td><span class="chip chip-g">40.34%</span></td>
         </tr>
-        <tr>
+        <tr data-dept="Customer Care">
           <td><strong>Customer Care</strong></td>
           <td class="gold">₦2,351,400.00</td><td>33</td><td>199</td>
           <td><span class="chip chip-gold">16.50%</span></td>
@@ -509,29 +608,29 @@ tr:hover td { background: #F8F9FF; }
   <div class="sec-head">
     <span class="sec-num">SEG 04</span>
     <span class="sec-title">Zone Sales Breakdown</span>
-    <span class="sec-meta">Lagos Mainland · Benin · Abuja · Ghana</span>
+    <span class="sec-meta">Lagos · Benin · Abuja · Ghana</span>
   </div>
   <div class="two-col">
     <div class="tbl-wrap">
       <table>
         <thead><tr><th>Zone</th><th>Revenue</th><th>Customers</th><th>Units</th><th>%</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>Lagos Mainland</strong></td>
+          <tr data-zone="Lagos">
+            <td><strong>Lagos</strong></td>
             <td class="g">₦7,469,600.00</td><td>92</td><td>772</td>
             <td><span class="chip chip-g">52.41%</span></td>
           </tr>
-          <tr>
+          <tr data-zone="Benin">
             <td><strong>Benin</strong></td>
             <td class="g">₦4,350,800.00</td><td>73</td><td>525</td>
             <td><span class="chip chip-gold">30.53%</span></td>
           </tr>
-          <tr>
+          <tr data-zone="Abuja">
             <td><strong>Abuja</strong></td>
             <td class="g">₦2,431,300.00</td><td>37</td><td>197</td>
             <td><span class="chip chip-r">17.06%</span></td>
           </tr>
-          <tr>
+          <tr data-zone="Ghana">
             <td class="mu">Ghana</td>
             <td class="mu">GHS 0.00</td><td class="mu">—</td><td class="mu">—</td>
             <td class="mu">—</td>
@@ -542,7 +641,7 @@ tr:hover td { background: #F8F9FF; }
     </div>
     <div style="background:var(--white); border:1px solid var(--border); padding:22px;">
       <div style="font-size:10px; color:var(--muted); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:18px; font-weight:600;">Zone Contribution</div>
-      <div class="bar-row"><span class="bar-label">Lagos Mainland</span><div class="bar-track"><div class="bar-fill" style="width:52.41%; background:var(--green);"></div></div><span class="bar-val g">52.41%</span></div>
+      <div class="bar-row"><span class="bar-label">Lagos</span><div class="bar-track"><div class="bar-fill" style="width:52.41%; background:var(--green);"></div></div><span class="bar-val g">52.41%</span></div>
       <div class="bar-row"><span class="bar-label">Benin</span><div class="bar-track"><div class="bar-fill" style="width:30.53%; background:var(--gold);"></div></div><span class="bar-val gold">30.53%</span></div>
       <div class="bar-row"><span class="bar-label">Abuja</span><div class="bar-track"><div class="bar-fill" style="width:17.06%; background:var(--red);"></div></div><span class="bar-val r">17.06%</span></div>
       <div class="bar-row"><span class="bar-label mu">Ghana</span><div class="bar-track"><div class="bar-fill" style="width:0%; background:var(--muted2);"></div></div><span class="bar-val mu">0%</span></div>
@@ -559,7 +658,7 @@ tr:hover td { background: #F8F9FF; }
   </div>
   <div class="rep-grid">
     <!-- Mary #1 -->
-    <div class="rep-card top">
+    <div class="rep-card top" data-rep="Mary">
       <div class="rep-rank-tag">#1 MARCH</div>
       <div class="rep-name">Mary</div>
       <div class="rep-rev">₦4,643,100</div>
@@ -571,7 +670,7 @@ tr:hover td { background: #F8F9FF; }
       <div class="rep-pct-label">Top performer this month</div>
     </div>
     <!-- Bolu #2 -->
-    <div class="rep-card">
+    <div class="rep-card" data-rep="Bolu">
       <div class="rep-rank-tag">#2</div>
       <div class="rep-name">Bolu</div>
       <div class="rep-rev" style="color:var(--ink2);">₦2,705,000</div>
@@ -583,7 +682,7 @@ tr:hover td { background: #F8F9FF; }
       <div class="rep-pct-label">58.3% of Mary's revenue</div>
     </div>
     <!-- Jaya #3 -->
-    <div class="rep-card">
+    <div class="rep-card" data-rep="Jaya">
       <div class="rep-rank-tag">#3</div>
       <div class="rep-name">Jaya</div>
       <div class="rep-rev" style="color:var(--ink2);">₦1,474,000</div>
@@ -595,7 +694,7 @@ tr:hover td { background: #F8F9FF; }
       <div class="rep-pct-label">31.7% of Mary's revenue</div>
     </div>
     <!-- Lewa #4 -->
-    <div class="rep-card">
+    <div class="rep-card" data-rep="Lewa">
       <div class="rep-rank-tag">#4</div>
       <div class="rep-name">Lewa</div>
       <div class="rep-rev" style="color:var(--ink2);">₦1,296,600</div>
@@ -607,7 +706,7 @@ tr:hover td { background: #F8F9FF; }
       <div class="rep-pct-label">27.9% of Mary's revenue</div>
     </div>
     <!-- Susan #5 -->
-    <div class="rep-card">
+    <div class="rep-card" data-rep="Susan">
       <div class="rep-rank-tag">#5</div>
       <div class="rep-name">Susan</div>
       <div class="rep-rev" style="color:var(--ink2);">₦1,291,200</div>
@@ -619,7 +718,7 @@ tr:hover td { background: #F8F9FF; }
       <div class="rep-pct-label">27.8% of Mary's revenue</div>
     </div>
     <!-- Rachel #6 -->
-    <div class="rep-card">
+    <div class="rep-card" data-rep="Rachel">
       <div class="rep-rank-tag">#6</div>
       <div class="rep-name">Rachel</div>
       <div class="rep-rev" style="color:var(--ink2);">₦1,054,800</div>
@@ -631,7 +730,7 @@ tr:hover td { background: #F8F9FF; }
       <div class="rep-pct-label">22.7% of Mary's revenue</div>
     </div>
     <!-- Divine #7 -->
-    <div class="rep-card">
+    <div class="rep-card" data-rep="Divine">
       <div class="rep-rank-tag">#7</div>
       <div class="rep-name">Divine</div>
       <div class="rep-rev" style="color:var(--ink2);">₦914,400</div>
@@ -643,7 +742,7 @@ tr:hover td { background: #F8F9FF; }
       <div class="rep-pct-label">19.7% of Mary's revenue</div>
     </div>
     <!-- Esther #8 -->
-    <div class="rep-card">
+    <div class="rep-card" data-rep="Esther">
       <div class="rep-rank-tag">#8</div>
       <div class="rep-name">Esther</div>
       <div class="rep-rev" style="color:var(--ink2);">₦687,400</div>
@@ -655,7 +754,7 @@ tr:hover td { background: #F8F9FF; }
       <div class="rep-pct-label">14.8% of Mary's revenue</div>
     </div>
     <!-- Jane #9 -->
-    <div class="rep-card">
+    <div class="rep-card" data-rep="Jane">
       <div class="rep-rank-tag" style="background:var(--red);">#9</div>
       <div class="rep-name">Jane</div>
       <div class="rep-rev" style="color:var(--red);">₦33,600</div>
@@ -682,63 +781,63 @@ tr:hover td { background: #F8F9FF; }
         <tr><th>#</th><th>Staff</th><th>2026 Revenue</th><th>Customers</th><th>Units</th><th>% From Target</th><th>Progress</th></tr>
       </thead>
       <tbody>
-        <tr>
+        <tr data-rep="Mary">
           <td><span class="rank rank-1">1</span></td>
-          <td><strong>Mary</strong></td>
+          <td data-rep="Mary"><strong>Mary</strong></td>
           <td class="g">₦38,639,446</td><td>591</td><td>4,602</td>
           <td><span class="chip chip-g">7.73%</span></td>
           <td style="min-width:120px;"><div style="height:4px; background:var(--border2); border-radius:2px; overflow:hidden;"><div style="width:7.73%; height:100%; background:var(--green); border-radius:2px;"></div></div></td>
         </tr>
-        <tr>
+        <tr data-rep="Bolu">
           <td><span class="rank rank-2">2</span></td>
-          <td><strong>Bolu</strong></td>
+          <td data-rep="Bolu"><strong>Bolu</strong></td>
           <td class="g">₦24,818,723</td><td>299</td><td>2,268</td>
           <td><span class="chip chip-g">6.20%</span></td>
           <td><div style="height:4px; background:var(--border2); border-radius:2px; overflow:hidden;"><div style="width:6.20%; height:100%; background:var(--accent); border-radius:2px;"></div></div></td>
         </tr>
-        <tr>
+        <tr data-rep="Jaya">
           <td><span class="rank rank-3">3</span></td>
-          <td><strong>Jaya</strong></td>
+          <td data-rep="Jaya"><strong>Jaya</strong></td>
           <td class="g">₦10,746,190</td><td>155</td><td>1,040</td>
           <td><span class="chip chip-gold">7.16%</span></td>
           <td><div style="height:4px; background:var(--border2); border-radius:2px; overflow:hidden;"><div style="width:7.16%; height:100%; background:var(--gold); border-radius:2px;"></div></div></td>
         </tr>
-        <tr>
+        <tr data-rep="Susan">
           <td><span class="rank rank-n">4</span></td>
-          <td><strong>Susan</strong></td>
+          <td data-rep="Susan"><strong>Susan</strong></td>
           <td class="g">₦9,558,492</td><td>149</td><td>1,107</td>
           <td><span class="chip chip-g">9.56%</span></td>
           <td><div style="height:4px; background:var(--border2); border-radius:2px; overflow:hidden;"><div style="width:9.56%; height:100%; background:var(--teal); border-radius:2px;"></div></div></td>
         </tr>
-        <tr>
+        <tr data-rep="Esther">
           <td><span class="rank rank-n">5</span></td>
-          <td><strong>Esther</strong></td>
+          <td data-rep="Esther"><strong>Esther</strong></td>
           <td class="g">₦8,214,200</td><td>139</td><td>908</td>
           <td><span class="chip chip-g">8.21%</span></td>
           <td><div style="height:4px; background:var(--border2); border-radius:2px; overflow:hidden;"><div style="width:8.21%; height:100%; background:var(--green); border-radius:2px;"></div></div></td>
         </tr>
-        <tr>
+        <tr data-rep="Lewa">
           <td><span class="rank rank-n">6</span></td>
-          <td><strong>Lewa</strong></td>
+          <td data-rep="Lewa"><strong>Lewa</strong></td>
           <td class="g">₦8,031,600</td><td>110</td><td>970</td>
           <td><span class="chip chip-r">3.21%</span></td>
           <td><div style="height:4px; background:var(--border2); border-radius:2px; overflow:hidden;"><div style="width:3.21%; height:100%; background:var(--gold); border-radius:2px;"></div></div></td>
         </tr>
-        <tr>
+        <tr data-rep="Divine">
           <td><span class="rank rank-n">7</span></td>
-          <td><strong>Divine</strong></td>
+          <td data-rep="Divine"><strong>Divine</strong></td>
           <td class="g">₦7,359,000</td><td>134</td><td>955</td>
           <td><span class="chip chip-gold">7.36%</span></td>
           <td><div style="height:4px; background:var(--border2); border-radius:2px; overflow:hidden;"><div style="width:7.36%; height:100%; background:var(--gold); border-radius:2px;"></div></div></td>
         </tr>
-        <tr>
+        <tr data-rep="Rachel">
           <td><span class="rank rank-n">8</span></td>
-          <td><strong>Rachel</strong></td>
+          <td data-rep="Rachel"><strong>Rachel</strong></td>
           <td class="g">₦6,731,311</td><td>120</td><td>709</td>
           <td><span class="chip chip-gold">6.73%</span></td>
           <td><div style="height:4px; background:var(--border2); border-radius:2px; overflow:hidden;"><div style="width:6.73%; height:100%; background:var(--accent); border-radius:2px;"></div></div></td>
         </tr>
-        <tr>
+        <tr data-rep="Jane">
           <td><span class="rank rank-n">9</span></td>
           <td><strong>Jane</strong></td>
           <td class="r">₦33,600</td><td>4</td><td>24</td>
@@ -1054,5 +1153,101 @@ tr:hover td { background: #F8F9FF; }
 </div>
 
 </div><!-- /page -->
+
+<script>
+// ── SURUKA SALES TEAM FILTER ENGINE ──────────────────────────────────────
+
+function getFilters() {
+  return {
+    rep:  document.getElementById('filterRep').value,
+    dept: document.getElementById('filterDept').value,
+    zone: document.getElementById('filterZone').value,
+    year: document.getElementById('filterYear').value,
+  };
+}
+
+function applyFilters() {
+  const f = getFilters();
+  const anyActive = Object.values(f).some(v => v !== 'all');
+
+  // Mark selects active
+  ['filterRep','filterDept','filterZone','filterYear'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.toggle('active', el.value !== 'all');
+  });
+
+  // Reset button visibility
+  document.querySelector('.filter-reset').style.visibility = anyActive ? 'visible' : 'hidden';
+
+  // REP filter — table rows
+  document.querySelectorAll('tr[data-rep]').forEach(row => {
+    const show = f.rep === 'all' || row.dataset.rep === f.rep;
+    row.classList.toggle('filter-hidden', !show);
+  });
+
+  // REP filter — rep cards
+  document.querySelectorAll('.rep-card[data-rep]').forEach(card => {
+    const show = f.rep === 'all' || card.dataset.rep === f.rep;
+    card.classList.toggle('filter-hidden', !show);
+  });
+
+  // DEPT filter
+  document.querySelectorAll('tr[data-dept]').forEach(row => {
+    const show = f.dept === 'all' || row.dataset.dept === f.dept;
+    row.classList.toggle('filter-hidden', !show);
+  });
+
+  // ZONE filter
+  document.querySelectorAll('tr[data-zone]').forEach(row => {
+    const show = f.zone === 'all' || row.dataset.zone === f.zone;
+    row.classList.toggle('filter-hidden', !show);
+  });
+
+  // YEAR filter — highlight relevant year KPI cards if present
+  // (Sales report is current-month focused — year filter dims non-matching year badges)
+  document.querySelectorAll('.sec-meta').forEach(meta => {
+    if (f.year !== 'all') {
+      const text = meta.textContent;
+      const yearMatch = text.includes(f.year) || text.includes('March 2026') && f.year === '2026';
+      meta.style.opacity = yearMatch ? '1' : '0.4';
+    } else {
+      meta.style.opacity = '';
+    }
+  });
+
+  // Update badge
+  updateBadge(f);
+}
+
+function updateBadge(f) {
+  const parts = [];
+  if (f.rep  !== 'all') parts.push('Rep: ' + f.rep);
+  if (f.dept !== 'all') parts.push('Dept: ' + f.dept);
+  if (f.zone !== 'all') parts.push('Zone: ' + f.zone);
+  if (f.year !== 'all') parts.push('Year: ' + f.year);
+
+  let badge = document.getElementById('filterBadge');
+  if (!badge) {
+    badge = document.createElement('span');
+    badge.id = 'filterBadge';
+    badge.style.cssText = 'font-size:11px; font-weight:700; color:var(--accent); padding:4px 10px; background:rgba(24,66,204,0.08); border-radius:20px; border:1px solid rgba(24,66,204,0.2); white-space:nowrap;';
+    document.getElementById('filterBar').insertBefore(badge, document.querySelector('.filter-reset'));
+  }
+  badge.textContent = parts.length ? '● ' + parts.join(' · ') : '';
+  badge.style.display = parts.length ? 'inline' : 'none';
+}
+
+function resetFilters() {
+  ['filterRep','filterDept','filterZone','filterYear'].forEach(id => {
+    document.getElementById(id).value = 'all';
+  });
+  applyFilters();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('.filter-reset').style.visibility = 'hidden';
+  applyFilters();
+});
+</script>
 </body>
 </html>
