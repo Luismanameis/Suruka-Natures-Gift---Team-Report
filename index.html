@@ -3,80 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suruka Command Audit | April 03 Update</title>
+    <title>Suruka Command Audit | April 04 Executive View</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #020617; --card-bg: #0f172a; --accent: #C5A059;
-            --profit: #10b981; --hazard: #ef4444; --text-dim: #94a3b8;
+            --bg-dark: #020617; 
+            --card-bg: #0f172a; 
+            --accent: #C5A059;
+            --profit: #10b981; 
+            --hazard: #ef4444; 
+            --text-dim: #94a3b8;
             --border-glow: rgba(197, 160, 89, 0.3);
         }
         * { box-sizing: border-box; transition: all 0.2s ease; }
         body { 
             background-color: var(--bg-dark); color: #f8fafc; 
-            font-family: 'Inter', sans-serif; margin: 0; padding: 210px 20px 50px; 
+            font-family: 'Inter', sans-serif; margin: 0; padding: 180px 20px 50px; 
         }
         
-        /* Fixed Header Strategy */
         header { 
             position: fixed; top: 0; left: 0; right: 0; 
-            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--accent); z-index: 1000; padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--accent); z-index: 1000; padding: 15px 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
         }
-        .header-main { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; }
+        .header-main { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .header-main h1 { 
-            font-family: 'Orbitron', sans-serif; font-size: 24px; margin: 0; 
+            font-family: 'Orbitron', sans-serif; font-size: 22px; margin: 0; 
             letter-spacing: 2px; color: var(--accent); text-transform: uppercase;
         }
         
-        /* KPI Dashboard Row */
-        .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
         .kpi-box { 
             background: rgba(255,255,255,0.03); border: 1px solid var(--border-glow);
-            padding: 12px; border-radius: 8px; text-align: center;
+            padding: 10px; border-radius: 6px; text-align: center;
         }
-        .kpi-box span { display: block; font-size: 9px; text-transform: uppercase; color: var(--accent); font-weight: 800; margin-bottom: 4px; }
-        .kpi-box strong { font-family: 'Orbitron', sans-serif; font-size: 18px; color: white; }
+        .kpi-box span { display: block; font-size: 9px; text-transform: uppercase; color: var(--accent); font-weight: 800; margin-bottom: 2px; }
+        .kpi-box strong { font-family: 'Orbitron', sans-serif; font-size: 16px; color: white; }
 
-        /* Main Layout */
-        .container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 25px; }
-        .grid-half { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .container { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 20px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         
-        /* Segment Styling */
         .segment { 
-            background: var(--card-bg); border-radius: 12px; border: 1px solid #1e293b;
+            background: var(--card-bg); border-radius: 10px; border: 1px solid #1e293b;
             box-shadow: 0 4px 20px rgba(0,0,0,0.2); overflow: hidden;
         }
         .seg-header { 
-            background: rgba(30, 41, 59, 0.5); padding: 15px 20px; 
-            border-bottom: 1px solid #334155; display: flex; align-items: center;
+            background: rgba(30, 41, 59, 0.5); padding: 12px 18px; 
+            border-bottom: 1px solid #334155; display: flex; align-items: center; justify-content: space-between;
         }
-        .seg-header h2 { margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; color: #cbd5e1; }
+        .seg-header h2 { margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; color: #cbd5e1; }
         .seg-id { 
-            background: var(--accent); color: black; padding: 2px 8px; 
-            border-radius: 4px; margin-right: 12px; font-size: 10px; font-weight: 900; 
+            background: var(--accent); color: black; padding: 2px 6px; 
+            border-radius: 3px; margin-right: 10px; font-size: 10px; font-weight: 900; 
         }
 
-        /* Table Aesthetics */
         .table-wrap { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        table { width: 100%; border-collapse: collapse; }
         th { 
-            text-align: left; padding: 15px; font-size: 10px; color: var(--text-dim); 
+            text-align: left; padding: 12px; font-size: 9px; color: var(--text-dim); 
             text-transform: uppercase; background: rgba(0,0,0,0.2); 
         }
-        td { padding: 14px 15px; border-bottom: 1px solid #1e293b; font-size: 13px; font-weight: 500; }
+        td { padding: 10px 12px; border-bottom: 1px solid #1e293b; font-size: 12px; }
         tr:hover { background: rgba(197, 160, 89, 0.03); }
+        .total-row { background: rgba(197, 160, 89, 0.08); font-weight: 800; color: var(--accent); }
         
-        /* Data Markers */
         .val-profit { color: var(--profit); font-weight: 700; }
         .val-loss { color: var(--hazard); font-weight: 700; }
-        .total-row { background: rgba(197, 160, 89, 0.1); font-weight: 800; color: var(--accent); }
-        
-        @media (max-width: 900px) {
-            body { padding-top: 280px; }
-            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-            .grid-half { grid-template-columns: 1fr; }
+        .status-badge { padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 800; background: #334155; }
+
+        @media (max-width: 1100px) {
+            body { padding-top: 260px; }
+            .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+            .grid-3, .grid-2 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -85,134 +85,77 @@
 <header>
     <div class="header-main">
         <h1>Suruka Command Audit</h1>
-        <div style="font-size: 11px; font-weight: 700;">AUDIT CYCLE: 03/04/2026</div>
+        <div style="font-size: 12px; font-weight: 700; background: var(--accent); color: black; padding: 4px 10px; border-radius: 4px;">CYCLE: 04/04/2026</div>
     </div>
     <div class="kpi-grid">
-        <div class="kpi-box"><span>Gross Revenue</span><strong>₦4,850,600</strong></div>
-        <div class="kpi-box"><span>Target Achieved</span><strong>65.38% (Return)</strong></div>
-        <div class="kpi-box"><span>Month Customers</span><strong>78</strong></div>
-        <div class="kpi-box"><span>Day Units</span><strong>40</strong></div>
+        <div class="kpi-box"><span>MTD Gross Revenue</span><strong>₦6,304,200</strong></div>
+        <div class="kpi-box"><span>Total Customers</span><strong>110</strong></div>
+        <div class="kpi-box"><span>Retention %</span><strong class="val-profit">60.91%</strong></div>
+        <div class="kpi-box"><span>Today's Sales</span><strong>₦33,600</strong></div>
+        <div class="kpi-box"><span>Today's Units</span><strong>6</strong></div>
     </div>
 </header>
 
 <div class="container">
 
-    <div class="segment">
-        <div class="seg-header"><div class="seg-id">01</div><h2>2026 Team Report (Digital Assets)</h2></div>
-        <div class="table-wrap">
-            <table>
-                <thead><tr><th>Channel</th><th>Revenue Breakdown</th></tr></thead>
-                <tbody>
-                    <tr><td>Digital - Instagram</td><td>₦910,600.00</td></tr>
-                    <tr><td>Digital - Landing Page</td><td>₦436,800.00</td></tr>
-                    <tr><td>Digital - Whatsapp DM</td><td>₦141,000.00</td></tr>
-                    <tr><td>Digital - Facebook</td><td>₦33,600.00</td></tr>
-                    <tr><td>Digital - Tik Tok / Website</td><td>₦0.00</td></tr>
-                    <tr class="total-row"><td>TOTAL DIGITAL REVENUE</td><td>₦1,522,000.00</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="segment">
-        <div class="seg-header"><div class="seg-id">02</div><h2>Today's Performance (03/04)</h2></div>
-        <div class="table-wrap">
-            <table>
-                <thead><tr><th>Sales Personnel</th><th>Cust.</th><th>Revenue</th></tr></thead>
-                <tbody>
-                    <tr><td>Bolu</td><td>2</td><td>₦312,200.00</td></tr>
-                    <tr><td>Lewa</td><td>2</td><td>₦118,600.00</td></tr>
-                    <tr><td>Esther</td><td>2</td><td>₦95,600.00</td></tr>
-                    <tr><td>Susan / Rachel</td><td>2 (1 Each)</td><td>₦67,200.00</td></tr>
-                    <tr><td>Mary / Jaya / Divine</td><td>0</td><td>₦0.00</td></tr>
-                    <tr class="total-row"><td>AGGREGATE TODAY</td><td>8 Cust (40 Units)</td><td class="val-profit">₦593,600.00</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="grid-half">
+    <div class="grid-2">
         <div class="segment">
-            <div class="seg-header"><div class="seg-id">03</div><h2>Departmental Contribution</h2></div>
+            <div class="seg-header"><div><span class="seg-id">01</span><h2>2026 Team Report (Digital Assets)</h2></div></div>
             <div class="table-wrap">
                 <table>
-                    <thead><tr><th>Dept</th><th>Revenue</th><th>Unit</th><th>%</th></tr></thead>
+                    <thead><tr><th>Channel</th><th>Revenue</th></tr></thead>
                     <tbody>
-                        <tr><td>Sales Team</td><td>₦2,800,800</td><td>319</td><td>57.74%</td></tr>
-                        <tr><td>Digital Marketers</td><td>₦1,522,000</td><td>185</td><td>31.38%</td></tr>
-                        <tr><td>Customer Care</td><td>₦527,800</td><td>65</td><td>10.88%</td></tr>
+                        <tr><td>Digital - Instagram</td><td>₦1,280,200.00</td></tr>
+                        <tr><td>Digital - Landing Page</td><td>₦925,000.00</td></tr>
+                        <tr><td>Digital - Whatsapp DM</td><td>₦141,000.00</td></tr>
+                        <tr><td>Digital - Facebook</td><td>₦67,200.00</td></tr>
+                        <tr><td>Digital - Tik Tok / Website</td><td>₦0.00</td></tr>
+                        <tr class="total-row"><td>TOTAL DIGITAL REVENUE</td><td>₦2,413,400.00</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
+
         <div class="segment">
-            <div class="seg-header"><div class="seg-id">04</div><h2>Regional Distribution</h2></div>
+            <div class="seg-header"><div><span class="seg-id">02</span><h2>Today's Performance (04/04)</h2></div><span class="status-badge">LIVE</span></div>
             <div class="table-wrap">
                 <table>
-                    <thead><tr><th>Zone</th><th>Revenue</th><th>Cust</th><th>%</th></tr></thead>
+                    <thead><tr><th>Personnel</th><th>Cust.</th><th>Units</th><th>Revenue</th></tr></thead>
                     <tbody>
-                        <tr><td>Lagos HQ</td><td>₦2,414,000</td><td>34</td><td>49.77%</td></tr>
-                        <tr><td>Benin City</td><td>₦1,758,000</td><td>31</td><td>36.24%</td></tr>
-                        <tr><td>Abuja Hub</td><td>₦678,600</td><td>13</td><td>13.99%</td></tr>
+                        <tr><td>Jaya</td><td>1</td><td>6</td><td class="val-profit">₦33,600.00</td></tr>
+                        <tr><td>Bolu / Mary / Lewa</td><td>0</td><td>0</td><td>₦0.00</td></tr>
+                        <tr><td>Susan / Rachel / Esther</td><td>0</td><td>0</td><td>₦0.00</td></tr>
+                        <tr><td>Divine</td><td>0</td><td>0</td><td>₦0.00</td></tr>
+                        <tr class="total-row"><td>AGGREGATE TODAY</td><td>1 Cust</td><td>6 Units</td><td>₦33,600.00</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <div class="segment">
-        <div class="seg-header"><div class="seg-id">05</div><h2>MTD Individual Statistics</h2></div>
-        <div class="table-wrap">
-            <table>
-                <thead><tr><th>Staff</th><th>Revenue</th><th>Customers</th><th>Units</th></tr></thead>
-                <tbody>
-                    <tr><td>Mary</td><td class="val-profit">₦1,701,800.00</td><td>31</td><td>251</td></tr>
-                    <tr><td>Bolu</td><td>₦1,014,600.00</td><td>12</td><td>101</td></tr>
-                    <tr><td>Esther</td><td>₦505,400.00</td><td>10</td><td>56</td></tr>
-                    <tr><td>Lewa</td><td>₦427,000.00</td><td>7</td><td>47</td></tr>
-                    <tr><td>Divine / Susan / Jaya</td><td>₦933,000.00 total</td><td>13</td><td>66</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="segment">
-        <div class="seg-header"><div class="seg-id">06</div><h2>2026 Target vs Reality (YTD)</h2></div>
-        <div class="table-wrap">
-            <table>
-                <thead><tr><th>Staff</th><th>Actual YTD</th><th>Target</th><th>Progress</th></tr></thead>
-                <tbody>
-                    <tr><td>Mary</td><td>₦53,651,946.00</td><td>₦500M</td><td>10.73%</td></tr>
-                    <tr><td>Bolu</td><td>₦33,376,523.00</td><td>₦400M</td><td>8.34%</td></tr>
-                    <tr><td>Susan</td><td>₦13,336,092.00</td><td>₦100M</td><td>13.34%</td></tr>
-                    <tr><td>Esther</td><td>₦12,172,600.00</td><td>₦100M</td><td class="val-profit">12.17%</td></tr>
-                    <tr><td>Jaya / Lewa</td><td>₦24,211,790.00</td><td>₦400M</td><td>~6%</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="grid-half">
+    <div class="grid-2">
         <div class="segment">
-            <div class="seg-header"><div class="seg-id">07</div><h2>Monthly Health Index</h2></div>
+            <div class="seg-header"><div><span class="seg-id">03</span><h2>Departmental Contribution</h2></div></div>
             <div class="table-wrap">
                 <table>
-                    <tr><td>Gross Revenue (Apr)</td><td class="val-profit">₦4,850,600</td></tr>
-                    <tr><td>Total Customers</td><td>78</td></tr>
-                    <tr><td>Retention Rate</td><td class="val-profit">65.38%</td></tr>
-                    <tr><td>CAC (New Cust)</td><td class="val-loss">₦14,444.44</td></tr>
+                    <thead><tr><th>Dept</th><th>Revenue</th><th>Cust</th><th>Unit</th><th>%</th></tr></thead>
+                    <tbody>
+                        <tr><td>Sales Team</td><td>₦3,158,600</td><td>50</td><td>377</td><td>50.10%</td></tr>
+                        <tr><td>Digital Marketers</td><td>₦2,413,400</td><td>46</td><td>330</td><td>38.28%</td></tr>
+                        <tr><td>Customer Care</td><td>₦732,200</td><td>14</td><td>90</td><td>11.61%</td></tr>
+                    </tbody>
                 </table>
             </div>
         </div>
         <div class="segment">
-            <div class="seg-header"><div class="seg-id">08</div><h2>Source of Revenue</h2></div>
+            <div class="seg-header"><div><span class="seg-id">04</span><h2>Regional Distribution</h2></div></div>
             <div class="table-wrap">
                 <table>
-                    <thead><tr><th>Source</th><th>Cust</th><th>Revenue</th><th>Unit</th></tr></thead>
+                    <thead><tr><th>Zone</th><th>Revenue</th><th>Cust</th><th>Unit</th><th>%</th></tr></thead>
                     <tbody>
-                        <tr><td>Instagram Ad</td><td>12</td><td>₦910,600</td><td>100</td></tr>
-                        <tr><td>Landing Page</td><td>10</td><td>₦436,800</td><td>78</td></tr>
-                        <tr><td>Other (Referrals)</td><td>55</td><td>₦3,469,600</td><td>385</td></tr>
+                        <tr><td>Lagos HQ</td><td>₦2,850,800</td><td>45</td><td>315</td><td>45.22%</td></tr>
+                        <tr><td>Benin City</td><td>₦2,347,000</td><td>41</td><td>321</td><td>37.23%</td></tr>
+                        <tr><td>Abuja Hub</td><td>₦1,106,400</td><td>24</td><td>161</td><td>17.55%</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -220,60 +163,117 @@
     </div>
 
     <div class="segment">
-        <div class="seg-header"><div class="seg-id">10</div><h2>Customer Satisfaction Pipeline</h2></div>
+        <div class="seg-header"><div><span class="seg-id">05/06</span><h2>Individual Performance Matrix (MTD & YTD)</h2></div></div>
         <div class="table-wrap">
             <table>
-                <thead><tr><th>Rep (03/04)</th><th>Contacted</th><th>Satisfied</th><th>% Score</th></tr></thead>
+                <thead>
+                    <tr>
+                        <th>Staff</th>
+                        <th>MTD Revenue</th>
+                        <th>Cust</th>
+                        <th>Units</th>
+                        <th>Actual YTD</th>
+                        <th>Target</th>
+                        <th>Progress</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td>RAY</td><td>20</td><td>20</td><td class="val-profit">100%</td></tr>
-                    <tr><td>LEWA</td><td>--</td><td>--</td><td>Awaiting</td></tr>
-                    <tr class="total-row"><td>TOTAL CS (YTD)</td><td>3,617</td><td>32,108 (All Time)</td><td class="val-profit">₦146.1M</td></tr>
+                    <tr><td>Mary</td><td class="val-profit">₦2,239,400</td><td>41</td><td>347</td><td>₦54,189,546</td><td>₦500M</td><td>10.84%</td></tr>
+                    <tr><td>Bolu</td><td>₦1,081,800</td><td>14</td><td>113</td><td>₦33,443,723</td><td>₦400M</td><td>8.36%</td></tr>
+                    <tr><td>Esther</td><td>₦661,600</td><td>14</td><td>78</td><td>₦12,328,800</td><td>₦100M</td><td>12.33%</td></tr>
+                    <tr><td>Lewa</td><td>₦564,200</td><td>9</td><td>60</td><td>₦11,095,400</td><td>₦250M</td><td>4.44%</td></tr>
+                    <tr><td>Divine</td><td>₦506,000</td><td>11</td><td>62</td><td>₦9,777,200</td><td>₦100M</td><td>9.78%</td></tr>
+                    <tr><td>Susan</td><td>₦459,200</td><td>7</td><td>44</td><td>₦13,504,092</td><td>₦100M</td><td>13.50%</td></tr>
+                    <tr><td>Jaya</td><td>₦337,400</td><td>5</td><td>26</td><td>₦13,320,790</td><td>₦150M</td><td>8.88%</td></tr>
+                    <tr><td>Rachel</td><td>₦201,600</td><td>6</td><td>36</td><td>₦10,228,711</td><td>₦100M</td><td>10.23%</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div class="segment">
-        <div class="seg-header"><div class="seg-id">12</div><h2>Lead Conversion Funnel</h2></div>
-        <div class="table-wrap">
-            <table>
-                <thead><tr><th>Staff</th><th>Total Leads</th><th>Closed</th><th>Conversion</th></tr></thead>
-                <tbody>
-                    <tr><td>Divine</td><td>33 (IG)</td><td>7</td><td>21.21%</td></tr>
-                    <tr><td>Jaya</td><td>41 (Mix)</td><td>3</td><td>7.32%</td></tr>
-                    <tr><td>Team Summary</td><td>74 Leads</td><td>12 Customers</td><td class="val-profit">16.22%</td></tr>
-                </tbody>
-            </table>
+    <div class="grid-2">
+        <div class="segment">
+            <div class="seg-header"><div><span class="seg-id">08</span><h2>Source of Revenue (April)</h2></div></div>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Source</th><th>Cust</th><th>Revenue</th><th>Unit</th><th>%</th></tr></thead>
+                    <tbody>
+                        <tr><td>Instagram Ad</td><td>23</td><td>₦1,280,200</td><td>166</td><td>20.31%</td></tr>
+                        <tr><td>Landing Page</td><td>20</td><td>₦925,000</td><td>151</td><td>14.67%</td></tr>
+                        <tr><td>Facebook Ad</td><td>2</td><td>₦67,200</td><td>12</td><td>1.07%</td></tr>
+                        <tr><td>Others (Referral)</td><td>65</td><td>₦4,031,800</td><td>468</td><td>63.95%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="segment">
+            <div class="seg-header"><div><span class="seg-id">14</span><h2>Efficiency Benchmarks</h2></div></div>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Metric</th><th>Target</th><th>Actual Spend</th></tr></thead>
+                    <tbody>
+                        <tr><td>Digital Marketing CAC</td><td>₦1,000.00</td><td class="val-loss">₦9,565</td></tr>
+                        <tr><td>Overall Business CAC</td><td>₦1,000.00</td><td class="val-loss">₦33,421</td></tr>
+                        <tr><td>Monthly New CAC Target</td><td>₦10,000.00</td><td>--</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-2">
+        <div class="segment">
+            <div class="seg-header"><div><span class="seg-id">10</span><h2>Customer Satisfaction Pipeline</h2></div></div>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Year</th><th>Total Contacted</th><th>Satisfied %</th><th>Revenue</th></tr></thead>
+                    <tbody>
+                        <tr><td>2026</td><td>3,617</td><td>97.37%</td><td>₦19,897,311</td></tr>
+                        <tr><td>2025</td><td>14,367</td><td>96.10%</td><td>₦90,938,755</td></tr>
+                        <tr class="total-row"><td>ALL TIME</td><td>32,108</td><td>97.10% (Avg)</td><td>₦146,384,576</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="segment">
+            <div class="seg-header"><div><span class="seg-id">12</span><h2>Lead Conversion Funnel (April)</h2></div></div>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Staff</th><th>Total Leads</th><th>Closed</th><th>Conversion</th></tr></thead>
+                    <tbody>
+                        <tr><td>Divine</td><td>33</td><td>11</td><td class="val-profit">33.33%</td></tr>
+                        <tr><td>Susan</td><td>25</td><td>5</td><td>25.00%</td></tr>
+                        <tr><td>Jaya</td><td>60</td><td>5</td><td>8.33%</td></tr>
+                        <tr><td>Bolu</td><td>45</td><td>3</td><td>6.67%</td></tr>
+                        <tr class="total-row"><td>TEAM TOTAL</td><td>158 Leads</td><td>24 Customers</td><td>15.19%</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <div class="segment">
-        <div class="seg-header"><div class="seg-id">13</div><h2>Performance Ceiling (Max Revenue)</h2></div>
+        <div class="seg-header"><div><span class="seg-id">13</span><h2>Performance Ceiling (Max Single Day Record)</h2></div></div>
         <div class="table-wrap">
             <table>
-                <thead><tr><th>Record Holder</th><th>Max Single Day Collection</th></tr></thead>
+                <thead><tr><th>Mary</th><th>Bolu</th><th>Susan</th><th>Jaya</th><th>Rachel</th><th>Esther</th><th>Lewa</th><th>Divine</th></tr></thead>
                 <tbody>
-                    <tr><td>Mary</td><td class="val-profit">₦2,890,350.00</td></tr>
-                    <tr><td>Bolu</td><td class="val-profit">₦2,808,200.00</td></tr>
-                    <tr><td>Susan / Jaya</td><td>₦855k / ₦621k</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="segment">
-        <div class="seg-header"><div class="seg-id">14</div><h2>Cost Analysis (Efficiency)</h2></div>
-        <div class="table-wrap">
-            <table>
-                <thead><tr><th>Metric</th><th>Benchmark</th><th>Actual Spend</th></tr></thead>
-                <tbody>
-                    <tr><td>Digital Marketing CAC</td><td>₦1,000.00</td><td class="val-loss">₦16,250</td></tr>
-                    <tr><td>Overall Business CAC</td><td>₦1,000.00</td><td class="val-loss">₦44,162</td></tr>
+                    <tr>
+                        <td class="val-profit">₦2,890,350</td>
+                        <td class="val-profit">₦2,808,200</td>
+                        <td>₦855,196</td>
+                        <td>₦621,400</td>
+                        <td>₦588,911</td>
+                        <td>₦558,800</td>
+                        <td>₦547,200</td>
+                        <td>₦534,400</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
 </div>
+
 </body>
 </html>
