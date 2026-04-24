@@ -123,7 +123,7 @@
         </div>
         <div class="kpi-grid">
             <div class="kpi-box"><span>Total YTD Cust</span><strong id="cust-timer">0</strong></div>
-            <div class="kpi-box"><span>Added Today</span><strong class="val-profit">11</strong></div>
+            <div class="kpi-box"><span>Added Today</span><strong id="today-timer" class="val-profit">0</strong></div>
             <div class="kpi-box"><span>MTD Revenue</span><strong>₦38,087,908</strong></div>
             <div class="kpi-box"><span>Retention</span><strong class="val-profit">59.21%</strong></div>
             <div class="kpi-box"><span>Lead Conv.</span><strong>14.72%</strong></div>
@@ -299,7 +299,10 @@
         if (input === 'sng001') {
             document.getElementById('auth-overlay').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
-            startCounting();
+            
+            // Start the loops
+            startInfiniteCounter('cust-timer', 45350, 2000);
+            startInfiniteCounter('today-timer', 11, 1500);
         } else {
             document.getElementById('error-msg').style.display = 'block';
         }
@@ -309,23 +312,37 @@
         if (e.key === 'Enter') checkAccess();
     });
 
-    function startCounting() {
-        const target = 45350;
-        const duration = 2000; // 2 seconds
-        const element = document.getElementById('cust-timer');
-        let startTime = null;
+    /**
+     * @param {string} id - The element ID
+     * @param {number} target - The final number
+     * @param {number} duration - Animation duration in ms
+     */
+    function startInfiniteCounter(id, target, duration) {
+        const element = document.getElementById(id);
+        
+        function runCycle() {
+            let startTime = null;
+            
+            function animate(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const progress = currentTime - startTime;
+                const currentCount = Math.min(Math.floor((progress / duration) * target), target);
+                element.innerText = currentCount.toLocaleString();
 
-        function animate(currentTime) {
-            if (!startTime) startTime = currentTime;
-            const progress = currentTime - startTime;
-            const currentCount = Math.min(Math.floor((progress / duration) * target), target);
-            element.innerText = currentCount.toLocaleString();
-
-            if (progress < duration) {
-                requestAnimationFrame(animate);
+                if (progress < duration) {
+                    requestAnimationFrame(animate);
+                } else {
+                    // Pause for 3 seconds, then reset and run again
+                    setTimeout(() => {
+                        element.innerText = "0";
+                        runCycle();
+                    }, 3000);
+                }
             }
+            requestAnimationFrame(animate);
         }
-        requestAnimationFrame(animate);
+        
+        runCycle();
     }
 </script>
 </body>
