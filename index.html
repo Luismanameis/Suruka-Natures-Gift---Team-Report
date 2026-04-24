@@ -105,12 +105,14 @@
     <div class="ticker-wrap">
         <div class="ticker-move">
             <div class="ticker-item">MTD REVENUE: ₦38.08M</div>
-            <div class="ticker-item">YTD REVENUE: ₦195.28M</div>
             <div class="ticker-item">RETENTION: 59.21%</div>
-            <div class="ticker-item">AD PROFIT: ₦10.16M</div>
             <div class="ticker-item">AVG CAC: ₦18,427</div>
-            <div class="ticker-item">TOTAL CUSTOMERS: 45,350</div>
+            <div class="ticker-item">YTD CUSTOMERS: 45,350</div>
+            <div class="ticker-item">CONVERSION: 14.72%</div>
             <div class="ticker-item">MTD REVENUE: ₦38.08M</div>
+            <div class="ticker-item">RETENTION: 59.21%</div>
+            <div class="ticker-item">AVG CAC: ₦18,427</div>
+            <div class="ticker-item">YTD CUSTOMERS: 45,350</div>
         </div>
     </div>
 
@@ -120,9 +122,9 @@
             <div style="font-size: 11px; font-weight: 800; background: var(--accent); color: black; padding: 4px 8px; border-radius: 3px;">CYCLE: 24/04/2026</div>
         </div>
         <div class="kpi-grid">
-            <div class="kpi-box"><span>Total YTD Cust</span><strong>45,350</strong></div>
+            <div class="kpi-box"><span>Total YTD Cust</span><strong id="cust-timer">0</strong></div>
             <div class="kpi-box"><span>Added Today</span><strong class="val-profit">11</strong></div>
-            <div class="kpi-box"><span>MTD Revenue</span><strong>₦38.08M</strong></div>
+            <div class="kpi-box"><span>MTD Revenue</span><strong>₦38,087,908</strong></div>
             <div class="kpi-box"><span>Retention</span><strong class="val-profit">59.21%</strong></div>
             <div class="kpi-box"><span>Lead Conv.</span><strong>14.72%</strong></div>
             <div class="kpi-box"><span>Today Sales</span><strong class="val-profit">₦1,208,550</strong></div>
@@ -212,7 +214,7 @@
 
         <div class="grid-2">
             <div class="segment">
-                <div class="seg-header"><div><span class="seg-id">08</span><h2>Sales By Medium (April)</h2></div></div>
+                <div class="seg-header"><div><span class="seg-id">08</span><h2>Sales By Medium (MTD)</h2></div></div>
                 <table>
                     <thead><tr><th>Medium</th><th>Cust</th><th>Revenue</th><th>Unit</th><th>%</th></tr></thead>
                     <tbody>
@@ -297,13 +299,34 @@
         if (input === 'sng001') {
             document.getElementById('auth-overlay').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
+            startCounting();
         } else {
             document.getElementById('error-msg').style.display = 'block';
         }
     }
+
     document.getElementById('access-code').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') checkAccess();
     });
+
+    function startCounting() {
+        const target = 45350;
+        const duration = 2000; // 2 seconds
+        const element = document.getElementById('cust-timer');
+        let startTime = null;
+
+        function animate(currentTime) {
+            if (!startTime) startTime = currentTime;
+            const progress = currentTime - startTime;
+            const currentCount = Math.min(Math.floor((progress / duration) * target), target);
+            element.innerText = currentCount.toLocaleString();
+
+            if (progress < duration) {
+                requestAnimationFrame(animate);
+            }
+        }
+        requestAnimationFrame(animate);
+    }
 </script>
 </body>
 </html>
