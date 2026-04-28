@@ -2,266 +2,327 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Energymall Master Sales Audit 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suruka Command Audit | April 2026 Executive View</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --em-red: #E31E24; 
-            --em-dark: #1A1A1A;
-            --em-gold: #D4AF37;
-            --profit-green: #008000;
-            --loss-red: #FF0000;
-            --text-main: #111111;
-            --text-muted: #666666;
-            --border: #E0E0E0;
-            --bg-light: #F4F4F4;
-            --white: #FFFFFF;
+            --bg-dark: #020617; 
+            --card-bg: #0f172a; 
+            --accent: #C5A059;
+            --profit: #10b981; 
+            --hazard: #ef4444; 
+            --text-dim: #94a3b8;
+            --border-glow: rgba(197, 160, 89, 0.3);
         }
-
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; transition: all 0.2s ease; }
         
-        body {
-            background-color: var(--bg-light); color: var(--text-main);
-            font-family: 'Outfit', sans-serif; margin: 0; padding-top: 290px;
-            line-height: 1.2;
-        }
-
-        /* Access Control */
         #auth-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-light); z-index: 9999;
+            background: var(--bg-dark); z-index: 9999;
             display: flex; align-items: center; justify-content: center;
         }
         .auth-card {
-            background: white; padding: 30px; border-radius: 16px;
-            border-top: 5px solid var(--em-red); text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 90%; max-width: 350px;
+            background: var(--card-bg); padding: 40px; border-radius: 12px;
+            border: 1px solid var(--accent); text-align: center;
+            box-shadow: 0 0 50px rgba(197, 160, 89, 0.1); width: 90%; max-width: 400px;
         }
         .auth-card input {
-            width: 100%; padding: 12px; background: #F9F9F9; border: 1px solid var(--border);
-            border-radius: 8px; text-align: center; font-size: 18px; margin-bottom: 15px; outline: none;
+            width: 100%; padding: 12px; background: #000; border: 1px solid #334155;
+            border-radius: 6px; color: white; text-align: center; font-size: 16px;
+            font-family: 'Orbitron', sans-serif; margin-bottom: 15px; outline: none;
         }
         .auth-card button {
-            width: 100%; padding: 12px; background: var(--em-red); color: white;
-            border: none; border-radius: 8px; font-weight: 800; cursor: pointer;
+            width: 100%; padding: 12px; background: var(--accent); color: black;
+            border: none; border-radius: 6px; font-weight: 800; cursor: pointer;
+            text-transform: uppercase;
         }
 
         #main-content { display: none; }
 
-        /* Scrolling Ticker */
+        body { 
+            background-color: var(--bg-dark); color: #f8fafc; 
+            font-family: 'Inter', sans-serif; margin: 0; padding: 190px 20px 50px; 
+        }
+        
         .ticker-wrap {
-            position: fixed; top: 0; width: 100%; height: 40px;
-            background: var(--em-dark); z-index: 2000; overflow: hidden;
-            display: flex; align-items: center; border-bottom: 2px solid var(--em-red);
+            position: fixed; top: 0; left: 0; width: 100%; height: 30px;
+            background: #000; z-index: 1001; overflow: hidden; display: flex;
+            align-items: center; border-bottom: 1px solid var(--accent);
         }
-        .ticker {
-            display: inline-block; white-space: nowrap;
-            animation: ticker-move 45s linear infinite; font-weight: 800; font-size: 11px; 
-            text-transform: uppercase; color: #FFF;
+        .ticker-move { display: flex; white-space: nowrap; animation: ticker 40s linear infinite; }
+        .ticker-item {
+            color: var(--accent); font-family: 'Orbitron', sans-serif;
+            font-size: 10px; font-weight: 700; padding: 0 50px;
         }
-        @keyframes ticker-move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .ticker span { margin: 0 30px; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* Fixed Performance Header */
-        header {
-            position: fixed; top: 40px; left: 0; right: 0;
-            background: white; border-bottom: 1px solid var(--border);
-            padding: 15px 5%; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        header { 
+            position: fixed; top: 30px; left: 0; right: 0; 
+            background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--accent); z-index: 1000; padding: 15px 30px;
         }
-        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .logo-area h1 { font-weight: 900; margin: 0; font-size: clamp(16px, 4vw, 22px); color: var(--em-red); }
-        .logo-area span { color: var(--text-muted); font-size: 9px; font-weight: 800; letter-spacing: 1px; }
-
-        .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-        .kpi-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px; border-left: 3px solid var(--em-red); }
-        .kpi-label { font-size: 8px; text-transform: uppercase; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 2px; }
-        .kpi-val { font-size: 13px; font-weight: 900; color: var(--em-dark); font-variant-numeric: tabular-nums; }
+        .header-main { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .header-main h1 { font-family: 'Orbitron', sans-serif; font-size: 20px; margin: 0; color: var(--accent); }
         
-        /* Grid System */
-        .container { max-width: 1400px; margin: 0 auto; padding: 15px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 15px; }
-        .segment { background: white; border-radius: 12px; padding: 20px; border: 1px solid var(--border); grid-column: span 12; overflow: hidden; }
-        .half { grid-column: span 6; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+        .kpi-box { background: rgba(255,255,255,0.03); border: 1px solid var(--border-glow); padding: 10px; border-radius: 6px; text-align: center; }
+        .kpi-box span { display: block; font-size: 8px; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+        .kpi-box strong { font-family: 'Orbitron', sans-serif; font-size: 13px; }
 
-        .segment-header h2 { color: var(--em-red); font-size: 13px; margin: 0 0 15px 0; text-transform: uppercase; font-weight: 900; border-left: 3px solid var(--em-red); padding-left: 8px; }
-
-        /* Tables */
-        .scroll-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-        table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        th { text-align: left; padding: 12px 10px; font-size: 9px; color: var(--text-muted); text-transform: uppercase; border-bottom: 2px solid #F0F0F0; }
-        td { padding: 12px 10px; border-bottom: 1px solid #F8F8F8; font-size: 11px; font-weight: 600; }
+        .container { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         
-        .m-red { color: var(--loss-red); }
-        .m-green { color: var(--profit-green); }
-        .m-gold { color: var(--em-gold); font-weight: 800; }
+        .segment { background: var(--card-bg); border-radius: 8px; border: 1px solid #1e293b; overflow: hidden; height: fit-content; }
+        .seg-header { background: rgba(30, 41, 59, 0.5); padding: 10px 15px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; }
+        .seg-header h2 { margin: 0; font-size: 10px; text-transform: uppercase; color: #cbd5e1; }
+        .seg-id { background: var(--accent); color: black; padding: 2px 5px; border-radius: 3px; font-size: 9px; font-weight: 900; margin-right: 8px; }
 
-        @media (max-width: 850px) {
-            body { padding-top: 320px; }
-            .kpi-row { grid-template-columns: repeat(2, 1fr); }
-            .half { grid-column: span 12; }
-            header { padding: 10px 15px; }
-        }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 10px; font-size: 9px; color: var(--text-dim); text-transform: uppercase; background: rgba(0,0,0,0.2); }
+        td { padding: 9px 10px; border-bottom: 1px solid #1e293b; font-size: 11px; }
+        .total-row { background: rgba(197, 160, 89, 0.08); font-weight: 800; color: var(--accent); }
+        .val-profit { color: var(--profit); }
+        .val-loss { color: var(--hazard); }
+
+        @media (max-width: 1200px) { .kpi-grid { grid-template-columns: repeat(3, 1fr); } body { padding-top: 260px; } }
+        @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <div id="auth-overlay">
     <div class="auth-card">
-        <h2 style="margin-bottom:15px; font-size:16px;">SECURE DATA LINK</h2>
-        <input type="password" id="access-code" placeholder="PIN" autofocus>
-        <button onclick="checkAccess()">LOAD SEGMENTS</button>
+        <h2 style="font-family: 'Orbitron'; color: var(--accent); margin-bottom: 20px;">COMMAND ACCESS</h2>
+        <input type="password" id="access-code" placeholder="ENTER PASSCODE">
+        <button onclick="checkAccess()">AUTHORIZE</button>
+        <p id="error-msg" style="color: var(--hazard); font-size: 11px; margin-top: 10px; display: none;">INVALID AUTHENTICATION CODE</p>
     </div>
 </div>
 
 <div id="main-content">
     <div class="ticker-wrap">
-        <div class="ticker">
-            <span>YTD CUSTOMERS 2026: 176</span> <span>RETURN CUSTOMER %: 36.86%</span> <span>APRIL REVENUE: ₦90,547,080</span> <span>SALES TEAM YTD: ₦390,920,937</span> <span>TARGET REMAINING: ₦472,422,065</span>
+        <div class="ticker-move">
+            <div class="ticker-item">APRIL GROSS: ₦43,271,108</div>
+            <div class="ticker-item">RETENTION: 59.43%</div>
+            <div class="ticker-item">CONVERSION: 17.75%</div>
+            <div class="ticker-item">TODAY REVENUE: ₦336,000</div>
+            <div class="ticker-item">UNITS SOLD TODAY: 60</div>
+            <div class="ticker-item">DIGITAL CAC: ₦9,888</div>
         </div>
     </div>
 
     <header>
-        <div class="header-top">
-            <div class="logo-area"><h1>ENERGYMALL</h1><span>COMMAND DASHBOARD 2026</span></div>
-            <div style="text-align: right;"><span class="kpi-label">YTD REVENUE (TOTAL)</span><br><span id="ytd-rev-loop" style="font-size: 16px; font-weight: 900; color: var(--em-red);">₦0.00</span></div>
+        <div class="header-main">
+            <h1>Suruka Command Audit</h1>
+            <div style="font-size: 11px; font-weight: 800; background: var(--accent); color: black; padding: 4px 8px; border-radius: 3px;">CYCLE: 28/04/2026</div>
         </div>
-        <div class="kpi-row">
-            <div class="kpi-card"><span class="kpi-label">YTD Customers (2026)</span><span class="kpi-val" id="cust-loop">0</span></div>
-            <div class="kpi-card"><span class="kpi-label">Avg Return %</span><span class="kpi-val" id="ret-loop">0.00%</span></div>
-            <div class="kpi-card"><span class="kpi-label">Month Rev (Apr)</span><span class="kpi-val m-green" id="month-loop">₦0.00</span></div>
-            <div class="kpi-card"><span class="kpi-label">Month Cust. (Apr)</span><span class="kpi-val m-green" id="today-loop">0</span></div>
+        <div class="kpi-grid">
+            <div class="kpi-box"><span>Monthly Revenue</span><strong>₦43,271,108</strong></div>
+            <div class="kpi-box"><span>Today Sales</span><strong id="today-rev-timer" class="val-profit">₦0</strong></div>
+            <div class="kpi-box"><span>Total Customers</span><strong>631</strong></div>
+            <div class="kpi-box"><span>Retention</span><strong class="val-profit">59.43%</strong></div>
+            <div class="kpi-box"><span>Digital CAC</span><strong class="val-loss">₦9,888</strong></div>
+            <div class="kpi-box"><span>Overall CAC</span><strong class="val-loss">₦18,429</strong></div>
         </div>
     </header>
 
     <div class="container">
-        
+        <div class="grid-2">
+            <div class="segment">
+                <div class="seg-header"><div><span class="seg-id">01</span><h2>Digital Assets Report (April)</h2></div></div>
+                <table>
+                    <thead><tr><th>Source</th><th>Revenue</th></tr></thead>
+                    <tbody>
+                        <tr><td>Instagram Ad</td><td>₦9,112,200.00</td></tr>
+                        <tr><td>Landing Page</td><td>₦3,493,808.00</td></tr>
+                        <tr><td>Facebook Ad</td><td>₦1,441,200.00</td></tr>
+                        <tr><td>Whatsapp DM</td><td>₦484,400.00</td></tr>
+                        <tr><td>Website</td><td>₦33,600.00</td></tr>
+                        <tr><td>TikTok</td><td>₦0.00</td></tr>
+                        <tr class="total-row"><td>TOTAL DIGITAL</td><td>₦14,565,208.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="segment">
+                <div class="seg-header"><div><span class="seg-id">02</span><h2>Today's Numbers (28/04/2026)</h2></div></div>
+                <table>
+                    <thead><tr><th>Personnel</th><th>Cust</th><th>Revenue</th></tr></thead>
+                    <tbody>
+                        <tr><td>Susan</td><td>3</td><td>₦134,400.00</td></tr>
+                        <tr><td>Lewa</td><td>2</td><td>₦100,800.00</td></tr>
+                        <tr><td>Bolu</td><td>1</td><td>₦67,200.00</td></tr>
+                        <tr><td>Jaya</td><td>1</td><td>₦33,600.00</td></tr>
+                        <tr class="total-row"><td>TOTAL</td><td>7</td><td>₦336,000.00</td></tr>
+                    </tbody>
+                </table>
+                <div style="padding: 10px; font-size: 10px; text-align: center; color: var(--accent);">Units Sold Today: 60 Units</div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="segment">
+                <div class="seg-header"><div><span class="seg-id">03</span><h2>Department Breakdown</h2></div></div>
+                <table>
+                    <thead><tr><th>Dept</th><th>Revenue</th><th>Cust</th><th>Unit</th><th>% Contrib</th></tr></thead>
+                    <tbody>
+                        <tr><td>Sales Team</td><td>₦22,525,900.00</td><td>254</td><td>2,079</td><td class="val-profit">52.06%</td></tr>
+                        <tr><td>Digital Marketer</td><td>₦14,601,208.00</td><td>286</td><td>1,991</td><td>33.74%</td></tr>
+                        <tr><td>Customer Care</td><td>₦6,144,000.00</td><td>100</td><td>824</td><td>14.20%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="segment">
+                <div class="seg-header"><div><span class="seg-id">04</span><h2>Zone Performance</h2></div></div>
+                <table>
+                    <thead><tr><th>Zone</th><th>Revenue</th><th>Cust</th><th>Unit</th><th>% Contrib</th></tr></thead>
+                    <tbody>
+                        <tr><td>Lagos</td><td>₦20,210,050.00</td><td>271</td><td>2,017</td><td class="val-profit">46.71%</td></tr>
+                        <tr><td>Benin</td><td>₦12,786,708.00</td><td>231</td><td>1,552</td><td>29.55%</td></tr>
+                        <tr><td>Abuja</td><td>₦10,344,350.00</td><td>167</td><td>1,326</td><td>23.91%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <div class="segment">
-            <div class="segment-header"><h2>April 2026: Sales & Bonus Audit</h2></div>
-            <div class="scroll-container">
+            <div class="seg-header"><div><span class="seg-id">05/06</span><h2>Individual Matrix (MTD & YTD)</h2></div></div>
+            <div class="table-wrap">
                 <table>
                     <thead>
-                        <tr><th>Representative</th><th>Revenue</th><th>Expected Bonus</th><th>Customers</th><th>Leads</th><th>Conv.</th></tr>
+                        <tr><th>Personnel</th><th>MTD Rev</th><th>MTD Cust</th><th>YTD Actual</th><th>Target</th><th>% Achieved</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>Patricia Uchedienyi</td><td>₦16,240,680.00</td><td class="m-gold">₦16,240.68</td><td>13</td><td>162</td><td class="m-red">8.02%</td></tr>
-                        <tr><td>Damilola A. Akingboye</td><td>₦27,768,000.00</td><td class="m-gold">₦27,768.00</td><td>10</td><td>60</td><td class="m-green">16.67%</td></tr>
-                        <tr><td>Immaculate O. Imion</td><td>₦38,888,450.00</td><td class="m-gold">₦38,888.45</td><td>19</td><td>114</td><td class="m-green">16.67%</td></tr>
-                        <tr><td>Jemila O. Ibrahim</td><td>₦942,000.00</td><td class="m-gold">₦942.00</td><td>1</td><td>-</td><td class="m-red">0.00%</td></tr>
-                        <tr style="background:#F9F9F9; font-weight:900;"><td>SALES TEAM TOTAL</td><td>₦83,839,130.00</td><td class="m-gold">₦83,839.13</td><td>43</td><td>336</td><td class="m-green">12.80%</td></tr>
-                        <tr style="background:#FFF0F0; font-weight:900;"><td>THIS MONTH TOTAL (ALL)</td><td>₦90,547,080.00</td><td>-</td><td class="m-green">45</td><td>336</td><td class="m-green">13.39%</td></tr>
+                        <tr><td>Mary</td><td class="val-profit">₦14,388,058</td><td>199</td><td>₦66,338,204</td><td>₦500M</td><td>13.27%</td></tr>
+                        <tr><td>Bolu</td><td>₦7,763,700</td><td>90</td><td>₦40,125,623</td><td>₦400M</td><td>10.03%</td></tr>
+                        <tr><td>Esther</td><td>₦4,232,150</td><td>58</td><td>₦15,899,350</td><td>₦100M</td><td>15.90%</td></tr>
+                        <tr><td>Jaya</td><td>₦3,971,000</td><td>58</td><td>₦16,954,390</td><td>₦150M</td><td>11.30%</td></tr>
+                        <tr><td>Lewa</td><td>₦3,215,000</td><td>51</td><td>₦13,746,200</td><td>₦250M</td><td>5.50%</td></tr>
+                        <tr><td>Rachel</td><td>₦3,063,400</td><td>53</td><td>₦13,090,511</td><td>₦100M</td><td>13.09%</td></tr>
+                        <tr><td>Susan</td><td>₦3,004,200</td><td>56</td><td>₦16,049,092</td><td>₦100M</td><td>16.05%</td></tr>
+                        <tr><td>Divine</td><td>₦3,076,200</td><td>66</td><td>₦12,347,400</td><td>₦100M</td><td>12.35%</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div class="segment half">
-            <div class="segment-header"><h2>April Weekly Breakdown</h2></div>
-            <div class="scroll-container">
+        <div class="grid-2">
+            <div class="segment">
+                <div class="seg-header"><div><span class="seg-id">08</span><h2>Sales By Medium (April)</h2></div></div>
                 <table>
-                    <thead><tr><th>Period</th><th>Revenue</th><th>Customers</th><th>Leads</th></tr></thead>
+                    <thead><tr><th>Medium</th><th>Cust</th><th>Revenue</th><th>Unit</th><th>%</th></tr></thead>
                     <tbody>
-                        <tr><td>Week 1</td><td>₦21,475,000.00</td><td>8</td><td>43</td></tr>
-                        <tr><td>Week 2</td><td>₦19,239,100.00</td><td>10</td><td>68</td></tr>
-                        <tr><td>Week 3</td><td>₦34,914,220.00</td><td>20</td><td>103</td></tr>
-                        <tr><td>Week 4</td><td>₦12,067,750.00</td><td>12</td><td>103</td></tr>
-                        <tr><td>Week 5</td><td>₦0.00</td><td>0</td><td>20</td></tr>
+                        <tr><td>Others</td><td>346</td><td>₦29,223,900.00</td><td>2,965</td><td>67.54%</td></tr>
+                        <tr><td>Instagram Ad</td><td>177</td><td>₦9,112,200.00</td><td>1,207</td><td>21.06%</td></tr>
+                        <tr><td>Landing Page</td><td>78</td><td>₦3,493,808.00</td><td>553</td><td>8.07%</td></tr>
+                        <tr><td>Facebook Ad</td><td>30</td><td>₦1,441,200.00</td><td>169</td><td>3.33%</td></tr>
                     </tbody>
                 </table>
             </div>
-        </div>
 
-        <div class="segment half">
-            <div class="segment-header"><h2>Return Customers Segment (YTD)</h2></div>
-            <div style="padding:15px; background:var(--em-dark); border-radius:12px; color:white;">
-                <p><span class="kpi-label" style="color:#aaa;">YTD Return Revenue</span><strong style="font-size:24px; color:var(--em-red); display:block; margin-top:5px;">₦135,638,834.00</strong></p>
-                <div style="display:flex; justify-content:space-between; border-top:1px solid #444; padding-top:15px; margin-top:15px;">
-                    <span>65 Customers</span>
-                    <span class="m-green" style="font-weight:900;">33.85% YTD Rate</span>
-                </div>
+            <div class="segment">
+                <div class="seg-header"><div><span class="seg-id">12</span><h2>Lead Funnel (IG/FB Focus)</h2></div></div>
+                <table>
+                    <thead><tr><th>Staff</th><th>Leads</th><th>Closed</th><th>Conv %</th></tr></thead>
+                    <tbody>
+                        <tr><td>Susan</td><td>80</td><td>41</td><td class="val-profit">51.25%</td></tr>
+                        <tr><td>Divine</td><td>202</td><td>62</td><td class="val-profit">30.69%</td></tr>
+                        <tr><td>Jaya</td><td>342</td><td>54</td><td>15.79%</td></tr>
+                        <tr><td>Bolu</td><td>230</td><td>34</td><td>14.78%</td></tr>
+                        <tr><td>Mary</td><td>267</td><td>8</td><td class="val-loss">3.00%</td></tr>
+                        <tr class="total-row"><td>TOTAL</td><td>1,121</td><td>199</td><td>17.75%</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
         <div class="segment">
-            <div class="segment-header"><h2>2026 Monthly Matrix (Revenue per Rep)</h2></div>
-            <div class="scroll-container">
-                <table>
+            <div class="seg-header"><div><span class="seg-id">10</span><h2>CS Long-Term Analysis</h2></div></div>
+            <table>
+                <thead><tr><th>Year</th><th>Satisfied %</th><th>Contacts</th><th>Revenue from CS</th></tr></thead>
+                <tbody>
+                    <tr><td>2026</td><td class="val-profit">97.49%</td><td>3,910</td><td>₦25,309,111</td></tr>
+                    <tr><td>2025</td><td>96.10%</td><td>14,367</td><td>₦90,938,755</td></tr>
+                    <tr><td>2024</td><td>96.68%</td><td>8,437</td><td>₦26,522,202</td></tr>
+                    <tr><td>2023</td><td>97.42%</td><td>5,687</td><td>₦9,026,308</td></tr>
+                    <tr class="total-row"><td>TOTAL AVG</td><td>96.92%</td><td>32,401</td><td>₦151,796,376</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="segment">
+            <div class="seg-header"><div><span class="seg-id">MAX</span><h2>Personnel Peak Revenue (1 Day)</h2></div></div>
+            <div class="table-wrap">
+                <table style="text-align: center;">
                     <thead>
-                        <tr><th>Month</th><th>Patricia</th><th>Damilola</th><th>Immaculate</th><th>Jemila</th></tr>
+                        <tr><th>Mary</th><th>Bolu</th><th>Susan</th><th>Lewa</th><th>Jaya</th><th>Rachel</th><th>Esther</th><th>Divine</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>January</td><td>₦36,264,512</td><td>₦41,821,100</td><td>₦36,183,773</td><td>₦1,653,825</td></tr>
-                        <tr><td>February</td><td>₦10,216,712</td><td>₦43,077,600</td><td>₦61,800,034</td><td>-</td></tr>
-                        <tr><td>March</td><td>₦10,237,750</td><td>₦18,452,500</td><td>₦47,374,000</td><td>-</td></tr>
-                        <tr style="background:#F9F9F9;"><td>April</td><td>₦16,240,680</td><td>₦27,768,000</td><td>₦38,888,450</td><td>₦942,000</td></tr>
+                        <tr>
+                            <td class="val-profit">₦2,890,350</td>
+                            <td class="val-profit">₦2,808,200</td>
+                            <td>₦855,196</td>
+                            <td>₦705,600</td>
+                            <td>₦621,400</td>
+                            <td>₦588,911</td>
+                            <td>₦558,800</td>
+                            <td>₦534,400</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <div class="segment">
-            <div class="segment-header"><h2>All Time Performance (2024 - Date)</h2></div>
-            <div class="scroll-container">
-                <table>
-                    <thead><tr><th>Representative</th><th>Total Revenue</th><th>Total Customers</th><th>Total Leads</th><th>3-Year Annual Avg</th></tr></thead>
-                    <tbody>
-                        <tr><td>Immaculate O. Imion</td><td>₦617,886,060</td><td>233</td><td>3,333</td><td class="m-gold">₦205,962,020</td></tr>
-                        <tr><td>Damilola A. Akingboye</td><td>₦554,336,777</td><td>212</td><td>3,909</td><td class="m-gold">₦184,778,925</td></tr>
-                        <tr><td>Patricia Uchedienyi</td><td>₦536,245,694</td><td>265</td><td>2,785</td><td class="m-gold">₦178,748,564</td></tr>
-                        <tr><td>Jemila O. Ibrahim</td><td>₦59,180,601</td><td>42</td><td>512</td><td class="m-gold">₦19,726,867</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
     </div>
 </div>
 
 <script>
     function checkAccess() {
-        if (document.getElementById('access-code').value === 'eng96') {
+        const input = document.getElementById('access-code').value;
+        if (input === 'sng001') {
             document.getElementById('auth-overlay').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
-            initLooping();
+            
+            startInfiniteCounter('today-rev-timer', 336000, 2000, true);
+        } else {
+            document.getElementById('error-msg').style.display = 'block';
         }
     }
 
-    function initLooping() {
-        startTimer('ytd-rev-loop', 418855387, 0, '₦', true);
-        startTimer('cust-loop', 176, 0, '', false);
-        startTimer('ret-loop', 36.86, 2, '%', false);
-        startTimer('month-loop', 90547080, 0, '₦', true);
-        startTimer('today-loop', 45, 0, '', false);
-    }
+    document.getElementById('access-code').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') checkAccess();
+    });
 
-    function startTimer(id, target, decimals, symbol, isPrefix) {
-        const el = document.getElementById(id);
-        const duration = 2000;
-        const pause = 3000;
+    function startInfiniteCounter(id, target, duration, isCurrency) {
+        const element = document.getElementById(id);
+        
+        function runCycle() {
+            let startTime = null;
+            
+            function animate(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const progress = currentTime - startTime;
+                const currentCount = Math.min(Math.floor((progress / duration) * target), target);
+                
+                element.innerText = isCurrency 
+                    ? "₦" + currentCount.toLocaleString() 
+                    : currentCount.toLocaleString();
 
-        function run() {
-            let start = null;
-            function step(timestamp) {
-                if (!start) start = timestamp;
-                let progress = timestamp - start;
-                let current = Math.min((progress / duration) * target, target);
-                let val = current.toLocaleString(undefined, {
-                    minimumFractionDigits: decimals,
-                    maximumFractionDigits: decimals
-                });
-                el.innerHTML = isPrefix ? symbol + val : val + symbol;
-                if (progress < duration) window.requestAnimationFrame(step);
-                else {
+                if (progress < duration) {
+                    requestAnimationFrame(animate);
+                } else {
                     setTimeout(() => {
-                        el.innerHTML = isPrefix ? symbol + "0" : "0" + symbol;
-                        run();
-                    }, pause);
+                        element.innerText = isCurrency ? "₦0" : "0";
+                        runCycle();
+                    }, 4000);
                 }
             }
-            window.requestAnimationFrame(step);
+            requestAnimationFrame(animate);
         }
-        run();
+        runCycle();
     }
 </script>
-
 </body>
 </html>
