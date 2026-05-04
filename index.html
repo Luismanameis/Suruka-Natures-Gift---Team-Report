@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suruka Command Audit | May 02, 2026 Update</title>
+    <title>Suruka Command Audit | May 04, 2026 Update</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -74,9 +74,10 @@
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         
         .segment { background: var(--card-bg); border-radius: 8px; border: 1px solid #1e293b; overflow: hidden; height: fit-content; }
-        .seg-header { background: rgba(30, 41, 59, 0.5); padding: 10px 15px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; }
+        .seg-header { background: rgba(30, 41, 59, 0.5); padding: 10px 15px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
         .seg-header h2 { margin: 0; font-size: 10px; text-transform: uppercase; color: #cbd5e1; }
         .seg-id { background: var(--accent); color: black; padding: 2px 5px; border-radius: 3px; font-size: 9px; font-weight: 900; margin-right: 8px; }
+        .tag-live { background: var(--profit); color: black; font-size: 8px; padding: 2px 4px; border-radius: 2px; font-weight: 900; }
 
         .table-wrap { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; }
@@ -85,6 +86,9 @@
         .total-row { background: rgba(197, 160, 89, 0.08); font-weight: 800; color: var(--accent); }
         .val-profit { color: var(--profit); }
         .val-hazard { color: var(--hazard); }
+        
+        .progress-bar { height: 4px; background: #1e293b; border-radius: 2px; margin-top: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent); }
 
         @media (max-width: 1200px) { .kpi-grid { grid-template-columns: repeat(3, 1fr); } body { padding-top: 260px; } }
         @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
@@ -104,58 +108,82 @@
 <div id="main-content">
     <div class="ticker-wrap">
         <div class="ticker-move">
-            <div class="ticker-item">MAY REVENUE: ₦2,855,550</div>
-            <div class="ticker-item">RETURNING CUSTOMERS: 71.79%</div>
-            <div class="ticker-item">NEW CAC: ₦13,636.36</div>
-            <div class="ticker-item">TOTAL HISTORICAL CONTACTS: 32,523</div>
-            <div class="ticker-item">TODAY'S SATISFACTION: 100%</div>
+            <div class="ticker-item">MAY REVENUE: ₦3,059,950</div>
+            <div class="ticker-item">RETURNING CUSTOMERS: 63.64%</div>
+            <div class="ticker-item">NEW CAC: ₦27,272.73</div>
+            <div class="ticker-item">TOTAL HISTORICAL CONTACTS: 32,539</div>
+            <div class="ticker-item">TODAY'S UNIT GOAL: 150+</div>
         </div>
     </div>
 
     <header>
         <div class="header-main">
             <h1>Suruka Command Audit</h1>
-            <div style="font-size: 11px; font-weight: 800; background: var(--accent); color: black; padding: 4px 8px; border-radius: 3px;">LIVE: 02/05/2026</div>
+            <div style="font-size: 11px; font-weight: 800; background: var(--accent); color: black; padding: 4px 8px; border-radius: 3px;">LIVE: 04/05/2026</div>
         </div>
         <div class="kpi-grid">
-            <div class="kpi-box"><span>MTD Revenue</span><strong>₦2,855,550</strong></div>
-            <div class="kpi-box"><span>Today Sales</span><strong id="today-rev-timer" class="val-profit">₦348,600</strong></div>
+            <div class="kpi-box"><span>MTD Revenue</span><strong>₦3,059,950</strong></div>
+            <div class="kpi-box"><span>Today Sales</span><strong id="today-rev-timer" class="val-profit">₦0</strong></div>
             <div class="kpi-box"><span>CAC Target</span><strong>₦1,000</strong></div>
-            <div class="kpi-box"><span>Today Unit</span><strong>38</strong></div>
-            <div class="kpi-box"><span>Return %</span><strong class="val-profit">71.79%</strong></div>
-            <div class="kpi-box"><span>Spend/Cust</span><strong class="val-hazard">₦91,075</strong></div>
+            <div class="kpi-box"><span>MTD Units</span><strong>295</strong></div>
+            <div class="kpi-box"><span>Return %</span><strong class="val-profit">63.64%</strong></div>
+            <div class="kpi-box"><span>CAC (All)</span><strong class="val-hazard">₦84,716</strong></div>
         </div>
     </header>
 
     <div class="container">
+        <!-- SEGMENT 14: MONTHLY TARGET TRACKER -->
+        <div class="segment" style="border: 1px solid var(--accent); box-shadow: 0 0 15px rgba(197,160,89,0.1);">
+            <div class="seg-header">
+                <div><span class="seg-id">14</span><h2>Representative Target Tracker (May)</h2></div>
+                <span class="tag-live">TRACKING LIVE</span>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Representative</th><th>Target</th><th>Achieved</th><th>Progress</th><th>% Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Mary</td><td>₦30,000,000</td><td class="val-profit">₦1,139,750</td><td><div class="progress-bar"><div class="progress-fill" style="width: 3.8%;"></div></div></td><td class="val-profit">3.80%</td></tr>
+                        <tr><td>Bolu</td><td>₦22,000,000</td><td class="val-profit">₦286,600</td><td><div class="progress-bar"><div class="progress-fill" style="width: 1.3%;"></div></div></td><td>1.30%</td></tr>
+                        <tr><td>Rachel</td><td>₦10,000,000</td><td class="val-profit">₦554,400</td><td><div class="progress-bar"><div class="progress-fill" style="width: 5.54%;"></div></div></td><td class="val-profit">5.54%</td></tr>
+                        <tr><td>Susan</td><td>₦8,000,000</td><td class="val-profit">₦488,200</td><td><div class="progress-bar"><div class="progress-fill" style="width: 6.1%;"></div></div></td><td class="val-profit">6.10%</td></tr>
+                        <tr><td>Lewa</td><td>₦10,000,000</td><td class="val-profit">₦288,600</td><td><div class="progress-bar"><div class="progress-fill" style="width: 2.89%;"></div></div></td><td>2.89%</td></tr>
+                        <tr><td>Divine</td><td>₦5,000,000</td><td class="val-profit">₦168,000</td><td><div class="progress-bar"><div class="progress-fill" style="width: 3.36%;"></div></div></td><td>3.36%</td></tr>
+                        <tr><td>Jaya</td><td>₦15,000,000</td><td class="val-profit">₦67,200</td><td><div class="progress-bar"><div class="progress-fill" style="width: 0.45%;"></div></div></td><td class="val-hazard">0.45%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <div class="grid-2">
             <div class="segment">
                 <div class="seg-header"><div><span class="seg-id">01</span><h2>Digital Assets Report (May)</h2></div></div>
                 <table>
                     <thead><tr><th>Source</th><th>Revenue</th></tr></thead>
                     <tbody>
-                        <tr><td>Instagram Ad</td><td>₦470,400.00</td></tr>
-                        <tr><td>Facebook Ad</td><td>₦100,800.00</td></tr>
+                        <tr><td>Instagram Ad</td><td>₦504,000.00</td></tr>
+                        <tr><td>Facebook Ad</td><td>₦168,000.00</td></tr>
                         <tr><td>Landing Page</td><td>₦33,600.00</td></tr>
                         <tr><td>Others (WA/TikTok)</td><td>₦0.00</td></tr>
-                        <tr class="total-row"><td>TOTAL DIGITAL</td><td>₦604,800.00</td></tr>
+                        <tr class="total-row"><td>TOTAL DIGITAL</td><td>₦705,600.00</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="segment">
-                <div class="seg-header"><div><span class="seg-id">02</span><h2>Today's Numbers (02/05/2026)</h2></div></div>
+                <div class="seg-header"><div><span class="seg-id">02</span><h2>Today's Numbers (04/05/2026)</h2></div></div>
                 <table>
                     <thead><tr><th>Personnel</th><th>Cust</th><th>Revenue</th></tr></thead>
                     <tbody>
-                        <tr><td>Divine</td><td>3</td><td>₦100,800.00</td></tr>
-                        <tr><td>Rachel</td><td>2</td><td>₦95,600.00</td></tr>
-                        <tr><td>Bolu</td><td>1</td><td>₦67,200.00</td></tr>
-                        <tr><td>Others</td><td>1</td><td>₦85,000.00</td></tr>
-                        <tr class="total-row"><td>TOTAL</td><td>7</td><td>₦348,600.00</td></tr>
+                        <tr><td>Divine</td><td>0</td><td>₦0.00</td></tr>
+                        <tr><td>Rachel</td><td>0</td><td>₦0.00</td></tr>
+                        <tr><td>Bolu</td><td>0</td><td>₦0.00</td></tr>
+                        <tr><td>Others</td><td>0</td><td>₦0.00</td></tr>
+                        <tr class="total-row"><td>TOTAL</td><td>0</td><td>₦0.00</td></tr>
                     </tbody>
                 </table>
-                <div style="padding: 10px; font-size: 10px; text-align: center; color: var(--accent);">Units Sold Today: 38 Units</div>
+                <div style="padding: 10px; font-size: 10px; text-align: center; color: var(--accent);">Pending Audit for Today's Close</div>
             </div>
         </div>
 
@@ -165,9 +193,9 @@
                 <table>
                     <thead><tr><th>Dept</th><th>Revenue</th><th>Unit</th><th>% Contrib</th></tr></thead>
                     <tbody>
-                        <tr><td>Sales Team</td><td>₦1,441,350.00</td><td>130</td><td>50.48%</td></tr>
-                        <tr><td>Customer Care</td><td>₦809,400.00</td><td>32</td><td>28.34%</td></tr>
-                        <tr><td>Digital Marketer</td><td>₦604,800.00</td><td>108</td><td>21.18%</td></tr>
+                        <tr><td>Sales Team</td><td>₦1,511,350.00</td><td>131</td><td>49.39%</td></tr>
+                        <tr><td>Customer Care</td><td>₦843,000.00</td><td>38</td><td>27.55%</td></tr>
+                        <tr><td>Digital Marketer</td><td>₦705,600.00</td><td>126</td><td>23.06%</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -177,9 +205,9 @@
                 <table>
                     <thead><tr><th>Zone</th><th>Revenue</th><th>Unit</th><th>% Contrib</th></tr></thead>
                     <tbody>
-                        <tr><td>Lagos</td><td>₦1,257,550.00</td><td>83</td><td>44.04%</td></tr>
-                        <tr><td>Benin</td><td>₦860,600.00</td><td>128</td><td>30.14%</td></tr>
-                        <tr><td>Abuja</td><td>₦737,400.00</td><td>59</td><td>25.82%</td></tr>
+                        <tr><td>Lagos</td><td>₦1,257,550.00</td><td>83</td><td>41.10%</td></tr>
+                        <tr><td>Benin</td><td>₦1,065,000.00</td><td>153</td><td>34.80%</td></tr>
+                        <tr><td>Abuja</td><td>₦737,400.00</td><td>59</td><td>24.10%</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -190,14 +218,14 @@
             <div class="table-wrap">
                 <table>
                     <thead>
-                        <tr><th>Staff</th><th>MTD Revenue</th><th>MTD Units</th><th>2026 YTD</th><th>% Target</th></tr>
+                        <tr><th>Staff</th><th>MTD Revenue</th><th>MTD Units</th><th>2026 YTD</th><th>% Annual Target</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>Mary</td><td>₦1,002,550</td><td>80</td><td class="val-profit">₦69,073,304</td><td>13.81%</td></tr>
-                        <tr><td>Rachel</td><td>₦520,800</td><td>23</td><td>₦13,959,911</td><td>13.96%</td></tr>
+                        <tr><td>Mary</td><td>₦1,139,750</td><td>93</td><td class="val-profit">₦69,210,504</td><td>13.84%</td></tr>
+                        <tr><td>Rachel</td><td>₦554,400</td><td>29</td><td>₦13,993,511</td><td>13.99%</td></tr>
                         <tr><td>Susan</td><td>₦488,200</td><td>73</td><td>₦16,756,692</td><td>16.76%</td></tr>
-                        <tr><td>Bolu</td><td>₦201,600</td><td>36</td><td>₦41,115,823</td><td>10.28%</td></tr>
-                        <tr><td>Divine</td><td>₦134,400</td><td>24</td><td>₦12,666,000</td><td>12.67%</td></tr>
+                        <tr><td>Bolu</td><td>₦286,600</td><td>37</td><td>₦41,200,823</td><td>10.30%</td></tr>
+                        <tr><td>Divine</td><td>₦168,000</td><td>30</td><td>₦12,699,600</td><td>12.70%</td></tr>
                         <tr><td>Lewa</td><td>₦288,600</td><td>9</td><td>₦14,696,400</td><td>5.88%</td></tr>
                         <tr><td>Jaya</td><td>₦67,200</td><td>12</td><td>₦17,348,590</td><td>11.57%</td></tr>
                     </tbody>
@@ -205,43 +233,15 @@
             </div>
         </div>
 
-        <div class="grid-2">
-            <div class="segment">
-                <div class="seg-header"><div><span class="seg-id">08</span><h2>Sales By Medium (May)</h2></div></div>
-                <table>
-                    <thead><tr><th>Medium</th><th>Revenue</th><th>Unit</th><th>% Contrib</th></tr></thead>
-                    <tbody>
-                        <tr><td>Instagram Ad</td><td>₦470,400.00</td><td>84</td><td>16.47%</td></tr>
-                        <tr><td>Facebook Ad</td><td>₦100,800.00</td><td>18</td><td>3.53%</td></tr>
-                        <tr><td>Landing Page</td><td>₦33,600.00</td><td>6</td><td>1.18%</td></tr>
-                        <tr class="total-row"><td>Others/Retention</td><td>₦2,250,750.00</td><td>162</td><td>78.82%</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="segment">
-                <div class="seg-header"><div><span class="seg-id">12</span><h2>Lead Funnel (IG/FB)</h2></div></div>
-                <table>
-                    <thead><tr><th>Staff</th><th>Leads</th><th>Closed</th><th>Conv %</th></tr></thead>
-                    <tbody>
-                        <tr><td>Susan</td><td>-</td><td>5</td><td>0.00%</td></tr>
-                        <tr><td>Divine</td><td>-</td><td>3</td><td>0.00%</td></tr>
-                        <tr><td>Jaya</td><td>-</td><td>2</td><td>0.00%</td></tr>
-                        <tr class="total-row"><td>TOTAL</td><td>-</td><td>11</td><td>0.00%</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
         <div class="segment">
-            <div class="seg-header"><div><span class="seg-id">10</span><h2>CS Long-Term Retention</h2></div></div>
+            <div class="seg-header"><div><span class="seg-id">10</span><h2>CS Historical Retention</h2></div></div>
             <table>
                 <thead><tr><th>Year</th><th>Sat %</th><th>Contacts</th><th>CS Revenue</th></tr></thead>
                 <tbody>
-                    <tr><td>2026</td><td class="val-profit">97.45%</td><td>4,032</td><td>₦27,162,311</td></tr>
+                    <tr><td>2026</td><td class="val-profit">97.46%</td><td>4,048</td><td>₦27,195,911</td></tr>
                     <tr><td>2025</td><td>96.10%</td><td>14,367</td><td>₦90,938,755</td></tr>
                     <tr><td>2024</td><td>96.68%</td><td>8,437</td><td>₦26,522,202</td></tr>
-                    <tr class="total-row"><td>HISTORICAL</td><td>96.91%</td><td>32,523</td><td>₦153,649,576</td></tr>
+                    <tr class="total-row"><td>HISTORICAL</td><td>96.91%</td><td>32,539</td><td>₦153,683,176</td></tr>
                 </tbody>
             </table>
         </div>
@@ -254,7 +254,8 @@
         if (input === 'sng009') {
             document.getElementById('auth-overlay').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
-            startInfiniteCounter('today-rev-timer', 348600, 2000, true);
+            // Start counter with 0 for today until new data hits
+            startInfiniteCounter('today-rev-timer', 0, 2000, true);
         } else {
             document.getElementById('error-msg').style.display = 'block';
         }
@@ -266,6 +267,7 @@
 
     function startInfiniteCounter(id, target, duration, isCurrency) {
         const element = document.getElementById(id);
+        if (target === 0) { element.innerText = isCurrency ? "₦0" : "0"; return; }
         function runCycle() {
             let startTime = null;
             function animate(currentTime) {
