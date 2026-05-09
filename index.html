@@ -3,237 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SNG COMMAND CENTER v12.0 | FULL AUDIT</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <title>SNG ELITE | COMMAND TERMINAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesque:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --glass-bg: rgba(15, 23, 42, 0.95);
-            --titanium: #f1f5f9;
-            --electric-blue: #3b82f6;
-            --cyber-gold: #fbbf24;
-            --danger-neon: #ff4d4d;
-            --success-neon: #00ff88;
-            --border-style: 1px solid rgba(255, 255, 255, 0.1);
+            --bg-deep: #05070a;
+            --accent: #00f2ff;
+            --accent-glow: rgba(0, 242, 255, 0.4);
+            --glass: rgba(15, 23, 42, 0.8);
+            --success: #00ffa3;
+            --danger: #ff3366;
+            --text-dim: #94a3b8;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; transition: all 0.2s ease; }
         
         body { 
-            background: #020617;
-            color: var(--titanium);
-            font-family: 'Outfit', sans-serif;
+            background: radial-gradient(circle at 50% 0%, #0f172a, #05070a);
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 240px 10px 40px; 
+            padding: 220px 15px 40px;
             min-height: 100vh;
         }
 
-        /* --- AUTHENTICATION --- */
+        /* --- AUTH SYSTEM --- */
         #auth-overlay {
-            position: fixed; inset: 0; background: #020617; z-index: 10000;
-            display: flex; align-items: center; justify-content: center; padding: 20px;
+            position: fixed; inset: 0; background: var(--bg-deep); z-index: 10000;
+            display: flex; align-items: center; justify-content: center;
         }
         .auth-portal {
-            background: #0f172a; padding: 40px 20px; border-radius: 24px;
-            border: 2px solid var(--electric-blue); text-align: center; width: 100%; max-width: 400px;
+            background: var(--glass); padding: 40px; border-radius: 24px;
+            border: 1px solid var(--accent-glow); text-align: center; width: 90%; max-width: 400px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
         }
+        .auth-portal h1 { font-family: 'Space Grotesque'; letter-spacing: 3px; font-size: 14px; margin-bottom: 30px; color: var(--accent); }
         .auth-portal input {
-            background: transparent; border: none; border-bottom: 2px solid #334155;
-            color: white; font-size: 20px; text-align: center; width: 100%; margin-bottom: 30px; outline: none; font-family: 'Syncopate';
-            text-transform: lowercase;
+            background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+            color: white; font-size: 18px; text-align: center; width: 100%; padding: 15px; border-radius: 12px; margin-bottom: 20px; outline: none;
         }
         .auth-portal button {
-            background: var(--electric-blue); color: white; border: none; padding: 15px 40px; border-radius: 50px; font-weight: 900; cursor: pointer; width: 100%;
+            background: var(--accent); color: #000; border: none; padding: 15px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase;
         }
 
         #main-content { display: none; }
 
-        /* --- FIXED HEADER SYSTEM --- */
-        .system-top {
+        /* --- TOP HUD --- */
+        .system-header {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 9000;
-            background: #020617; border-bottom: 2px solid var(--electric-blue);
+            background: rgba(5, 7, 10, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 242, 255, 0.2);
         }
 
-        .news-ticker {
-            height: 30px; background: var(--electric-blue); display: flex; align-items: center;
-            overflow: hidden; white-space: nowrap;
+        .ticker {
+            height: 32px; background: var(--accent); display: flex; align-items: center; overflow: hidden;
         }
-        .ticker-track {
-            display: flex; animation: scroll-ticker 40s linear infinite;
-        }
-        .ticker-track span {
-            font-family: 'Syncopate'; font-size: 9px; font-weight: 700;
-            padding: 0 40px; color: #000;
-        }
-        @keyframes scroll-ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-track { display: flex; animation: scroll 40s linear infinite; white-space: nowrap; }
+        .ticker-track span { font-family: 'Space Grotesque'; font-size: 10px; font-weight: 700; color: #000; padding: 0 40px; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        .kpi-bar {
-            padding: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-        }
-        @media (min-width: 768px) {
-            .kpi-bar { grid-template-columns: repeat(6, 1fr); }
-            body { padding-top: 180px; }
-        }
+        .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
+        @media (min-width: 768px) { .kpi-row { grid-template-columns: repeat(6, 1fr); } }
 
-        .kpi-tile { 
-            text-align: center; padding: 8px 4px; background: rgba(255,255,255,0.03); 
-            border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);
+        .kpi-box {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 10px; text-align: center;
         }
-        .kpi-tile label { display: block; font-size: 7px; color: #64748b; font-weight: 800; text-transform: uppercase; }
-        .kpi-tile .value { font-family: 'Syncopate'; font-size: 11px; font-weight: 700; }
+        .kpi-box label { display: block; font-size: 8px; color: var(--text-dim); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+        .kpi-box .val { font-family: 'Space Grotesque'; font-size: 14px; font-weight: 700; color: #fff; }
 
-        /* --- DASHBOARD GRID --- */
-        .container { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
-        @media (min-width: 1024px) {
-            .container { display: grid; grid-template-columns: repeat(12, 1fr); }
-            .full { grid-column: span 12; }
-            .half { grid-column: span 6; }
-        }
+        /* --- LAYOUT --- */
+        .grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+        .span-12 { grid-column: span 12; }
+        .span-6 { grid-column: span 12; }
+        @media (min-width: 1024px) { .span-6 { grid-column: span 6; } }
 
-        .card { 
-            background: var(--glass-bg); border-radius: 16px; padding: 15px;
-            border: var(--border-style); box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        .module {
+            background: var(--glass); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .card h3 { 
-            margin: 0 0 12px; font-family: 'Syncopate'; font-size: 10px; 
-            color: var(--electric-blue); border-left: 3px solid var(--electric-blue); padding-left: 10px;
+        .module h3 {
+            margin: 0 0 15px; font-family: 'Space Grotesque'; font-size: 11px; letter-spacing: 2px;
+            color: var(--accent); text-transform: uppercase; display: flex; align-items: center;
         }
+        .module h3::before { content: ''; width: 4px; height: 14px; background: var(--accent); margin-right: 10px; border-radius: 2px; }
 
-        .table-wrapper { width: 100%; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; min-width: 300px; }
-        th { text-align: left; font-size: 8px; color: #475569; padding: 10px 5px; text-transform: uppercase; background: rgba(255,255,255,0.02); }
-        td { padding: 12px 5px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12px; }
-        
-        .red-bold { color: var(--danger-neon); font-weight: 900; }
-        .green-val { color: var(--success-neon); font-weight: 600; }
-        .row-total { background: rgba(59, 130, 246, 0.15); font-weight: 900; }
-        .row-total td { color: var(--cyber-gold); }
+        /* --- TABLE STYLING --- */
+        .scroll-x { overflow-x: auto; width: 100%; }
+        table { width: 100%; border-collapse: separate; border-spacing: 0 6px; min-width: 400px; }
+        th { font-size: 9px; text-transform: uppercase; color: var(--text-dim); text-align: left; padding: 10px; }
+        td { padding: 12px 10px; background: rgba(255,255,255,0.02); font-size: 13px; }
+        td:first-child { border-radius: 8px 0 0 8px; font-weight: 600; color: var(--accent); }
+        td:last-child { border-radius: 0 8px 8px 0; text-align: right; }
 
-        .metric-badge { 
-            display: inline-block; background: #1e293b; padding: 6px 10px; 
-            border-radius: 6px; font-size: 10px; font-weight: 700; color: var(--cyber-gold); 
-            margin: 0 5px 5px 0;
-        }
+        .green { color: var(--success); font-weight: 700; }
+        .red { color: var(--danger); font-weight: 700; }
+        .highlight { background: rgba(0, 242, 255, 0.05) !important; border: 1px solid rgba(0, 242, 255, 0.2); }
     </style>
 </head>
 <body>
 
 <div id="auth-overlay">
     <div class="auth-portal">
-        <h1 style="font-family: 'Syncopate'; font-size: 14px; margin-bottom: 20px;">SYSTEM INITIALIZE</h1>
-        <input type="password" id="passkey" placeholder="ENTER CODE">
-        <button onclick="unlock()">ENTER COMMAND</button>
+        <h1>ACCESS TERMINAL</h1>
+        <input type="password" id="passkey" placeholder="COMMAND CODE">
+        <button onclick="unlock()">INITIALIZE</button>
     </div>
 </div>
 
 <div id="main-content">
-    <div class="system-top">
-        <div class="news-ticker">
+    <div class="system-header">
+        <div class="ticker">
             <div class="ticker-track">
-                <span>// GROSS REVENUE: ₦12.95M</span>
-                <span>// RETURN RATE: 64.32%</span>
-                <span>// CS TOTAL: 32.7k CONTACTS</span>
-                <span>// 2026 SATISFIED: 97.58%</span>
-                <span>// CS REVENUE YTD: ₦28.77M</span>
+                <span>// GROSS REVENUE: ₦12,951,900</span>
+                <span>// RETURNING CUSTOMERS: 124 (67.03%)</span>
+                <span>// CS TOTAL REVENUE: ₦155,266,576</span>
+                <span>// LAGOS CONTRIBUTION: 49.11%</span>
+                <span>// DIGITAL REVENUE: ₦3,770,200</span>
+                <span>// SYSTEM STATUS: OPTIMIZED</span>
             </div>
         </div>
         
-        <div class="kpi-bar">
-            <div class="kpi-tile"><label>MTD Revenue</label><span class="value">₦12.95M</span></div>
-            <div class="kpi-tile"><label>Return %</label><span class="value green-val">64.32%</span></div>
-            <div class="kpi-tile"><label>Cost/New Cust</label><span class="value red-bold">₦11k</span></div>
-            <div class="kpi-tile"><label>YTD CS Contacts</label><span class="value">4,291</span></div>
-            <div class="kpi-tile"><label>CS Rev (All Time)</label><span class="value">₦155.2M</span></div>
-            <div class="kpi-tile"><label>Avg Sat %</label><span class="value green-val">97.1%</span></div>
+        <div class="kpi-row">
+            <div class="kpi-box"><label>MTD Revenue</label><div class="val">₦12.95M</div></div>
+            <div class="kpi-box"><label>Return %</label><div class="val green">67.0%</div></div>
+            <div class="kpi-box"><label>Cost/Lead</label><div class="val red">₦11,065</div></div>
+            <div class="kpi-box"><label>Total Leads</label><div class="val">166</div></div>
+            <div class="kpi-box"><label>Avg Satisfaction</label><div class="val green">97.1%</div></div>
+            <div class="kpi-box"><label>Units Sold</label><div class="val">1,398</div></div>
         </div>
     </div>
 
-    <div class="container">
-        <!-- SEGMENT 14: CURRENT MONTH TARGETS -->
-        <div class="card full" style="border: 1px solid var(--electric-blue)">
-            <h3 style="color:white; background: var(--electric-blue); padding: 5px 10px; display: inline-block;">SEGMENT 14 - THIS MONTH TARGETS (MAY)</h3>
-            <div class="table-wrapper">
+    <div class="grid">
+        <!-- TOP PERFORMANCE - MAY TARGETS -->
+        <div class="module span-12" style="border-top: 2px solid var(--accent);">
+            <h3>Segment 14 - Execution vs Target (May 2026)</h3>
+            <div class="scroll-x">
                 <table>
-                    <thead><tr><th>Rep</th><th>Target</th><th>Achieved</th><th>% Status</th></tr></thead>
+                    <thead><tr><th>Staff Member</th><th>Monthly Target</th><th>Achieved</th><th>Performance</th></tr></thead>
                     <tbody>
-                        <tr><td>Bolu</td><td>₦22m</td><td>₦3.05m</td><td class="red-bold">13.90%</td></tr>
-                        <tr><td>Mary</td><td>₦30m</td><td>₦3.97m</td><td class="red-bold">13.27%</td></tr>
-                        <tr><td>Jaya</td><td>₦15m</td><td>₦1.09m</td><td class="red-bold">7.27%</td></tr>
-                        <tr><td>Lewa</td><td>₦10m</td><td>₦774.4k</td><td class="red-bold">7.74%</td></tr>
-                        <tr><td>Susan</td><td>₦8m</td><td>₦1.19m</td><td class="red-bold">14.96%</td></tr>
-                        <tr><td>Rachel</td><td>₦10m</td><td>₦1.65m</td><td class="red-bold">16.52%</td></tr>
-                        <tr><td>Divine</td><td>₦5m</td><td>₦958.6k</td><td class="red-bold">19.17%</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        
-        <div class="card half">
-            <h3 class="red-bold">SEGMENT 2 - TODAY'S REVENUE (09/05)</h3>
-            <div class="metric-badge">6 Cust</div>
-            <div class="metric-badge">₦311k Rev</div>
-            <div class="metric-badge">23 Units</div>
-            <div class="table-wrapper">
-                <table>
-                    <thead><tr><th>Rep</th><th>Cust</th><th>Revenue</th></tr></thead>
-                    <tbody>
-                        <tr><td>Mary</td><td>2</td><td class="green-val">₦100.8k</td></tr>
-                        <tr><td>Rachel</td><td>2</td><td class="green-val">₦106.8k</td></tr>
-                        <tr><td>Lewa</td><td>1</td><td>₦70k</td></tr>
-                        <tr><td>Jaya</td><td>1</td><td>₦33.6k</td></tr>
-                        <tr><td>Others</td><td>0</td><td>₦0</td></tr>
+                        <tr><td>Bolu</td><td>₦22,000,000</td><td>₦3,058,600</td><td class="red">13.90%</td></tr>
+                        <tr><td>Mary</td><td>₦30,000,000</td><td>₦3,979,500</td><td class="red">13.27%</td></tr>
+                        <tr><td>Rachel</td><td>₦10,000,000</td><td>₦1,652,000</td><td class="red">16.52%</td></tr>
+                        <tr><td>Susan</td><td>₦8,000,000</td><td>₦1,196,400</td><td class="red">14.96%</td></tr>
+                        <tr><td>Divine</td><td>₦5,000,000</td><td>₦958,600</td><td class="red">19.17%</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div class="card half">
-            <h3 class="red-bold">SEGMENT 10 - CS TODAY (09/05)</h3>
-            <div class="table-wrapper">
-                <table>
-                    <thead><tr><th>Rep</th><th>Contacted</th><th>Sat</th><th>Sat %</th></tr></thead>
-                    <tbody>
-                        <tr><td>RAY</td><td>14</td><td>14</td><td>100%</td></tr>
-                        <tr><td>LEWA</td><td>0</td><td>0</td><td>0%</td></tr>
-                        <tr class="row-total"><td>TOTAL</td><td>14</td><td>14</td><td>100%</td></tr>
-                    </tbody>
-                </table>
-            </div>
+        <!-- TODAY'S NUMBERS -->
+        <div class="module span-6">
+            <h3>Segment 2 - Today's Live Audit (09/05)</h3>
+            <table>
+                <thead><tr><th>Staff</th><th>Units</th><th>Revenue</th></tr></thead>
+                <tbody>
+                    <tr><td>Mary</td><td>-</td><td class="green">₦100,800</td></tr>
+                    <tr><td>Rachel</td><td>-</td><td class="green">₦106,800</td></tr>
+                    <tr><td>Lewa</td><td>-</td><td>₦70,000</td></tr>
+                    <tr><td>Jaya</td><td>-</td><td>₦33,600</td></tr>
+                    <tr class="highlight"><td>DAILY TOTAL</td><td>23</td><td>₦311,200</td></tr>
+                </tbody>
+            </table>
         </div>
 
-        <div class="card full">
-            <h3 class="red-bold">SEGMENT 3 - DEPARTMENT BREAKDOWN</h3>
-            <div class="table-wrapper">
+        <!-- CS TODAY -->
+        <div class="module span-6">
+            <h3>Segment 10 - CS Satisfaction Today</h3>
+            <table>
+                <thead><tr><th>REP</th><th>Contacted</th><th>Satisfied</th><th>% Score</th></tr></thead>
+                <tbody>
+                    <tr><td>RAY</td><td>14</td><td>14</td><td class="green">100%</td></tr>
+                    <tr><td>LEWA</td><td>0</td><td>0</td><td class="red">0%</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- DEPT BREAKDOWN -->
+        <div class="module span-12">
+            <h3>Segment 3 - Departmental Contribution</h3>
+            <div class="scroll-x">
                 <table>
-                    <thead><tr><th>Department</th><th>Revenue</th><th>Customers</th><th>Units</th><th>% Contribution</th></tr></thead>
+                    <thead><tr><th>Department</th><th>Revenue</th><th>Customers</th><th>Units</th><th>Contribution</th></tr></thead>
                     <tbody>
                         <tr><td>Sales Team</td><td>₦6,670,300</td><td>64</td><td>613</td><td>51.50%</td></tr>
                         <tr><td>Digital Marketer</td><td>₦3,855,200</td><td>81</td><td>570</td><td>29.77%</td></tr>
-                        <tr style="background: rgba(0, 255, 136, 0.05);">
-                            <td><strong>Customer Care</strong></td>
-                            <td class="green-val"><strong>₦2,426,400</strong></td>
-                            <td>41</td>
-                            <td>221</td>
-                            <td class="green-val">18.73%</td>
-                        </tr>
+                        <tr style="background:rgba(0, 255, 163, 0.05)"><td>Customer Care</td><td class="green">₦2,426,400</td><td>41</td><td>221</td><td>18.73%</td></tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <!-- ZONE ANALYSIS -->
+        <div class="module span-6">
+            <h3>Segment 4 - Zonal Revenue</h3>
+            <table>
+                <thead><tr><th>Zone</th><th>Revenue</th><th>Unit</th><th>Share</th></tr></thead>
+                <tbody>
+                    <tr><td>Lagos</td><td>₦6,360,700</td><td>616</td><td class="green">49.1%</td></tr>
+                    <tr><td>Benin</td><td>₦4,254,200</td><td>522</td><td>32.8%</td></tr>
+                    <tr><td>Abuja</td><td>₦2,337,000</td><td>266</td><td>18.0%</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- MEDIUM ANALYSIS -->
+        <div class="module span-6">
+            <h3>Segment 8 - Conversion by Medium</h3>
+            <table>
+                <thead><tr><th>Source</th><th>Customers</th><th>Revenue</th><th>Unit</th></tr></thead>
+                <tbody>
+                    <tr><td>Instagram Ad</td><td>61</td><td>₦2,850,800</td><td>429</td></tr>
+                    <tr><td>Facebook Ad</td><td>14</td><td>₦717,800</td><td>104</td></tr>
+                    <tr><td>Others</td><td>109</td><td class="green">₦9,349,700</td><td>865</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
 <script>
     function unlock() {
-        const input = document.getElementById('passkey').value.toLowerCase();
-        if (input === 'sng009') {
+        const key = document.getElementById('passkey').value.toLowerCase();
+        if (key === 'sng009') {
             document.getElementById('auth-overlay').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
             window.scrollTo(0,0);
-        } else { 
-            alert('ACCESS DENIED'); 
+        } else {
+            alert('INVALID COMMAND CODE');
             document.getElementById('passkey').value = '';
         }
     }
+    // Enter key support
+    document.getElementById('passkey').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') { unlock(); }
+    });
 </script>
 </body>
 </html>
