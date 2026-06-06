@@ -2,50 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>2026 Team Report</title>
+    <title>2026 Operations Dashboard</title>
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --red: #ff4a4a; --green: #2ea043; --white: #ffffff; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 240px 20px 20px 20px; font-size: 14px; }
-        .container { max-width: 1200px; margin: 0 auto; }
+        :root { 
+            --bg: #0b0f19; 
+            --card: #111827; 
+            --card-hover: #1f293d;
+            --border: #1e293b; 
+            --text: #94a3b8; 
+            --white: #f8fafc;
+            --red: #f43f5e; 
+            --green: #10b981; 
+            --accent: #3b82f6;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            padding: 210px 24px 24px 24px; 
+            font-size: 14px; 
+            letter-spacing: -0.01em;
+        }
+        .container { max-width: 1300px; margin: 0 auto; }
         
         /* Lock Screen Access Point */
-        #lock-screen { position: fixed; top:0; left:0; width:100%; height:100%; background: #090d13; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .lock-box { background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 8px; text-align: center; box-shadow: 0 4px 25px rgba(0,0,0,0.7); }
-        .lock-box input { background: var(--bg); border: 1px solid var(--border); color: var(--white); padding: 10px; border-radius: 4px; font-size: 16px; text-align: center; margin-bottom: 15px; width: 200px; }
-        .lock-box button { background: var(--red); color: var(--white); border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; }
-        .lock-box button:hover { background: #e03d3d; }
-        .error-msg { color: var(--red); font-size: 12px; margin-top: 10px; display: none; }
+        #lock-screen { position: fixed; top:0; left:0; width:100%; height:100%; background: var(--bg); z-index: 9999; display: flex; justify-content: center; align-items: center; }
+        .lock-box { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 16px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); max-width: 320px; width: 100%; }
+        .lock-box h3 { color: var(--white); margin-bottom: 20px; font-size: 18px; font-weight: 700; }
+        .lock-box input { background: #070a12; border: 1px solid var(--border); color: var(--white); padding: 12px; border-radius: 8px; font-size: 16px; text-align: center; margin-bottom: 15px; width: 100%; box-sizing: border-box; transition: all 0.3s; }
+        .lock-box input:focus { border-color: var(--accent); outline: none; }
+        .lock-box button { background: var(--red); color: var(--white); border: none; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%; font-size: 14px; transition: background 0.2s; }
+        .lock-box button:hover { background: #e11d48; }
+        .error-msg { color: var(--red); font-size: 13px; margin-top: 12px; display: none; font-weight: 500; }
 
-        /* Fixed Top Monthly Summary Panel */
-        .sticky-header { position: fixed; top: 0; left: 0; right: 0; background: #090d13; border-bottom: 2px solid var(--border); z-index: 1000; padding: 15px 20px 0 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .sticky-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 10px; }
-        .sticky-card { background: var(--card); border: 1px solid var(--border); padding: 12px; border-radius: 6px; text-align: center; }
-        .sticky-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text); font-weight: 600; margin-bottom: 4px; }
+        /* Premium Sticky Header */
+        .sticky-header { position: fixed; top: 0; left: 0; right: 0; background: rgba(11, 15, 25, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 1000; padding: 20px 24px 10px 24px; }
+        .sticky-container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 15px; }
+        .sticky-card { background: var(--card); border: 1px solid var(--border); padding: 16px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2); position: relative; overflow: hidden; }
+        .sticky-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); }
+        .sticky-card.rev-card::before { background: var(--green); }
+        .sticky-card.pct-card::before { background: var(--green); }
+        .sticky-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text); font-weight: 700; margin-bottom: 6px; }
         
-        /* Infinitely Gliding News Ticker */
-        .ticker-wrap { background: #1f242c; border: 1px solid var(--border); overflow: hidden; padding: 8px; border-radius: 4px; margin-bottom: 10px; width: 100%; box-sizing: border-box; }
-        .ticker { display: inline-block; white-space: nowrap; animation: marquee 25s linear infinite; }
-        .ticker span { margin-right: 50px; font-weight: bold; color: var(--text); }
+        /* News Ticker */
+        .ticker-wrap { background: #141b2d; border: 1px solid var(--border); overflow: hidden; padding: 10px 16px; border-radius: 8px; width: 100%; box-sizing: border-box; }
+        .ticker { display: inline-block; white-space: nowrap; animation: marquee 28s linear infinite; }
+        .ticker span { margin-right: 60px; font-weight: 600; font-size: 13px; color: #e2e8f0; }
         @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
         
-        h1, h2, h3 { color: var(--red); font-weight: bold; margin-top: 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-bottom: 25px; }
-        .card { background: var(--card); border: 1px solid var(--border); padding: 15px; border-radius: 6px; }
-        .metric { font-size: 20px; font-weight: bold; color: var(--white); margin: 5px 0; }
-        .rev { color: var(--green); font-weight: bold; }
-        .high-pct { color: var(--green); font-weight: bold; }
-        .low-pct { color: var(--red); font-weight: bold; }
+        h2 { color: var(--white); font-weight: 800; font-size: 26px; margin: 0 0 25px 0; letter-spacing: -0.02em; }
+        h3 { color: var(--red); font-weight: 700; font-size: 16px; margin: 30px 0 15px 0; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px; }
         
-        table { width: 100%; border-collapse: collapse; margin-bottom: 25px; background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: #21262d; color: var(--white); font-weight: 600; }
-        tr:hover { background: #1f242c; }
+        /* Cards Layout */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 30px; }
+        .card { background: var(--card); border: 1px solid var(--border); padding: 18px; border-radius: 12px; transition: all 0.2s; }
+        .card:hover { transform: translateY(-2px); border-color: #334155; background: var(--card-hover); }
+        .card-label { font-size: 13px; color: var(--text); font-weight: 500; }
+        .metric { font-size: 24px; font-weight: 700; color: var(--white); margin-top: 8px; font-family: SFMono-Regular, Consolas, monospace; }
+        .rev { color: var(--green) !important; }
+        .high-pct { color: var(--green) !important; }
+        .low-pct { color: var(--red) !important; }
         
-        /* Falling/Dropping Reviews Container */
-        .feedback-waterfall { background: var(--card); border: 1px solid var(--border); border-radius: 6px; height: 220px; overflow: hidden; position: relative; padding: 10px; }
-        .feedback-track { position: absolute; width: calc(100% - 20px); animation: drop-stream 20s linear infinite; }
+        /* Modern Data Tables */
+        table { width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 30px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        th, td { padding: 14px 16px; text-align: left; }
+        th { background: #1e293b; color: var(--white); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.03em; border-bottom: 1px solid var(--border); }
+        td { border-bottom: 1px solid rgba(30, 41, 59, 0.5); color: #e2e8f0; font-size: 13.5px; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(30, 41, 59, 0.4); }
+        
+        /* Flex Layout Columns */
+        .flex-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 24px; }
+        
+        /* Streaming Live Feedback Vertical Loop */
+        .feedback-waterfall { background: var(--card); border: 1px solid var(--border); border-radius: 12px; height: 260px; overflow: hidden; position: relative; padding: 16px; box-shadow: inset 0 10px 20px rgba(0,0,0,0.3); }
+        .feedback-track { position: absolute; width: calc(100% - 32px); animation: drop-stream 25s linear infinite; }
         .feedback-track:hover { animation-play-state: paused; }
-        .feedback-node { background: var(--bg); border: 1px solid var(--border); padding: 12px; border-radius: 4px; margin-bottom: 12px; border-left: 4px solid var(--red); }
+        .feedback-node { background: #1e293b; border: 1px solid var(--border); padding: 16px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--red); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .feedback-node strong { color: var(--white); display: block; margin-bottom: 4px; font-size: 13px; }
+        .feedback-node span { font-style: italic; color: #cbd5e1; line-height: 1.5; display: block; }
         @keyframes drop-stream { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(0, -50%, 0); } }
     </style>
 </head>
@@ -53,179 +89,179 @@
 
 <div id="lock-screen">
     <div class="lock-box">
-        <h3 style="margin-bottom: 15px;">System Access Required</h3>
-        <input type="password" id="passkey" placeholder="Enter Access Code" onkeydown="if(event.key==='Enter') verifyAccess()">
-        <br>
-        <button onclick="verifyAccess()">Verify Identity</button>
-        <div id="lock-error" class="error-msg">Invalid Access Point Token</div>
+        <h3>Operational Access Terminal</h3>
+        <input type="password" id="passkey" placeholder="Enter Authentication Code" onkeydown="if(event.key==='Enter') verifyAccess()">
+        <button onclick="verifyAccess()">Authenticate</button>
+        <div id="lock-error" class="error-msg">Invalid Access Credentials</div>
     </div>
 </div>
 
 <div class="sticky-header">
     <div class="sticky-container">
-        <div class="sticky-card"><div class="sticky-label">Revenue for the Month</div><div class="metric rev">₦12.80m</div></div>
-        <div class="sticky-card"><div class="sticky-label">Customers</div><div class="metric">193</div></div>
-        <div class="sticky-card"><div class="sticky-label">Units Sold</div><div class="metric">1,414 Units</div></div>
-        <div class="sticky-card"><div class="sticky-label">Return %</div><div class="metric high-pct">50.26%</div></div>
+        <div class="sticky-card rev-card"><div class="sticky-label">Month Revenue Overview</div><div class="metric rev">₦12.80m</div></div>
+        <div class="sticky-card"><div class="sticky-label">Active Transacting Base</div><div class="metric">193</div></div>
+        <div class="sticky-card"><div class="sticky-label">Gross Vol. Dispatched</div><div class="metric">1,414 Units</div></div>
+        <div class="sticky-card pct-card"><div class="sticky-label">Customer Retention Rate</div><div class="metric high-pct">50.26%</div></div>
     </div>
     <div class="ticker-wrap">
-        <div class="ticker" id="ticker-belt">
-            <span>🚀 June Gross Revenue: <span class="rev">₦12.80m</span></span>
-            <span>👥 Total Customers: 193</span>
-            <span>🔄 Return Rate: <span class="high-pct">50.26%</span></span>
-            <span>🎯 Blended Conversion: <span class="low-pct">16.21%</span></span>
-            <span>📍 Top Performing Zone: Lagos (<span class="high-pct">52.54%</span>)</span>
-            <span>🚀 June Gross Revenue: <span class="rev">₦12.80m</span></span>
-            <span>👥 Total Customers: 193</span>
-            <span>🔄 Return Rate: <span class="high-pct">50.26%</span></span>
-            <span>🎯 Blended Conversion: <span class="low-pct">16.21%</span></span>
-            <span>📍 Top Performing Zone: Lagos (<span class="high-pct">52.54%</span>)</span>
+        <div class="ticker">
+            <span>📈 June Gross Revenue Run-rate: <span class="rev">₦12.80m</span></span>
+            <span>⚡ Total Customer Pipeline: 193</span>
+            <span>🔄 Re-order Frequency: <span class="high-pct">50.26%</span></span>
+            <span>🎯 Blended Core Conversion: <span class="low-pct">16.21%</span></span>
+            <span>🌍 Primary Core Hub: Lagos (<span class="high-pct">52.54%</span>)</span>
+            <span>📈 June Gross Revenue Run-rate: <span class="rev">₦12.80m</span></span>
+            <span>⚡ Total Customer Pipeline: 193</span>
+            <span>🔄 Re-order Frequency: <span class="high-pct">50.26%</span></span>
+            <span>🎯 Blended Core Conversion: <span class="low-pct">16.21%</span></span>
+            <span>🌍 Primary Core Hub: Lagos (<span class="high-pct">52.54%</span>)</span>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <h2>2026 Team Report</h2>
+    <h2>Performance Management Dashboard</h2>
     
-    <h3>Segment 1 — Digital Revenue Breakdown</h3>
+    <h3>📊 Segment 1 — Digital Revenue Breakdown</h3>
     <div class="grid">
-        <div class="card"><div>Digital - IG</div><div class="metric">₦4.16m</div></div>
-        <div class="card"><div>Digital - Landing Page</div><div class="metric">₦1.62m</div></div>
-        <div class="card"><div>Digital - Facebook</div><div class="metric">₦517.4k</div></div>
-        <div class="card"><div>Digital - Whatsapp Dm</div><div class="metric">₦127.2k</div></div>
-        <div class="card"><div>Digital - Website</div><div class="metric">₦67.2k</div></div>
-        <div class="card"><div>TOTAL REVENUE</div><div class="metric rev">₦6.50m</div></div>
+        <div class="card"><div class="card-label">Digital - IG</div><div class="metric">₦4.16m</div></div>
+        <div class="card"><div class="card-label">Digital - Landing Page</div><div class="metric">₦1.62m</div></div>
+        <div class="card"><div class="card-label">Digital - Facebook</div><div class="metric">₦517.4k</div></div>
+        <div class="card"><div class="card-label">Digital - Whatsapp Dm</div><div class="metric">₦127.2k</div></div>
+        <div class="card"><div class="card-label">Digital - Website</div><div class="metric">₦67.2k</div></div>
+        <div class="card" style="border-color: var(--green);"><div class="card-label">TOTAL REVENUE</div><div class="metric rev">₦6.50m</div></div>
     </div>
 
-    <h3>Segment 2 — Today's Numbers (06/06/2026)</h3>
+    <h3>⚡ Segment 2 — Real-Time Flash Metrics (Today)</h3>
     <div class="grid">
-        <div class="card"><div>Customers</div><div class="metric">4</div></div>
-        <div class="card"><div>Revenue</div><div class="metric rev">₦185.8k</div></div>
-        <div class="card"><div>Units Sold</div><div class="metric">19 Units</div></div>
+        <div class="card"><div class="card-label">Active Customers</div><div class="metric">4</div></div>
+        <div class="card"><div class="card-label">Gross Intake</div><div class="metric rev">₦185.8k</div></div>
+        <div class="card"><div class="card-label">Volume Movement</div><div class="metric">19 Units</div></div>
     </div>
 
     <table>
-        <thead><tr><th>Sales Representatives</th><th>Today's Customers</th><th>Today's Revenue</th></tr></thead>
+        <thead><tr><th>Sales Representative</th><th>Acquired Pipeline</th><th>Closed Revenue Flow</th></tr></thead>
         <tbody>
-            <tr><td>Mary</td><td>1</td><td class="rev">₦85.0k</td></tr>
-            <tr><td>Divine</td><td>2</td><td class="rev">₦67.2k</td></tr>
-            <tr><td>Susan</td><td>1</td><td class="rev">₦33.6k</td></tr>
-            <tr><td>Bolu / Jaya / Lewa / Rachel / Fortunate</td><td>0</td><td>₦0.00</td></tr>
+            <tr><td><strong>Mary</strong></td><td>1 Customer</td><td class="rev">₦85.0k</td></tr>
+            <tr><td><strong>Divine</strong></td><td>2 Customers</td><td class="rev">₦67.2k</td></tr>
+            <tr><td><strong>Susan</strong></td><td>1 Customer</td><td class="rev">₦33.6k</td></tr>
+            <tr><td><span style="opacity: 0.5;">Bolu / Jaya / Lewa / Rachel / Fortunate</span></td><td>0 Customers</td><td>₦0.00</td></tr>
         </tbody>
     </table>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 20px;">
+    <div class="flex-grid">
         <div>
-            <h3>Segment 3 — Department Breakdown</h3>
+            <h3>🏢 Segment 3 — Department Structuring</h3>
             <table>
-                <thead><tr><th>Department</th><th>Revenue</th><th>Customers</th><th>Units</th><th>% Contribution</th></tr></thead>
+                <thead><tr><th>Department</th><th>Net Intake</th><th>Volume</th><th>% Contribution</th></tr></thead>
                 <tbody>
-                    <tr><td>Digital Marketer</td><td class="rev">₦6.49m</td><td>107</td><td>563</td><td class="high-pct">50.71%</td></tr>
-                    <tr><td>Sales Team</td><td class="rev">₦4.70m</td><td>61</td><td>530</td><td class="low-pct">36.75%</td></tr>
-                    <tr><td>Customer Care</td><td class="rev">₦1.61m</td><td>25</td><td>141</td><td class="low-pct">12.54%</td></tr>
+                    <tr><td>Digital Marketer</td><td class="rev">₦6.49m</td><td>563 Units</td><td class="high-pct">50.71%</td></tr>
+                    <tr><td>Sales Team</td><td class="rev">₦4.70m</td><td>530 Units</td><td class="low-pct">36.75%</td></tr>
+                    <tr><td>Customer Care</td><td class="rev">₦1.61m</td><td>141 Units</td><td class="low-pct">12.54%</td></tr>
                 </tbody>
             </table>
         </div>
         <div>
-            <h3>Segment 4 — Zone Sales Breakdown</h3>
+            <h3>📍 Segment 4 — Regional Zone Sales Breakdown</h3>
             <table>
-                <thead><tr><th>Zone</th><th>Revenue</th><th>Customers</th><th>Units</th><th>% Contribution</th></tr></thead>
+                <thead><tr><th>Zone</th><th>Net Intake</th><th>Volume</th><th>% Contribution</th></tr></thead>
                 <tbody>
-                    <tr><td>Lagos</td><td class="rev">₦6.72m</td><td>88</td><td>607</td><td class="high-pct">52.54%</td></tr>
-                    <tr><td>Benin</td><td class="rev">₦3.62m</td><td>65</td><td>395</td><td class="low-pct">28.31%</td></tr>
-                    <tr><td>Abuja</td><td class="rev">₦2.45m</td><td>40</td><td>232</td><td class="low-pct">19.16%</td></tr>
-                    <tr><td>Ghana</td><td>GHS0.00</td><td>0</td><td>0</td><td class="low-pct">0.00%</td></tr>
+                    <tr><td>Lagos HQ</td><td class="rev">₦6.72m</td><td>607 Units</td><td class="high-pct">52.54%</td></tr>
+                    <tr><td>Benin Hub</td><td class="rev">₦3.62m</td><td>395 Units</td><td class="low-pct">28.31%</td></tr>
+                    <tr><td>Abuja Hub</td><td class="rev">₦2.45m</td><td>232 Units</td><td class="low-pct">19.16%</td></tr>
+                    <tr><td>Ghana Regional</td><td>GHS0.00</td><td>0 Units</td><td class="low-pct">0.00%</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <h3>Segment 5 — Individuals This Month Numbers</h3>
+    <h3>👤 Segment 5 — Personnel Performance (Current Month)</h3>
     <table>
-        <thead><tr><th>Staff</th><th>Revenue</th><th>Customers</th><th>Units</th></tr></thead>
+        <thead><tr><th>Account Executive</th><th>Total Revenue Yield</th><th>Client Base Count</th><th>Total Load Despatched</th></tr></thead>
         <tbody>
-            <tr><td>Mary</td><td class="rev">₦3.73m</td><td>64</td><td>387</td></tr>
-            <tr><td>Bolu</td><td class="rev">₦3.03m</td><td>36</td><td>233</td></tr>
-            <tr><td>Jaya</td><td class="rev">₦2.23m</td><td>29</td><td>225</td></tr>
-            <tr><td>Susan</td><td class="rev">₦1.17m</td><td>22</td><td>123</td></tr>
-            <tr><td>Rachel</td><td class="rev">₦1.02m</td><td>18</td><td>97</td></tr>
-            <tr><td>Divine</td><td class="rev">₦730.8k</td><td>14</td><td>82</td></tr>
-            <tr><td>Lewa</td><td class="rev">₦652.2k</td><td>8</td><td>45</td></tr>
+            <tr><td><strong>Mary</strong></td><td class="rev">₦3.73m</td><td>64 Customers</td><td>387 Units</td></tr>
+            <tr><td><strong>Bolu</strong></td><td class="rev">₦3.03m</td><td>36 Customers</td><td>233 Units</td></tr>
+            <tr><td><strong>Jaya</strong></td><td class="rev">₦2.23m</td><td>29 Customers</td><td>225 Units</td></tr>
+            <tr><td><strong>Susan</strong></td><td class="rev">₦1.17m</td><td>22 Customers</td><td>123 Units</td></tr>
+            <tr><td><strong>Rachel</strong></td><td class="rev">₦1.02m</td><td>18 Customers</td><td>97 Units</td></tr>
+            <tr><td><strong>Divine</strong></td><td class="rev">₦730.8k</td><td>14 Customers</td><td>82 Units</td></tr>
+            <tr><td><strong>Lewa</strong></td><td class="rev">₦652.2k</td><td>8 Customers</td><td>45 Units</td></tr>
         </tbody>
     </table>
 
-    <h3>Segment 6 — Individuals 2026 Numbers</h3>
+    <h3>🏁 Segment 6 — Annual Run-Rate vs Target Parameters</h3>
     <table>
-        <thead><tr><th>Staff</th><th>YTD Revenue</th><th>% From Target</th><th>Target</th></tr></thead>
+        <thead><tr><th>Account Executive</th><th>YTD Compiled Yield</th><th>Target Metric Benchmark</th><th>% Realized Status</th></tr></thead>
         <tbody>
-            <tr><td>Mary</td><td class="rev">₦86.10m</td><td class="low-pct">17.22%</td><td>₦500.00m</td></tr>
-            <tr><td>Bolu</td><td class="rev">₦52.60m</td><td class="low-pct">13.15%</td><td>₦400.00m</td></tr>
-            <tr><td>Jaya</td><td class="rev">₦23.75m</td><td class="low-pct">15.83%</td><td>₦150.00m</td></tr>
-            <tr><td>Susan</td><td class="rev">₦22.59m</td><td class="low-pct">22.59%</td><td>₦100.00m</td></tr>
-            <tr><td>Rachel</td><td class="rev">₦21.19m</td><td class="low-pct">21.19%</td><td>₦100.00m</td></tr>
-            <tr><td>Lewa</td><td class="rev">₦19.75m</td><td class="low-pct">7.90%</td><td>₦250.00m</td></tr>
-            <tr><td>Divine</td><td class="rev">₦16.89m</td><td class="low-pct">16.89%</td><td>₦100.00m</td></tr>
+            <tr><td>Mary</td><td class="rev">₦86.10m</td><td>₦500.00m</td><td class="low-pct">17.22%</td></tr>
+            <tr><td>Bolu</td><td class="rev">₦52.60m</td><td>₦400.00m</td><td class="low-pct">13.15%</td></tr>
+            <tr><td>Jaya</td><td class="rev">₦23.75m</td><td>₦150.00m</td><td class="low-pct">15.83%</td></tr>
+            <tr><td>Susan</td><td class="rev">₦22.59m</td><td>₦100.00m</td><td class="low-pct">22.59%</td></tr>
+            <tr><td>Rachel</td><td class="rev">₦21.19m</td><td>₦100.00m</td><td class="low-pct">21.19%</td></tr>
+            <tr><td>Lewa</td><td class="rev">₦19.75m</td><td>₦250.00m</td><td class="low-pct">7.90%</td></tr>
+            <tr><td>Divine</td><td class="rev">₦16.89m</td><td>₦100.00m</td><td class="low-pct">16.89%</td></tr>
         </tbody>
     </table>
 
-    <h3>Segment 8 — Sales By Medium For This Month</h3>
+    <h3>🎯 Segment 8 — Acquisition Channel Performance Matrix</h3>
     <table>
-        <thead><tr><th>Medium</th><th>Customers</th><th>Revenue</th><th>Units</th><th>% Contributed</th></tr></thead>
+        <thead><tr><th>Marketing Core Medium</th><th>Volume Client Count</th><th>Gross Financial Flow</th><th>Product Footprint</th><th>Contribution Weight</th></tr></thead>
         <tbody>
-            <tr><td>Others</td><td>91</td><td class="rev">₦6.50m</td><td>707</td><td class="high-pct">51%</td></tr>
-            <tr><td>Instagram Ad</td><td>58</td><td class="rev">₦4.16m</td><td>335</td><td class="low-pct">33%</td></tr>
-            <tr><td>Landing Page Ad</td><td>34</td><td class="rev">₦1.62m</td><td>149</td><td class="low-pct">13%</td></tr>
-            <tr><td>Facebook Ad</td><td>10</td><td class="rev">₦517.4k</td><td>43</td><td class="low-pct">4%</td></tr>
+            <tr><td>Organic & Direct (Others)</td><td>91</td><td class="rev">₦6.50m</td><td>707 Units</td><td class="high-pct">51%</td></tr>
+            <tr><td>Instagram Targeted Paid</td><td>58</td><td class="rev">₦4.16m</td><td>335 Units</td><td class="low-pct">33%</td></tr>
+            <tr><td>Landing Engine Network</td><td>34</td><td class="rev">₦1.62m</td><td>149 Units</td><td class="low-pct">13%</td></tr>
+            <tr><td>Facebook Core Paid</td><td>10</td><td class="rev">₦517.4k</td><td>43 Units</td><td class="low-pct">4%</td></tr>
         </tbody>
     </table>
 
-    <h3>Segment 12 — IG & Facebook Conversion Analytics</h3>
+    <h3>🔌 Segment 12 — Social Meta Lead Inflow Pipeline Analytics</h3>
     <table>
-        <thead><tr><th>Rep</th><th>FB Leads</th><th>FB Closed</th><th>IG Leads</th><th>IG Closed</th><th>Total Leads</th><th>Total Closed</th><th>Conversion %</th></tr></thead>
+        <thead><tr><th>Account Executive</th><th>FB Inbound Leads</th><th>FB Conversions</th><th>IG Inbound Leads</th><th>IG Conversions</th><th>Aggregate Input</th><th>Aggregate Conversions</th><th>Net Close Efficiency</th></tr></thead>
         <tbody>
-            <tr><td>Susan</td><td>30</td><td>0</td><td>0</td><td>15</td><td>30</td><td>15</td><td class="high-pct">50.00%</td></tr>
-            <tr><td>Jaya</td><td>17</td><td>2</td><td>22</td><td>15</td><td>39</td><td>17</td><td class="low-pct">43.59%</td></tr>
-            <tr><td>Divine</td><td>28</td><td>0</td><td>79</td><td>13</td><td>107</td><td>13</td><td class="low-pct">12.15%</td></tr>
-            <tr><td>Bolu</td><td>225</td><td>4</td><td>0</td><td>12</td><td>225</td><td>16</td><td class="low-pct">7.11%</td></tr>
+            <tr><td>Susan</td><td>30 Leads</td><td>0 Clients</td><td>0 Leads</td><td>15 Clients</td><td>30 Leads</td><td>15 Clients</td><td class="high-pct">50.00%</td></tr>
+            <tr><td>Jaya</td><td>17 Leads</td><td>2 Clients</td><td>22 Leads</td><td>15 Clients</td><td>39 Leads</td><td>17 Clients</td><td class="low-pct">43.59%</td></tr>
+            <tr><td>Divine</td><td>28 Leads</td><td>0 Clients</td><td>79 Leads</td><td>13 Clients</td><td>107 Leads</td><td>13 Clients</td><td class="low-pct">12.15%</td></tr>
+            <tr><td>Bolu</td><td>225 Leads</td><td>4 Clients</td><td>0 Leads</td><td>12 Clients</td><td>225 Leads</td><td>16 Clients</td><td class="low-pct">7.11%</td></tr>
         </tbody>
     </table>
 
-    <h3>Segment 16 — Medium Cost Matrix</h3>
+    <h3>📉 Segment 16 — Unit Economics & Campaign Acquisition Costings</h3>
     <table>
-        <thead><tr><th>Medium</th><th>Revenue</th><th>%</th><th>Customers</th><th>Ad Cost</th><th>Log Cost</th><th>Profit %</th></tr></thead>
+        <thead><tr><th>Inbound Channel Engine</th><th>Financial Intake</th><th>Channel Spend (Ad)</th><th>Logistics Overheads</th><th>Cost Per Acquisition</th><th>ROI Profit Baseline</th></tr></thead>
         <tbody>
-            <tr><td>Instagram Ad</td><td class="rev">₦4.16m</td><td>33%</td><td>58</td><td>₦294.0k</td><td>₦116.0k</td><td class="high-pct">914%</td></tr>
-            <tr><td>Landing Page Ad</td><td class="rev">₦1.62m</td><td>13%</td><td>34</td><td>₦150.0k</td><td>₦68.0k</td><td class="high-pct">645%</td></tr>
-            <tr><td>Blended Total</td><td class="rev">₦6.30m</td><td>49%</td><td>102</td><td>₦474.0k</td><td>₦204.0k</td><td class="high-pct">829%</td></tr>
+            <tr><td>Instagram Targeted</td><td class="rev">₦4.16m</td><td>₦294.0k</td><td>₦116.0k</td><td>₦7,069</td><td class="high-pct">914%</td></tr>
+            <tr><td>Landing Engine Network</td><td class="rev">₦1.62m</td><td>₦150.0k</td><td>₦68.0k</td><td>₦6,412</td><td class="high-pct">645%</td></tr>
+            <tr style="background: rgba(16, 185, 129, 0.05);"><td><strong>Blended Combined Parameters</strong></td><td class="rev">₦6.30m</td><td><strong>₦474.0k</strong></td><td><strong>₦204.0k</strong></td><td><strong>₦6,647</strong></td><td class="high-pct"><strong>829%</strong></td></tr>
         </tbody>
     </table>
 
-    <h3>Live Customer Feedback Stream</h3>
+    <h3>💬 Live Customer Feedback Stream</h3>
     <div class="feedback-waterfall">
         <div class="feedback-track">
-            <div class="feedback-node"><strong>Mr Ade (Lagos):</strong> "My woman never expected what was coming for her. Your product boosted my confidence."</div>
-            <div class="feedback-node"><strong>Mr Charles (Abuja):</strong> "I can't argue, I can't lie, your product is a banger, no headache, no side pain..."</div>
-            <div class="feedback-node"><strong>Phillip (Porthacourt):</strong> "My woman leg never shake before, last night shock me"</div>
-            <div class="feedback-node"><strong>Mrs Dami (UK):</strong> "I now have the urge for sex with SPE, my husband enjoys sex... Suruka thank you 🙏"</div>
-            <div class="feedback-node"><strong>Leye (France):</strong> "I don't regret ordering your products, it's an amazing one, after cumming, I'm still active..."</div>
-            <div class="feedback-node"><strong>Mr Ade (Lagos):</strong> "My woman never expected what was coming for her. Your product boosted my confidence."</div>
-            <div class="feedback-node"><strong>Mr Charles (Abuja):</strong> "I can't argue, I can't lie, your product is a banger, no headache, no side pain..."</div>
-            <div class="feedback-node"><strong>Phillip (Porthacourt):</strong> "My woman leg never shake before, last night shock me"</div>
-            <div class="feedback-node"><strong>Mrs Dami (UK):</strong> "I now have the urge for sex with SPE, my husband enjoys sex... Suruka thank you 🙏"</div>
-            <div class="feedback-node"><strong>Leye (France):</strong> "I don't regret ordering your products, it's an amazing one, after cumming, I'm still active..."</div>
+            <div class="feedback-node"><strong>Mr Ade (Lagos Hub)</strong><span>"My woman never expected what was coming for her. Your product boosted my confidence."</span></div>
+            <div class="feedback-node"><strong>Mr Charles (Abuja Hub)</strong><span>"I can't argue, I can't lie, your product is a banger, no headache, no side pain..."</span></div>
+            <div class="feedback-node"><strong>Phillip (Port Harcourt)</strong><span>"My woman leg never shake before, last night shock me"</span></div>
+            <div class="feedback-node"><strong>Mrs Dami (United Kingdom)</strong><span>"I now have the urge for sex with SPE, my husband enjoys sex... Suruka thank you 🙏"</span></div>
+            <div class="feedback-node"><strong>Leye (France Export)</strong><span>"I don't regret ordering your products, it's an amazing one, after cumming, I'm still active..."</span></div>
+            <div class="feedback-node"><strong>Mr Ade (Lagos Hub)</strong><span>"My woman never expected what was coming for her. Your product boosted my confidence."</span></div>
+            <div class="feedback-node"><strong>Mr Charles (Abuja Hub)</strong><span>"I can't argue, I can't lie, your product is a banger, no headache, no side pain..."</span></div>
+            <div class="feedback-node"><strong>Phillip (Port Harcourt)</strong><span>"My woman leg never shake before, last night shock me"</span></div>
+            <div class="feedback-node"><strong>Mrs Dami (United Kingdom)</strong><span>"I now have the urge for sex with SPE, my husband enjoys sex... Suruka thank you 🙏"</span></div>
+            <div class="feedback-node"><strong>Leye (France Export)</strong><span>"I don't regret ordering your products, it's an amazing one, after cumming, I'm still active..."</span></div>
         </div>
     </div>
 </div>
 
 <script>
     function verifyAccess() {
-        const key = document.getElementById('passkey').value;
-        if(key === 'sng009') {
+        const inputField = document.getElementById('passkey');
+        if(inputField.value === 'sng009') {
             document.getElementById('lock-screen').style.display = 'none';
         } else {
-            const err = document.getElementById('lock-error');
-            err.style.display = 'block';
-            err.classList.add('low-pct');
+            const errLabel = document.getElementById('lock-error');
+            errLabel.style.display = 'block';
+            inputField.value = '';
+            inputField.focus();
         }
     }
 </script>
