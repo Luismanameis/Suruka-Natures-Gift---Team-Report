@@ -47,6 +47,11 @@
         .waterfall { background: var(--card); border: 1px solid var(--border); border-radius: 8px; height: 160px; overflow: hidden; position: relative; padding: 10px; }
         .track { position: absolute; width: calc(100% - 20px); animation: stream 35s linear infinite; }
         .node { background: #1e293b; padding: 10px; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid var(--green); font-size: 12px; color: var(--white); }
+        .live-status { color: var(--text); font-size: 11px; margin: -2px 0 12px; }
+        .sheet-updated { color: var(--green); font-weight: 700; }
+        .sheet-section { margin-bottom: 18px; }
+        .sheet-title { color: var(--white); font-size: 13px; margin: 24px 0 8px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; border-left: 3px solid var(--green); padding-left: 6px; }
+        .sheet-empty { background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.35); color: var(--white); padding: 12px; border-radius: 8px; }
         @keyframes stream { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(0,-50%,0); } }
         @media (max-width: 768px) { body { padding-top: 170px; } .sticky-container { grid-template-columns: repeat(2, 1fr); } .flex-grid { grid-template-columns: 1fr; } }
     </style>
@@ -212,11 +217,183 @@
     </div>
 </div>
 <script>
+    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQNSvEuKM_1ZB_7q0w4K2A73CJip4ctuBUSwkmWfLcYjVXOzP27kTnzVmR8188ThqNUcxHJMfqDKmDF/pub?gid=1756356450&single=true&output=csv';
+
     function val() {
         const p = document.getElementById('passkey');
         if(p.value==='sng009') { document.getElementById('lock-screen').style.display='none'; }
         else { document.getElementById('err').style.display='block'; p.value=''; p.focus(); }
     }
+
+    function parseCsv(text) {
+        const rows = [];
+        let row = [], cell = '', quoted = false;
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i], next = text[i + 1];
+            if (char === '"' && quoted && next === '"') { cell += '"'; i++; continue; }
+            if (char === '"') { quoted = !quoted; continue; }
+            if (char === ',' && !quoted) { row.push(cell.trim()); cell = ''; continue; }
+            if ((char === '\n' || char === '\r') && !quoted) {
+                if (char === '\r' && next === '\n') i++;
+                row.push(cell.trim());
+                if (row.some(Boolean)) rows.push(row);
+                row = []; cell = '';
+                continue;
+            }
+            cell += char;
+        }
+        row.push(cell.trim());
+        if (row.some(Boolean)) rows.push(row);
+        return rows;
+    }
+
+    function escapeHtml(value) {
+        return String(value || '').replace(/[&<>"']/g, char => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[char]));
+    }
+
+    function usefulCells(row) {
+        return row.map(cell => String(cell || '').trim()).filter(Boolean);
+    }
+
+    function looksLikeHeading(cells) {
+        return cells.length === 1 || (cells.length <= 2 && !/\d/.test(cells.join(' ')));
+    }
+
+    function splitIntoSections(rows) {
+        const sections = [];
+        let current = { title: 'Live Google Sheet Data', rows: [] };
+        rows.forEach(row => {
+            const cells = usefulCells(row);
+            if (!cells.length) return;
+            if (looksLikeHeading(cells) && current.rows.length) {
+                sections.push(current);
+                current = { title: cells.join(' '), rows: [] };
+            } else if (looksLikeHeading(cells) && !current.rows.length) {
+                current.title = cells.join(' ');
+            } else {
+                current.rows.push(cells);
+            }
+        });
+        if (current.rows.length) sections.push(current);
+        return sections;
+    }
+
+    function renderTable(rows) {
+        const header = rows[0] || [];
+        const body = rows.slice(1);
+        return `
+            <div class="table-responsive">
+                <table>
+                    <thead><tr>${header.map(cell => `<th>${escapeHtml(cell)}</th>`).join('')}</tr></thead>
+                    <tbody>
+                        ${body.map(row => `<tr>${header.map((_, index) => {
+                            const value = row[index] || '';
+                            const className = /%|₦|ngn|ghs|revenue|sales|target|amount/i.test(value) ? ' class="rev"' : '';
+                            return `<td${className}>${escapeHtml(value)}</td>`;
+                        }).join('')}</tr>`).join('')}
+                    </tbody>
+                </table>
+            </div>`;
+    }
+
+    function renderSheet(rows) {
+        const container = document.querySelector('.container');
+        const sections = splitIntoSections(rows);
+        if (!sections.length) throw new Error('No readable rows were found in the Google Sheet.');
+
+        const firstValues = sections.flatMap(section => section.rows).flat().filter(Boolean).slice(0, 4);
+        document.querySelectorAll('.sticky-card .metric').forEach((metric, index) => {
+            if (firstValues[index]) metric.textContent = firstValues[index];
+        });
+        const ticker = document.querySelector('.ticker');
+        if (ticker) {
+            const tickerItems = firstValues.concat(firstValues).map(value => `<span>${escapeHtml(value)}</span>`).join('');
+            if (tickerItems) ticker.innerHTML = tickerItems;
+        }
+
+        container.innerHTML = `
+            <h2>2026 Operations Dashboard</h2>
+            <div class="live-status">Live from Google Sheet <span class="sheet-updated">updated ${new Date().toLocaleString()}</span></div>
+            <div class="flex-grid">
+                ${sections.map(section => `
+                    <div class="sheet-section">
+                        <div class="sheet-title">${escapeHtml(section.title)}</div>
+                        ${renderTable(section.rows)}
+                    </div>
+                `).join('')}
+            </div>`;
+    }
+
+    function gvizUrl() {
+        return SHEET_CSV_URL
+            .replace('/pub?gid=', '/gviz/tq?gid=')
+            .replace('&single=true&output=csv', '&tqx=out:json;responseHandler:handleGoogleSheetData');
+    }
+
+    function rowsFromGoogleTable(table) {
+        const headers = (table.cols || []).map(col => col.label || col.id || '');
+        const rows = (table.rows || []).map(row => (row.c || []).map(cell => {
+            if (!cell) return '';
+            return cell.f || cell.v || '';
+        }));
+        return [headers].concat(rows).filter(row => row.some(Boolean));
+    }
+
+    function loadSheetWithGoogleScript() {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            const timeout = setTimeout(() => {
+                delete window.handleGoogleSheetData;
+                script.remove();
+                reject(new Error('Google Sheet script load timed out.'));
+            }, 12000);
+
+            window.handleGoogleSheetData = payload => {
+                clearTimeout(timeout);
+                delete window.handleGoogleSheetData;
+                script.remove();
+                if (!payload || !payload.table) {
+                    reject(new Error('Google Sheet response was empty.'));
+                    return;
+                }
+                resolve(rowsFromGoogleTable(payload.table));
+            };
+
+            script.onerror = () => {
+                clearTimeout(timeout);
+                delete window.handleGoogleSheetData;
+                script.remove();
+                reject(new Error('Google Sheet script could not load.'));
+            };
+            script.src = gvizUrl() + '&cacheBust=' + Date.now();
+            document.head.appendChild(script);
+        });
+    }
+
+    async function loadSheetDashboard() {
+        try {
+            let rows;
+            try {
+                const response = await fetch(SHEET_CSV_URL + '&cacheBust=' + Date.now(), { cache: 'no-store' });
+                if (!response.ok) throw new Error('Google Sheet returned ' + response.status);
+                rows = parseCsv(await response.text());
+            } catch (fetchError) {
+                rows = await loadSheetWithGoogleScript();
+            }
+            renderSheet(rows);
+        } catch (error) {
+            const container = document.querySelector('.container');
+            const warning = document.createElement('div');
+            warning.className = 'sheet-empty';
+            warning.textContent = 'Could not load the live Google Sheet, so this page is showing the last saved dashboard. Check that the sheet is still published to web as CSV.';
+            container.prepend(warning);
+            console.error(error);
+        }
+    }
+
+    loadSheetDashboard();
 </script>
 </body>
 </html>
