@@ -253,8 +253,20 @@
         }[char]));
     }
 
+    function looksLikeCode(value) {
+        const text = String(value || '').trim();
+        return /^<[^>]+>/i.test(text)
+            || /^<\/?[a-z][^>]*>/i.test(text)
+            || /^--[\w-]+\s*:/.test(text)
+            || /<\/?(html|head|body|style|script|meta|link|div|table|tr|td|th)\b/i.test(text)
+            || /^(rel=|family=|\.|#|@media|:root|\*|\})/i.test(text)
+            || /[{}]/.test(text);
+    }
+
     function usefulCells(row) {
-        return row.map(cell => String(cell || '').trim()).filter(Boolean);
+        return row
+            .map(cell => String(cell || '').trim())
+            .filter(cell => cell && !looksLikeCode(cell));
     }
 
     function looksLikeHeading(cells) {
@@ -277,12 +289,18 @@
             }
         });
         if (current.rows.length) sections.push(current);
-        return sections;
+        return sections.filter(section => {
+            const rowsWithTwoCells = section.rows.filter(row => row.length >= 2).length;
+            return rowsWithTwoCells >= 1 && !looksLikeCode(section.title);
+        });
     }
 
     function renderTable(rows) {
-        const header = rows[0] || [];
-        const body = rows.slice(1);
+        const cleanRows = rows
+            .map(row => row.filter(cell => !looksLikeCode(cell)))
+            .filter(row => row.some(Boolean));
+        const header = cleanRows[0] || [];
+        const body = cleanRows.slice(1).filter(row => row.some(Boolean));
         return `
             <div class="table-responsive">
                 <table>
