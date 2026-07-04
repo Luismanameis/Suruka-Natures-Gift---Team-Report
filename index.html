@@ -15,6 +15,7 @@
         .lock-box button { background: var(--green); color: var(--white); border: none; padding: 10px; border-radius: 6px; width: 100%; font-weight: 600; cursor: pointer; }
         .sticky-header { position: fixed; top: 0; left: 0; right: 0; background: rgba(11, 15, 25, 0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); z-index: 1000; padding: 10px; }
         .sticky-container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 6px; }
+        .sticky-container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 6px; }
         .sticky-card { background: var(--card); border-left: 3px solid var(--green); padding: 8px; border-radius: 6px; }
         .sticky-label { font-size: 10px; text-transform: uppercase; font-weight: 700; }
         .metric { font-size: 18px; font-weight: 700; color: var(--white); margin-top: 4px; }
@@ -39,6 +40,13 @@
         .node { background: #1e293b; padding: 8px; border-radius: 6px; margin-bottom: 6px; border-left: 3px solid var(--green); font-size: 12px; color: var(--white); }
         @keyframes stream { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(0,-50%,0); } }
         @media (max-width: 768px) { body { padding-top: 170px; } .sticky-container { grid-template-columns: repeat(2, 1fr); } .flex-grid { grid-template-columns: 1fr; } }
+        
+        /* Styled Link Box Rules */
+        .redirect-box { background: #1e293b; border: 1px solid var(--border); padding: 15px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; gap: 15px; }
+        .redirect-text { color: var(--white); font-weight: 500; font-size: 13px; }
+        .redirect-btn { background: var(--green); color: var(--white); text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: opacity 0.2s ease; display: inline-block; white-space: nowrap; }
+        .redirect-btn:hover { opacity: 0.9; }
+        @media (max-width: 600px) { .redirect-box { flex-direction: column; text-align: center; } }
     </style>
 </head>
 <body>
@@ -91,6 +99,14 @@
         </div>
     </div>
 
+    <!-- NEW REDIRECT LINK BOX -->
+    <div class="redirect-box">
+        <div class="redirect-text">
+            📋 To view <strong>Staff Tenure</strong> data and the <strong>Total Revenue from 2024 Till Date</strong>, please access the main ledger sheet.
+        </div>
+        <a href="https://tinyurl.com/SNG-Sales-Team-Till-Date" target="_blank" class="redirect-btn">Staff Till Date ↗</a>
+    </div>
+
     <div class="grid">
         <div class="card">Digital - IG<div class="metric rev">₦715.0k</div></div>
         <div class="card">Digital - Tik Tok<div class="metric rev">₦0.00</div></div>
@@ -122,7 +138,7 @@
             </div>
         </div>
         <div>
-            <h3>🏁 Segment 5 & 6 — Individuals Month & Annual Target Status</h3>
+            <h3>🏢 Segment 5 & 6 — Individuals Month & Annual Target Status</h3>
             <div class="table-responsive">
                 <table>
                     <thead><tr><th>Staff</th><th>Month Cust / Unit</th><th>2026 YTD Revenue</th><th>Target</th><th>% Realized</th></tr></thead>
