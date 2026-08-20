@@ -3,86 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 Operations Dashboard</title>
+    <title>2026 Operations & Financial Dashboard</title>
     <style>
-        :root { --bg: #0b0f19; --card: #111827; --border: #1e293b; --white: #f8fafc; --red: #f43f5e; --green: #10b981; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-size: 13px; font-family: system-ui, sans-serif; }
-        body { background: var(--bg); color: #94a3b8; padding: 130px 12px 20px 12px; }
-        .container { max-width: 1300px; margin: 0 auto; }
+        :root {
+            --bg: #0b0f19;
+            --card: #111827;
+            --border: #1e293b;
+            --white: #f8fafc;
+            --red: #f43f5e;
+            --green: #10b981;
+            --muted: #94a3b8;
+            --accent: #3b82f6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-size: 13px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background: var(--bg); color: var(--muted); padding: 130px 14px 30px 14px; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        
+        /* Auth & Overlay Framework */
         #lock-screen, .modal-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; justify-content: center; align-items: center; }
-        .lock-box, .modal-content { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 12px; text-align: center; max-width: 340px; width: 100%; }
-        .modal-overlay { background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); z-index: 10000; display: none; }
-        .modal-content { max-width: 500px; }
-        input { background: #070a12; border: 1px solid var(--border); color: var(--white); padding: 10px; border-radius: 6px; width: 100%; margin: 10px 0; text-align: center; }
-        button, .modal-btn { background: var(--green); color: var(--white); border: none; padding: 11px; border-radius: 6px; width: 100%; font-weight: 700; cursor: pointer; text-transform: uppercase; }
-        .sticky-header { position: fixed; top: 0; left: 0; right: 0; background: rgba(11, 15, 25, 0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); z-index: 1000; padding: 10px; }
-        .sticky-container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 6px; }
-        .sticky-card { background: var(--card); border-left: 3px solid var(--green); padding: 8px; border-radius: 6px; }
-        .metric { font-size: 18px; font-weight: 700; color: var(--green); margin-top: 4px; }
-        .red { color: var(--red) !important; } .grn { color: var(--green) !important; } .wht { color: var(--white) !important; }
-        .ticker-wrap { background: #141b2d; border: 1px solid var(--border); overflow: hidden; padding: 6px; border-radius: 4px; }
+        .lock-box, .modal-content { background: var(--card); border: 1px solid var(--border); padding: 28px; border-radius: 12px; text-align: center; max-width: 360px; width: 100%; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); }
+        .modal-overlay { background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); z-index: 10000; display: none; }
+        .modal-content { max-width: 480px; }
+        input { background: #070a12; border: 1px solid var(--border); color: var(--white); padding: 12px; border-radius: 6px; width: 100%; margin: 12px 0; text-align: center; font-size: 14px; outline: none; }
+        input:focus { border-color: var(--accent); }
+        button, .modal-btn { background: var(--green); color: var(--white); border: none; padding: 12px; border-radius: 6px; width: 100%; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: opacity 0.2s; }
+        button:hover { opacity: 0.9; }
+
+        /* Fixed Top Telemetry Header */
+        .sticky-header { position: fixed; top: 0; left: 0; right: 0; background: rgba(11, 15, 25, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 1000; padding: 10px 14px; }
+        .sticky-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 8px; }
+        .sticky-card { background: var(--card); border-left: 3px solid var(--green); padding: 8px 12px; border-radius: 6px; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .sticky-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+        .metric { font-size: 18px; font-weight: 700; color: var(--green); margin-top: 2px; }
+
+        /* Universal Color System */
+        .red { color: var(--red) !important; }
+        .grn { color: var(--green) !important; }
+        .wht { color: var(--white) !important; }
+
+        /* Scrolling Ticker Engine */
+        .ticker-wrap { background: #141b2d; border: 1px solid var(--border); overflow: hidden; padding: 6px 0; border-radius: 4px; }
         .ticker { display: inline-block; white-space: nowrap; animation: marquee 35s linear infinite; }
-        .ticker span { margin-right: 40px; font-weight: 600; color: #e2e8f0; }
+        .ticker span { margin-right: 40px; font-weight: 600; color: #e2e8f0; font-size: 12px; }
         @keyframes marquee { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-50%,0,0); } }
-        h3 { color: var(--white); font-size: 12px; margin: 18px 0 8px 0; text-transform: uppercase; font-weight: 700; border-left: 3px solid var(--green); padding-left: 6px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 15px; }
+
+        /* Typography & Layout Scaffolding */
+        h2 { color: var(--white); font-size: 22px; margin-bottom: 16px; font-weight: 800; tracking: -0.5px; }
+        h3 { color: var(--red); font-size: 12px; margin: 20px 0 10px 0; text-transform: uppercase; font-weight: 800; letter-spacing: 0.6px; display: flex; align-items: center; gap: 6px; }
+        h3::before { content: ""; display: inline-block; width: 4px; height: 12px; background: var(--red); border-radius: 2px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px; }
         .card { background: var(--card); border: 1px solid var(--border); padding: 12px; border-radius: 8px; font-weight: bold; }
-        .table-responsive { width: 100%; overflow-x: auto; margin-bottom: 15px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); }
-        table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid rgba(30, 41, 59, 0.5); }
-        th { background: #1e293b; color: var(--white); font-size: 11px; text-transform: uppercase; }
-        .flex-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(580px, 1fr)); gap: 15px; }
-        @media (max-width: 768px) { body { padding-top: 170px; } .sticky-container { grid-template-columns: repeat(2, 1fr); } .flex-grid { grid-template-columns: 1fr; } }
+        .card .title { color: var(--muted); font-size: 11px; text-transform: uppercase; margin-bottom: 4px; }
+        
+        .table-responsive { width: 100%; overflow-x: auto; margin-bottom: 18px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); }
+        table { width: 100%; border-collapse: collapse; min-width: 650px; text-align: left; }
+        th, td { padding: 9px 12px; border-bottom: 1px solid rgba(30, 41, 59, 0.6); white-space: nowrap; }
+        th { background: #1e293b; color: var(--white); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .flex-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(620px, 1fr)); gap: 16px; }
+        
+        @media (max-width: 800px) {
+            body { padding-top: 180px; }
+            .sticky-container { grid-template-columns: repeat(2, 1fr); }
+            .flex-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
+<!-- Operational Auth Screen -->
 <div id="lock-screen">
     <div class="lock-box">
-        <h3>Operational Access</h3>
-        <input type="password" id="passkey" placeholder="Enter Access Code" onkeydown="if(event.key==='Enter') val()">
-        <button onclick="val()">Verify</button>
-        <div id="err" style="color:var(--red); display:none; margin-top:10px; font-weight:bold;">Invalid Password</div>
+        <h3 style="margin-top:0; color:var(--white);">Enterprise Security</h3>
+        <p style="margin-bottom:10px; font-size:12px;">Authentication Required</p>
+        <input type="password" id="passkey" placeholder="Enter Access Password" onkeydown="if(event.key==='Enter') val()">
+        <button onclick="val()">Authorize Access</button>
+        <div id="err" style="color:var(--red); display:none; margin-top:12px; font-weight:bold; font-size:12px;">Invalid Security Credentials</div>
     </div>
 </div>
 
+<!-- Modal Infrastructure Directive -->
 <div id="redirect-modal" class="modal-overlay">
     <div class="modal-content">
-        <h3 style="margin-top:0; border:none; color:var(--white); font-size:15px;">📈 Central Ledger System Access</h3>
-        <p style="margin: 15px 0; line-height: 1.5; text-align: justify;">Historical workforce metrics and tenure analytics from 2024 to date are managed via the external framework instance.</p>
-        <button class="modal-btn" onclick="window.open('https://tinyurl.com/SNG-Sales-Team-Till-Date','_blank');closeM()">Click here to see staff tenure and figures for 2024 till date ↗</button>
-        <button onclick="closeM()" style="background:transparent; color:#64748b; margin-top:12px; text-decoration:underline; font-size:11px;">Dismiss Infrastructure Notice</button>
+        <h3 style="margin-top:0; border:none; color:var(--white); font-size:15px; padding:0;">📈 Central Ledger Portal</h3>
+        <p style="margin: 15px 0; line-height: 1.6; text-align: justify; color: var(--muted);">Historical workforce metrics, archived team structures, and tenure analytics covering 2024 to date are indexed on the extended portal framework.</p>
+        <button class="modal-btn" onclick="window.open('https://tinyurl.com/SNG-Sales-Team-Till-Date','_blank');closeM()">Access Historical Ledger (2024 - Present) ↗</button>
+        <button onclick="closeM()" style="background:transparent; color:var(--muted); margin-top:10px; text-decoration:underline; font-size:11px; cursor:pointer;">Continue to Current Operations</button>
     </div>
 </div>
 
+<!-- Top Fixed Metrics Bar -->
 <div class="sticky-header">
     <div class="sticky-container">
-        <div class="sticky-card"><div>AUGUST MONTH GROSS SUMMARY</div><div class="metric">₦30.20m</div></div>
-        <div class="sticky-card"><div>TOTAL PIPELINE BASE</div><div class="metric">3,862 Cust</div></div>
-        <div class="sticky-card"><div>RETURN COHORT %</div><div class="metric">56.22%</div></div>
-        <div class="sticky-card"><div>TODAY'S FLASH INTAKE</div><div class="metric">₦1.17m</div></div>
+        <div class="sticky-card"><div class="label">AUGUST GROSS REVENUE</div><div class="metric">₦33.99m</div></div>
+        <div class="sticky-card"><div class="label">PIPELINE TOTAL CUSTOMERS</div><div class="metric">464 Cust</div></div>
+        <div class="sticky-card"><div class="label">RETURN COHORT %</div><div class="metric">57.54%</div></div>
+        <div class="sticky-card"><div class="label">TODAY'S FLASH INTAKE</div><div class="metric">₦1.83m</div></div>
     </div>
-    <div class="ticker-wrap"><div class="ticker"><span>📈 August Gross Revenue: ₦30.20m</span><span>⚡ Pipeline Unique Customers: 3,862</span><span>🔄 Return Rate: 56.22%</span><span>🎯 Cost Per New Customer: ₦9,398.94</span><span>📊 Today CS Metrics: 0 Cust / 0.00% Satisfied</span><span>📈 August Gross Revenue: ₦30.20m</span></div></div>
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span>📈 August Gross Revenue: ₦33.99m</span>
+            <span>⚡ Total Pipeline Customers: 464</span>
+            <span>🔄 Return Cohort Rate: 57.54%</span>
+            <span>🎯 Cost Per New Customer: ₦9,393.94</span>
+            <span>📊 CS Today: 47 Contacted / 97.87% Satisfied</span>
+            <span>📈 August Gross Revenue: ₦33.99m</span>
+            <span>⚡ Total Pipeline Customers: 464</span>
+            <span>🔄 Return Cohort Rate: 57.54%</span>
+        </div>
+    </div>
 </div>
 
 <div class="container">
-    <h2 style="color:var(--white); font-size:20px; margin-bottom:15px;">2026 Operations Dashboard</h2>
-    
-    <div style="background: rgba(16,185,129,0.08); border: 2px solid var(--green); padding: 12px; border-radius: 8px; margin-bottom: 15px;">
-        <h3 style="margin-top:0; color:var(--green)">🌍 REGIONAL ZONE TARGET RUN-RATES (2026 YTD)</h3>
+    <h2>2026 Operations & Performance Executive Dashboard</h2>
+
+    <!-- Regional Zones Overview -->
+    <div style="background: rgba(16,185,129,0.04); border: 1px solid rgba(16,185,129,0.3); padding: 14px; border-radius: 8px; margin-bottom: 18px;">
+        <h3 style="margin-top:0;">🌍 REGIONAL HUB TARGET PERFORMANCE (2026 YTD)</h3>
         <div class="table-responsive" style="margin:0;">
             <table>
-                <thead><tr><th>Zone Hub Location</th><th>2026 Annual Target</th><th>2026 Achieved YTD</th><th>% Achieved Status</th></tr></thead>
+                <thead>
+                    <tr><th>Zone Hub Location</th><th>2026 Annual Target</th><th>2026 Achieved YTD</th><th>% Achieved Status</th></tr>
+                </thead>
                 <tbody>
-                    <tr><td class="wht" style="font-weight:bold;">LAGOS HUB</td><td class="grn">₦500.00m</td><td class="grn">₦190.02m</td><td class="red" style="font-weight:bold;">38.00%</td></tr>
-                    <tr><td class="wht" style="font-weight:bold;">BENIN HUB</td><td class="grn">₦300.00m</td><td class="grn">₦114.56m</td><td class="red" style="font-weight:bold;">38.19%</td></tr>
-                    <tr><td class="wht" style="font-weight:bold;">ABUJA HUB</td><td class="grn">₦200.00m</td><td class="grn">₦87.41m</td><td class="red" style="font-weight:bold;">43.71%</td></tr>
+                    <tr><td class="wht" style="font-weight:bold;">LAGOS HUB</td><td class="grn">₦500.00m</td><td class="grn">₦192.21m</td><td class="red" style="font-weight:bold;">38.44%</td></tr>
+                    <tr><td class="wht" style="font-weight:bold;">BENIN HUB</td><td class="grn">₦300.00m</td><td class="grn">₦115.94m</td><td class="red" style="font-weight:bold;">38.65%</td></tr>
+                    <tr><td class="wht" style="font-weight:bold;">ABUJA HUB</td><td class="grn">₦200.00m</td><td class="grn">₦87.62m</td><td class="red" style="font-weight:bold;">43.81%</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- FOCUS ON AD SEGMENT -->
+    <!-- Focus On Ad Monthly Financial Engine -->
     <div>
         <h3>🎯 Focus On Ad — 2026 Monthly Breakdown</h3>
         <div class="table-responsive">
@@ -95,16 +150,18 @@
         </div>
     </div>
 
+    <!-- Digital Inflow Distribution Cards -->
     <div class="grid">
-        <div class="card">Digital - IG <div class="metric">₦8.38m</div></div>
-        <div class="card">Digital - Tik Tok <div class="metric">₦0.00</div></div>
-        <div class="card">Digital - Website <div class="metric">₦100.80k</div></div>
-        <div class="card">Digital - Facebook <div class="metric">₦1.00m</div></div>
-        <div class="card">Digital - Whatsapp <div class="metric">₦320.20k</div></div>
-        <div class="card">Digital - Landing <div class="metric">₦689.80k</div></div>
-        <div class="card" style="border-color:var(--green)">TOTAL FLOW <div class="metric">₦10.49m</div></div>
+        <div class="card"><div class="title">Digital - IG</div><div class="metric">₦9.08m</div></div>
+        <div class="card"><div class="title">Digital - Tik Tok</div><div class="metric">₦0.00</div></div>
+        <div class="card"><div class="title">Digital - Website</div><div class="metric">₦100.80k</div></div>
+        <div class="card"><div class="title">Digital - Facebook</div><div class="metric">₦1.00m</div></div>
+        <div class="card"><div class="title">Digital - Whatsapp</div><div class="metric">₦791.80k</div></div>
+        <div class="card"><div class="title">Digital - Landing Page</div><div class="metric">₦723.40k</div></div>
+        <div class="card" style="border-color:var(--green);"><div class="title">TOTAL FLOW</div><div class="metric">₦11.69m</div></div>
     </div>
 
+    <!-- Staff Projections Matrix -->
     <div>
         <h3>📋 Staff Profile & Revenue Projections Matrix</h3>
         <div class="table-responsive">
@@ -113,38 +170,46 @@
                     <tr><th>Staff Profile Identity</th><th>Daily Average</th><th>Projected Remainder Revenue</th><th>Projected End of Year Revenue</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td class="wht">Mary Nsikan Inyang</td><td class="grn">₦741.73k</td><td class="grn">₦71.21m</td><td class="grn" style="font-weight:bold;">₦193.59m</td></tr>
-                    <tr><td class="wht">Atanda Faith Boluwatife</td><td class="grn">₦434.95k</td><td class="grn">₦41.75m</td><td class="grn" style="font-weight:bold;">₦113.52m</td></tr>
-                    <tr><td class="wht">Anthony Racheal Chat</td><td class="grn">₦236.36k</td><td class="grn">₦22.69m</td><td class="grn" style="font-weight:bold;">₦61.69m</td></tr>
-                    <tr><td class="wht">Odubanjo Elizabeth Omolewa</td><td class="grn">₦207.92k</td><td class="grn">₦19.96m</td><td class="grn" style="font-weight:bold;">₦54.27m</td></tr>
-                    <tr><td class="wht">Ogunleye Ifeoluwa Susan</td><td class="grn">₦207.41k</td><td class="grn">₦19.91m</td><td class="grn" style="font-weight:bold;">₦54.13m</td></tr>
-                    <tr><td class="wht">Jaisri Nwamaka Agunobi</td><td class="grn">₦201.40k</td><td class="grn">₦19.33m</td><td class="grn" style="font-weight:bold;">₦52.57m</td></tr>
-                    <tr><td class="wht">Ehanire Divine Oghogho</td><td class="grn">₦162.28k</td><td class="grn">₦15.58m</td><td class="grn" style="font-weight:bold;">₦42.36m</td></tr>
-                    <tr><td class="wht">Fidelia Ene Paul</td><td class="grn">₦102.75k</td><td class="grn">₦9.86m</td><td class="grn" style="font-weight:bold;">₦14.28m</td></tr>
-                    <tr><td class="wht">Chioma Joy Okereafor</td><td class="grn">₦66.94k</td><td class="grn">₦6.43m</td><td class="grn" style="font-weight:bold;">₦7.97m</td></tr>
+                    <tr><td class="wht">Mary Nsikan Inyang</td><td class="grn">₦747.52k</td><td class="grn">₦71.01m</td><td class="grn" style="font-weight:bold;">₦195.10m</td></tr>
+                    <tr><td class="wht">Atanda Faith Boluwatife</td><td class="grn">₦437.78k</td><td class="grn">₦41.59m</td><td class="grn" style="font-weight:bold;">₦114.26m</td></tr>
+                    <tr><td class="wht">Anthony Racheal Chat</td><td class="grn">₦236.29k</td><td class="grn">₦22.45m</td><td class="grn" style="font-weight:bold;">₦61.67m</td></tr>
+                    <tr><td class="wht">Odubanjo Elizabeth Omolewa</td><td class="grn">₦207.70k</td><td class="grn">₦19.73m</td><td class="grn" style="font-weight:bold;">₦54.21m</td></tr>
+                    <tr><td class="wht">Ogunleye Ifeoluwa Susan</td><td class="grn">₦206.16k</td><td class="grn">₦19.59m</td><td class="grn" style="font-weight:bold;">₦53.81m</td></tr>
+                    <tr><td class="wht">Jaisri Nwamaka Agunobi</td><td class="grn">₦203.07k</td><td class="grn">₦19.29m</td><td class="grn" style="font-weight:bold;">₦53.00m</td></tr>
+                    <tr><td class="wht">Ehanire Divine Oghogho</td><td class="grn">₦161.77k</td><td class="grn">₦15.37m</td><td class="grn" style="font-weight:bold;">₦42.22m</td></tr>
+                    <tr><td class="wht">Fidelia Ene Paul</td><td class="grn">₦100.42k</td><td class="grn">₦9.54m</td><td class="grn" style="font-weight:bold;">₦13.96m</td></tr>
+                    <tr><td class="wht">Chioma Joy Okereafor</td><td class="grn">₦73.73k</td><td class="grn">₦7.00m</td><td class="grn" style="font-weight:bold;">₦8.77m</td></tr>
                     <tr style="font-weight:bold; background:#1e293b;">
-                        <td class="wht">PROJECTION MATRIX TOTALS</td><td class="grn">₦2.36m</td><td class="grn">₦226.73m</td><td class="grn">₦594.38m</td>
+                        <td class="wht">PROJECTION MATRIX TOTALS</td><td class="grn">₦2.37m</td><td class="grn">₦225.57m</td><td class="grn">₦597.01m</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
+    <!-- Row 1: Today's Rep Flash & Monthly Targets -->
     <div class="flex-grid">
         <div>
             <h3>⚡ Segment 2 — Flash Today Rep Metrics</h3>
             <div class="table-responsive">
-                <table><thead><tr><th>Rep Name</th><th>Today Cust / Rev</th><th>Units Sold</th></tr></thead><tbody id="today-table"></tbody></table>
+                <table>
+                    <thead><tr><th>Rep Name</th><th>Today Cust / Rev</th><th>Units Sold</th></tr></thead>
+                    <tbody id="today-table"></tbody>
+                </table>
             </div>
         </div>
         <div>
             <h3>📈 Segment 14 — Individual Month Sales Targets</h3>
             <div class="table-responsive">
-                <table><thead><tr><th>Rep Name</th><th>Target For This Month</th><th>Achieved MTD</th><th>% Target Status</th></tr></thead><tbody id="month-target-table"></tbody></table>
+                <table>
+                    <thead><tr><th>Rep Name</th><th>Target For This Month</th><th>Achieved MTD</th><th>% Target Status</th></tr></thead>
+                    <tbody id="month-target-table"></tbody>
+                </table>
             </div>
         </div>
     </div>
 
+    <!-- Row 2: Operational Units & Monthly Performance -->
     <div class="flex-grid">
         <div>
             <h3>🏢 Segment 3 & 4 — Structures & Zone Hubs Breakdown</h3>
@@ -152,12 +217,12 @@
                 <table>
                     <thead><tr><th>Breakdown Category</th><th>Net Revenue</th><th>Customers</th><th>Volume Load</th><th>% Contribution</th></tr></thead>
                     <tbody>
-                        <tr><td>Sales Team Department</td><td class="grn">₦14.54m</td><td>153 Customers</td><td>1,178 Units</td><td class="red">48.16%</td></tr>
-                        <tr><td>Digital Marketer Department</td><td class="grn">₦10.31m</td><td>206 Customers</td><td>1,324 Units</td><td class="red">34.13%</td></tr>
-                        <tr><td>Customer Care Department</td><td class="grn">₦5.35m</td><td>78 Customers</td><td>603 Units</td><td class="red">17.71%</td></tr>
-                        <tr style="border-top:2px solid var(--border)"><td>Lagos Zone Hub</td><td class="grn">₦14.48m</td><td>188 Customers</td><td>1,395 Units</td><td class="red">47.95%</td></tr>
-                        <tr><td>Benin Zone Hub</td><td class="grn">₦7.68m</td><td>137 Customers</td><td>890 Units</td><td class="red">25.42%</td></tr>
-                        <tr><td>Abuja Zone Hub</td><td class="grn">₦8.23m</td><td>122 Customers</td><td>839 Units</td><td class="red">27.24%</td></tr>
+                        <tr><td>Sales Team Department</td><td class="grn">₦16.81m</td><td>164 Customers</td><td>1,285 Units</td><td class="red">49.44%</td></tr>
+                        <tr><td>Digital Marketer Department</td><td class="grn">₦11.51m</td><td>221 Customers</td><td>1,454 Units</td><td class="red">33.86%</td></tr>
+                        <tr><td>Customer Care Department</td><td class="grn">₦5.67m</td><td>82 Customers</td><td>607 Units</td><td class="red">16.70%</td></tr>
+                        <tr style="border-top:2px solid var(--border);"><td>Lagos Zone Hub</td><td class="grn">₦16.68m</td><td>205 Customers</td><td>1,512 Units</td><td class="red">49.06%</td></tr>
+                        <tr><td>Benin Zone Hub</td><td class="grn">₦9.07m</td><td>149 Customers</td><td>989 Units</td><td class="red">26.67%</td></tr>
+                        <tr><td>Abuja Zone Hub</td><td class="grn">₦8.43m</td><td>125 Customers</td><td>864 Units</td><td class="red">24.81%</td></tr>
                         <tr><td>Ghana Outlet Base</td><td>GHS 0.00</td><td>0 Customers</td><td>0 Units</td><td>0.00%</td></tr>
                     </tbody>
                 </table>
@@ -166,38 +231,49 @@
         <div>
             <h3>🏢 Segment 5 — Individuals This Month Run Metrics</h3>
             <div class="table-responsive">
-                <table><thead><tr><th>Staff Officer</th><th>Monthly Revenue</th><th>Customers</th><th>Unit Vol</th></tr></thead><tbody id="month-run-table"></tbody></table>
+                <table>
+                    <thead><tr><th>Staff Officer</th><th>Monthly Revenue</th><th>Customers</th><th>Unit Vol</th></tr></thead>
+                    <tbody id="month-run-table"></tbody>
+                </table>
             </div>
         </div>
     </div>
 
+    <!-- Row 3: Lifetime 2026 Trackers & Funnel Tracking -->
     <div class="flex-grid">
         <div>
             <h3>🏢 Segment 6 — Individuals 2026 Lifetime Targets Tracker</h3>
             <div class="table-responsive">
-                <table><thead><tr><th>Staff Officer</th><th>2026 Revenue YTD</th><th>% From Target</th><th>Target Assignment</th></tr></thead><tbody id="lifetime-table"></tbody></table>
+                <table>
+                    <thead><tr><th>Staff Officer</th><th>2026 Revenue YTD</th><th>% From Target</th><th>Target Assignment</th></tr></thead>
+                    <tbody id="lifetime-table"></tbody>
+                </table>
             </div>
         </div>
         <div>
-            <h3>⚡ Segment 12 — Funnel Conversions & Historic Day Highs</h3>
+            <h3>⚡ Segment 12 — Funnel Conversions & Lead Metrics</h3>
             <div class="table-responsive">
-                <table><thead><tr><th>Executive Name</th><th>FB (L/C)</th><th>IG (L/C)</th><th>Conversion %</th><th>Max Revenue Single Day</th></tr></thead><tbody id="funnel-table"></tbody></table>
+                <table>
+                    <thead><tr><th>Executive Name</th><th>FB (L/C)</th><th>IG (L/C)</th><th>Conversion %</th><th>Total Closed</th></tr></thead>
+                    <tbody id="funnel-table"></tbody>
+                </table>
             </div>
         </div>
     </div>
 
+    <!-- Row 4: Paid Channels & CS Retention Segment -->
     <div class="flex-grid">
         <div>
-            <h3>🎯 Segment 8 & 16 — Paid Channels & Profit Allocation Matrix</h3>
+            <h3>🎯 Segment 8 & 16 — Paid Mediums & Channel ROI</h3>
             <div class="table-responsive">
                 <table>
                     <thead><tr><th>Medium Channel</th><th>Cust</th><th>Revenue</th><th>Vol</th><th>Ad Cost</th><th>Log Cost</th><th>CPP</th><th>ROI</th></tr></thead>
                     <tbody>
-                        <tr><td>Instagram Ad</td><td>157</td><td class="grn">₦8.38m</td><td>1,032</td><td class="red">₦1.29m</td><td class="red">₦1.03m</td><td>₦14.77k</td><td class="grn">261%</td></tr>
-                        <tr><td>Facebook Ad</td><td>26</td><td class="grn">₦1.00m</td><td>141</td><td class="red">₦285.00k</td><td class="red">₦170.06k</td><td>₦17.50k</td><td class="grn">121%</td></tr>
-                        <tr><td>Landing Page</td><td>17</td><td class="grn">₦689.80k</td><td>109</td><td class="red">₦190.00k</td><td class="red">₦111.19k</td><td>₦17.72k</td><td class="grn">129%</td></tr>
-                        <tr style="background:#1e293b; font-weight:bold;"><td>Blended Paid Total</td><td>200</td><td class="grn">₦10.07m</td><td>1,282</td><td class="red">₦1.77m</td><td class="red">₦1.31m</td><td>₦15.38k</td><td class="grn">228%</td></tr>
-                        <tr><td>Organic / Others</td><td>234</td><td class="grn">₦20.13m</td><td>1,823</td><td colspan="4">Target Spend: Digital <span class="red">₦8.70k</span> / Combined: <span class="red">₦9.45k</span></td></tr>
+                        <tr><td>Instagram Ad</td><td>169</td><td class="grn">₦9.08m</td><td>1,119</td><td class="red">₦1.36m</td><td class="red">₦1.11m</td><td>₦14.59k</td><td class="grn">268%</td></tr>
+                        <tr><td>Facebook Ad</td><td>26</td><td class="grn">₦1.00m</td><td>141</td><td class="red">₦300.00k</td><td class="red">₦170.06k</td><td>₦18.08k</td><td class="grn">114%</td></tr>
+                        <tr><td>Landing Page</td><td>18</td><td class="grn">₦723.40k</td><td>115</td><td class="red">₦200.00k</td><td class="red">₦117.73k</td><td>₦17.65k</td><td class="grn">128%</td></tr>
+                        <tr style="background:#1e293b; font-weight:bold;"><td>Blended Paid Total</td><td>213</td><td class="grn">₦10.80m</td><td>1,375</td><td class="red">₦1.86m</td><td class="red">₦1.39m</td><td>₦15.27k</td><td class="grn">232%</td></tr>
+                        <tr><td>Organic / Others</td><td>251</td><td class="grn">₦23.19m</td><td>1,971</td><td colspan="4">Cost Per New Customer: <span class="red">₦9,393.94</span></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -208,51 +284,75 @@
                 <table>
                     <thead><tr><th>Profile Window</th><th>Satisfied %</th><th>Unsatisfied %</th><th>Contacts</th><th>CS Pipeline Revenue</th></tr></thead>
                     <tbody>
-                        <tr><td>19/08 Today (Lewa/Ray)</td><td class="red">0.00%</td><td class="red">0.00%</td><td>0 Cust</td><td class="grn">₦0.00</td></tr>
-                        <tr><td>2026 YTD Profile</td><td class="grn">97.93%</td><td class="red">2.07%</td><td>6,774 Cust</td><td class="grn">₦0.00</td></tr>
+                        <tr><td>20/08 Today (Ray)</td><td class="grn">97.87%</td><td class="red">2.13%</td><td>47 Cust</td><td class="grn">₦0.00</td></tr>
+                        <tr><td>2026 YTD Profile</td><td class="grn">97.93%</td><td class="red">2.07%</td><td>6,821 Cust</td><td class="grn">₦69.85m</td></tr>
                         <tr><td>2025 Profile</td><td class="grn">96.10%</td><td class="red">3.90%</td><td>14,367 Cust</td><td class="grn">₦90.94m</td></tr>
                         <tr><td>2024 Profile</td><td class="grn">96.68%</td><td class="red">3.32%</td><td>8,437 Cust</td><td class="grn">₦26.52m</td></tr>
                         <tr><td>2023 Profile</td><td class="grn">97.42%</td><td class="red">2.58%</td><td>5,687 Cust</td><td class="grn">₦9.03m</td></tr>
-                        <tr style="font-weight:bold; background:rgba(16,185,129,0.05)"><td>CUMULATIVE SYSTEM</td><td class="grn">97.02%</td><td class="red">2.98%</td><td>35,265 Cust</td><td class="grn">₦126.49m</td></tr>
+                        <tr style="font-weight:bold; background:rgba(16,185,129,0.05)"><td>CUMULATIVE SYSTEM</td><td class="grn">97.02%</td><td class="red">2.98%</td><td>35,312 Cust</td><td class="grn">₦196.34m</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <div>
-        <h3>📊 LTV Cohort Profiles & Walk-In Distribution Trends</h3>
-        <div class="table-responsive">
-            <table>
-                <thead><tr><th>Financial Variables</th><th>2026 Profile Tracking YTD</th><th>2025 Complete Profile</th></tr></thead>
-                <tbody>
-                    <tr><td>Unique Transacting Base / Orders</td><td>3,862 / 5,427 Total Orders</td><td>13,530 / 17,636 Total Orders</td></tr>
-                    <tr><td>Sponsored Capital Costs (Ad+Log)</td><td class="red">₦58.72m (₦30.84m / ₦27.87m)</td><td class="red">₦221.56m</td></tr>
-                    <tr><td>Customer CAC Metrics</td><td class="red">₦15.20k</td><td class="red">₦16.38k</td></tr>
-                    <tr><td>Average Order Value (AOV)</td><td class="grn">₦72.23k</td><td class="grn">₦49.72k</td></tr>
-                    <tr><td>Purchase Frequency Coefficient</td><td>1.41 Rate</td><td>1.30 Rate</td></tr>
-                    <tr style="font-weight:bold;"><td>Calculated Lifetime Value (LTV)</td><td class="grn">₦101.50k</td><td class="grn">₦64.81k</td></tr>
-                    <tr style="border-top:1px solid var(--border)"><td>Walk-In / Depot Pick Up Ratio</td><td>335 Customers (<span class="red">8.67%</span>)</td><td>1,017 Customers (<span class="red">7.52%</span>)</td></tr>
-                </tbody>
-            </table>
+    <!-- Segment 12 Trackers & Walk-in Distributions -->
+    <div class="flex-grid">
+        <div>
+            <h3>⚡ Segment 12 — Last 5 Days Channel Breakdown</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th>Date Window</th><th>Landing Page (Rev/Cust)</th><th>Instagram (Rev/Cust)</th><th>FB & TT (Rev/Cust)</th></tr></thead>
+                    <tbody>
+                        <tr><td>20/08/2026</td><td>₦0.00 (0)</td><td class="grn">₦211.60k (4 Cust)</td><td>₦0.00 (0)</td></tr>
+                        <tr><td>19/08/2026</td><td>₦33.60k (1 Cust)</td><td class="grn">₦736.00k (15 Cust)</td><td>₦33.60k (1 Cust)</td></tr>
+                        <tr><td>18/08/2026</td><td class="grn">₦656.20k (16 Cust)</td><td class="grn">₦684.80k (16 Cust)</td><td>₦21.80k (1 Cust)</td></tr>
+                        <tr><td>17/08/2026</td><td>₦0.00 (0)</td><td class="grn">₦768.20k (13 Cust)</td><td>₦33.60k (1 Cust)</td></tr>
+                        <tr><td>16/08/2026</td><td>₦0.00 (0)</td><td class="grn">₦353.80k (7 Cust)</td><td>₦67.20k (2 Cust)</td></tr>
+                        <tr style="font-weight:bold; background:#1e293b;">
+                            <td>LAST 5 DAYS TOTAL</td><td class="grn">₦689.80k (17 Cust)</td><td class="grn">₦2.75m (55 Cust)</td><td class="grn">₦156.20k (5 Cust)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <h3>📊 LTV Cohort Profiles & Walk-In Distribution Trends</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th>Financial Variables</th><th>2026 Profile Tracking YTD</th><th>2025 Complete Profile</th></tr></thead>
+                    <tbody>
+                        <tr><td>Unique Transacting Base / Orders</td><td>3,876 / 5,460 Total Orders</td><td>13,530 / 17,636 Total Orders</td></tr>
+                        <tr><td>Sponsored Capital Costs (Ad+Log)</td><td class="red">₦59.05m (₦30.94m / ₦28.11m)</td><td class="red">₦221.56m</td></tr>
+                        <tr><td>Customer CAC Metrics</td><td class="red">₦15,234.00</td><td class="red">₦16,375.34</td></tr>
+                        <tr><td>Average Order Value (AOV)</td><td class="grn">₦72,486.02</td><td class="grn">₦49,722.00</td></tr>
+                        <tr><td>Purchase Frequency Coefficient</td><td>1.41 Rate</td><td>1.30 Rate</td></tr>
+                        <tr style="font-weight:bold;"><td>Calculated Lifetime Value (LTV)</td><td class="grn">₦102,108.78</td><td class="grn">₦64,811.00</td></tr>
+                        <tr style="border-top:1px solid var(--border)"><td>Walk-In / Office Pick Up Ratio</td><td>336 Customers (<span class="red">8.67%</span>)</td><td>1,017 Customers (<span class="red">7.52%</span>)</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
     const f = n => n >= 1e6 ? '₦' + (n/1e6).toFixed(2) + 'm' : n >= 1e3 ? '₦' + (n/1e3).toFixed(2) + 'k' : '₦' + n.toFixed(2);
+    
+    // Updated Team & Staff Database from Latest Log
     const reps = [
-        {n:"Bolu", tc:0, tr:0, tu:0, mt:22e6, ma:3850400, mp:"17.50%", mc:46, mu:302, ly:71766257, lp:"35.88%", lt:200e6, fbl:"-", fbc:"-", igl:"-", igc:"-", md:2808200, cv:"0.00%"},
-        {n:"Mary", tc:2, tr:253000, tu:0, mt:30e6, ma:9935600, mp:"33.12%", mc:104, mu:893, ly:122385065, lp:"40.80%", lt:300e6, fbl:"-", fbc:"-", igl:"-", igc:"-", md:2890350, cv:"0.00%"},
-        {n:"Jaya", tc:2, tr:67200, tu:0, mt:15e6, ma:2455400, mp:"16.37%", mc:44, mu:332, ly:33231540, lp:"22.15%", lt:150e6, fbl:"120 Leads", fbc:"-", igl:"183 Leads", igc:"-", md:777400, cv:"0.00%"},
-        {n:"Lewa", tc:2, tr:100800, tu:0, mt:10e6, ma:2943550, mp:"29.44%", mc:36, mu:336, ly:34307550, lp:"34.31%", lt:100e6, fbl:"-", fbc:"-", igl:"-", igc:"-", md:1065550, cv:"0.00%"},
-        {n:"Susan", tc:2, tr:303600, tu:0, mt:10e6, ma:2734800, mp:"27.35%", mc:38, mu:239, ly:34222683, lp:"34.22%", lt:100e6, fbl:"-", fbc:"-", igl:"-", igc:"-", md:1035600, cv:"0.00%"},
-        {n:"Rachel", tc:1, tr:62000, tu:0, mt:15e6, ma:3529800, mp:"23.53%", mc:64, mu:402, ly:38999730, lp:"39.00%", lt:100e6, fbl:"-", fbc:"-", igl:"-", igc:"-", md:1118346, cv:"0.00%"},
-        {n:"Divine", tc:0, tr:0, tu:0, mt:10e6, ma:1690200, mp:"16.90%", mc:35, mu:220, ly:26776800, lp:"26.78%", lt:100e6, fbl:"19 Leads", fbc:"-", igl:"217 Leads", igc:"-", md:695600, cv:"0.00%"},
-        {n:"Fidelia", tc:2, tr:100800, tu:0, mt:5e6, ma:1216800, mp:"24.34%", mc:18, mu:101, ly:4418400, lp:"8.84%", lt:50e6, fbl:"-", fbc:"-", igl:"-", igc:"-", md:378200, cv:"0.00%"},
-        {n:"Chioma", tc:6, tr:286600, tu:0, mt:5e6, ma:1539600, mp:"30.79%", mc:43, mu:254, ly:1539600, lp:"3.08%", lt:50e6, fbl:"-", fbc:"-", igl:"-", igc:"-", md:336000, cv:"0.00%"}
+        {n:"Bolu", tc:4, tr:297200, tu:0, mt:22e6, ma:4755200, mp:"21.61%", mc:53, mu:385, ly:72671057, lp:"36.34%", lt:200e6, fbl:"0 Leads", fbc:"0", igl:"0 Leads", igc:"3", tc_closed:3, cv:"0.00%"},
+        {n:"Mary", tc:2, tr:995100, tu:0, mt:30e6, ma:11639500, mp:"38.80%", mc:110, mu:952, ly:124088965, lp:"41.36%", lt:300e6, fbl:"0 Leads", fbc:"0", igl:"0 Leads", igc:"2", tc_closed:2, cv:"0.00%"},
+        {n:"Jaya", tc:3, tr:224800, tu:0, mt:15e6, ma:2933200, mp:"19.55%", mc:52, mu:383, ly:33709340, lp:"22.47%", lt:150e6, fbl:"120 Leads", fbc:"12", igl:"183 Leads", igc:"37", tc_closed:49, cv:"16.17%"},
+        {n:"Lewa", tc:2, tr:170000, tu:0, mt:10e6, ma:3113550, mp:"31.14%", mc:38, mu:338, ly:34477550, lp:"34.48%", lt:100e6, fbl:"0 Leads", fbc:"0", igl:"0 Leads", igc:"0", tc_closed:0, cv:"0.00%"},
+        {n:"Susan", tc:0, tr:0, tu:0, mt:10e6, ma:2734800, mp:"27.35%", mc:38, mu:239, ly:34222683, lp:"34.22%", lt:100e6, fbl:"0 Leads", fbc:"1", igl:"0 Leads", igc:"30", tc_closed:31, cv:"0.00%"},
+        {n:"Rachel", tc:0, tr:0, tu:0, mt:15e6, ma:3754800, mp:"25.03%", mc:67, mu:405, ly:39224730, lp:"39.22%", lt:100e6, fbl:"0 Leads", fbc:"0", igl:"0 Leads", igc:"0", tc_closed:0, cv:"0.00%"},
+        {n:"Divine", tc:1, tr:77200, tu:0, mt:10e6, ma:1767400, mp:"17.67%", mc:36, mu:232, ly:26854000, lp:"26.85%", lt:100e6, fbl:"19 Leads", fbc:"7", igl:"217 Leads", igc:"26", tc_closed:33, cv:"13.98%"},
+        {n:"Fidelia", tc:0, tr:0, tu:0, mt:5e6, ma:1216800, mp:"24.34%", mc:18, mu:101, ly:4418400, lp:"8.84%", lt:50e6, fbl:"0 Leads", fbc:"0", igl:"0 Leads", igc:"0", tc_closed:0, cv:"0.00%"},
+        {n:"Chioma", tc:1, tr:67200, tu:0, mt:5e6, ma:1769600, mp:"35.39%", mc:47, mu:285, ly:1769600, lp:"3.54%", lt:50e6, fbl:"0 Leads", fbc:"0", igl:"0 Leads", igc:"0", tc_closed:0, cv:"0.00%"}
     ];
 
+    // Updated Monthly Focus On Ad Matrix
     const adData = [
         ["January", 6659444, 200000, 1870917.99, 8730361.99, 23156092, 14425730.01, "165.24%"],
         ["February", 4860000, 500000, 1598893.62, 6958893.62, 19599150, 12640256.38, "181.64%"],
@@ -261,21 +361,21 @@
         ["May", 1890900, 3700000, 1151367.54, 6742267.54, 16114300, 9372032.46, "139.00%"],
         ["June", 4114701, 1405000, 2015119.23, 7534820.23, 26056756, 18521935.77, "245.82%"],
         ["July", 4384000, 150000, 1431962.00, 5965962.00, 19708653, 13742691.00, "230.35%"],
-        ["August", 1767000, 180000, 846000.00, 2793000.00, 10820400, 8027400.00, "287.41%"],
+        ["August", 1860000, 180000, 891000.00, 2931000.00, 11303400, 8372400.00, "285.65%"],
         ["September", 0, 0, 0, 0, 0, 0, "0.00%"],
         ["October", 0, 0, 0, 0, 0, 0, "0.00%"],
         ["November", 0, 0, 0, 0, 0, 0, "0.00%"],
         ["December", 0, 0, 0, 0, 0, 0, "0.00%"],
-        ["TOTAL YTD", 30844745, 7120000, 12000419.08, 49965164.08, 150722101, 100756936.92, "201.70%"]
+        ["TOTAL YTD", 30937745, 7120000, 12045419.08, 50103164.08, 151205001, 101101836.92, "201.79%"]
     ];
 
     let t1="", t2="", t3="", t4="", t5="", tAd="";
     reps.forEach(r => {
-        t1 += `<tr><td>${r.n}</td><td>${r.tc} / ${f(r.tr)}</td><td>${r.tu} Units</td></tr>`;
-        t2 += `<tr><td>${r.n}</td><td>${f(r.mt)}</td><td class="grn">${f(r.ma)}</td><td class="${parseFloat(r.mp)>=50?'grn':'red'}">${r.mp}</td></tr>`;
-        t3 += `<tr><td>${r.n}</td><td class="grn">${f(r.ma)}</td><td>${r.mc} Cust</td><td>${r.mu} Units</td></tr>`;
-        t4 += `<tr><td>${r.n}</td><td class="grn">${f(r.ly)}</td><td class="${parseFloat(r.lp)>=50?'grn':'red'}">${r.lp}</td><td>${f(r.lt)}</td></tr>`;
-        t5 += `<tr><td>${r.n}</td><td>${r.fbl}/${r.fbc}</td><td>${r.igl}/${r.igc}</td><td class="${parseFloat(r.cv)>0?'grn':'red'}">${r.cv}</td><td class="grn">${f(r.md)}</td></tr>`;
+        t1 += `<tr><td class="wht">${r.n}</td><td class="grn">${r.tc} Cust / ${f(r.tr)}</td><td>-</td></tr>`;
+        t2 += `<tr><td class="wht">${r.n}</td><td>${f(r.mt)}</td><td class="grn">${f(r.ma)}</td><td class="${parseFloat(r.mp)>=50?'grn':'red'}">${r.mp}</td></tr>`;
+        t3 += `<tr><td class="wht">${r.n}</td><td class="grn">${f(r.ma)}</td><td>${r.mc} Cust</td><td>${r.mu} Units</td></tr>`;
+        t4 += `<tr><td class="wht">${r.n}</td><td class="grn">${f(r.ly)}</td><td class="${parseFloat(r.lp)>=50?'grn':'red'}">${r.lp}</td><td>${f(r.lt)}</td></tr>`;
+        t5 += `<tr><td class="wht">${r.n}</td><td>${r.fbl} (${r.fbc})</td><td>${r.igl} (${r.igc})</td><td class="${parseFloat(r.cv)>0?'grn':'red'}">${r.cv}</td><td class="grn">${r.tc_closed} Cust</td></tr>`;
     });
     
     adData.forEach((a, i) => {
@@ -287,7 +387,7 @@
         </tr>`;
     });
 
-    t1 += `<tr style="font-weight:bold; background:#1e293b"><td>TOTAL</td><td>17 / ₦1.17m</td><td>124 Units</td></tr>`;
+    t1 += `<tr style="font-weight:bold; background:#1e293b;"><td class="wht">TOTAL TODAY</td><td class="grn">13 Cust / ₦1.83m</td><td class="grn">97 Units</td></tr>`;
     
     document.getElementById('today-table').innerHTML = t1;
     document.getElementById('month-target-table').innerHTML = t2;
