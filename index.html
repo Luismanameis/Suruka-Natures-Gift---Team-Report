@@ -78,10 +78,7 @@
     <h2>2026 Operations & Financial Dashboard</h2>
     <div style="background: var(--gold-dim); border: 1px solid rgba(217,182,74,0.35); padding: 16px; border-radius: 10px; margin-bottom: 20px;">
         <h3 style="margin-top:0;"><b>Regional Hub Target Performance (2026 YTD)</b></h3>
-        <div class="table-responsive" style="margin:0;"><table><thead><tr><th>Zone Hub Location</th><th>2026 Annual Target</th><th>2026 Achieved YTD</th><th>% Achieved Status</th></tr></thead><tbody>
-        <tr><td class="wht" style="font-weight:bold;">LAGOS HUB</td><td class="grn">₦500.00m</td><td class="grn">₦198.73m</td><td class="red" style="font-weight:bold;">39.75%</td></tr>
-        <tr><td class="wht" style="font-weight:bold;">BENIN HUB</td><td class="grn">₦300.00m</td><td class="grn">₦120.01m</td><td class="red" style="font-weight:bold;">40.00%</td></tr>
-        <tr><td class="wht" style="font-weight:bold;">ABUJA HUB</td><td class="grn">₦200.00m</td><td class="grn">₦90.35m</td><td class="red" style="font-weight:bold;">45.18%</td></tr>
+        <div class="table-responsive" style="margin:0;"><table><thead><tr><th>Zone Hub Location</th><th>2026 Annual Target</th><th>2026 Achieved YTD</th><th>% Achieved Status</th></tr></thead><tbody id="hub-performance-body">
         </tbody></table></div>
     </div>
     <div><h3><b>Focus On Ad — 2026 Monthly Breakdown</b></h3><div class="table-responsive"><table><thead><tr><th>Month</th><th>Ad Expenses</th><th>Content Expenses</th><th>Log Expenses</th><th>Total Expenses</th><th>New Cust Revenue</th><th>Profit</th><th>Profit %</th></tr></thead><tbody id="ad-focus-table"></tbody></table></div></div>
@@ -160,40 +157,87 @@
     </div>
 </div>
 <script>
-    const f = n => n >= 1e6 ? '₦' + (n/1e6).toFixed(2) + 'm' : n >= 1e3 ? '₦' + (n/1e3).toFixed(2) + 'k' : '₦' + n.toFixed(2);
-    fetch('data/daily_sales_report.json?t=' + new Date().getTime())
-  .then(response => response.json())
-  .then(data => {
-    // Extracts rep array from JSON payload, defaulting to static payload if missing
-    const reps = data.report || data.reps || [];
-
-    let t1="", t2="", t3="", t4="", t5="", tAd="";
+    const f = n => n >= 1e6 ? '₦' + (n/1e6).toFixed(2) + 'm' : n >= 1e3 ? '₦' + (n/1e3).toFixed(2) + 'k' : '₦' + (n || 0).toFixed(2);
     
-    reps.forEach(r => { 
-      t1 += `<tr><td class="wht">${r.n}</td><td class="grn">${r.tc} Cust / ${f(r.tr)}</td><td>-</td></tr>`; 
-    });
-
-    if (typeof adData !== 'undefined') {
-      adData.forEach((a, i) => { 
-        const isTot = i === adData.length - 1; 
-        tAd += `<tr style="${isTot ? 'font-weight:bold; background:var(--surface-2);' : ''}">...</tr>`;
-      });
-    }
-
-    document.getElementById('today-table').innerHTML = t1;
-  })
-  .catch(err => console.error("Error fetching live sales report:", err));
     function val() { if(document.getElementById('passkey').value === 'sng009') { document.getElementById('lock-screen').style.display = 'none'; document.getElementById('redirect-modal').style.display = 'flex'; } else { document.getElementById('err').style.display = 'block'; } }
     function closeM() { document.getElementById('redirect-modal').style.display = 'none'; }
-    // --- Top 3 Sales Rep Pop-in Controller ---
-    const topThree = [...reps].sort((a,b) => b.ly - a.ly).slice(0, 3);
-    const ranks = ["3RD PLACE 🥉", "2ND PLACE 🥈", "1ST PLACE 🏆"];
-    const displayOrder = [topThree[2], topThree[1], topThree[0]]; // 3rd, 2nd, 1st
-    let currentIdx = 0, popInterval = null, isScrolling = false;
-    function showPop(index) { const popEl = document.getElementById('top-reps-pop'); const rankEl = document.getElementById('pop-rank'); const nameEl = document.getElementById('pop-name'); const metricsEl = document.getElementById('pop-metrics'); const rep = displayOrder[index]; rankEl.textContent = ranks[index]; nameEl.textContent = rep.n; metricsEl.textContent = `Revenue: ${f(rep.ly)} | Closed: ${rep.mc} Cust`; popEl.classList.add('active'); setTimeout(() => { popEl.classList.remove('active'); }, 4300); } // Fades out slightly before switching at 5 seconds
-    function startTopRepsLoop() { if (popInterval) return; showPop(currentIdx); popInterval = setInterval(() => { currentIdx = (currentIdx + 1) % 3; showPop(currentIdx); }, 5000); }
-    function stopTopRepsLoop() { clearInterval(popInterval); popInterval = null; document.getElementById('top-reps-pop').classList.remove('active'); }
-    window.addEventListener('scroll', () => { if (window.scrollY > 150) { startTopRepsLoop(); } else { stopTopRepsLoop(); } });
+
+    let popInterval = null, currentIdx = 0;
+
+    fetch('data/daily_sales_report.json?t=' + new Date().getTime())
+      .then(response => response.json())
+      .then(data => {
+        // Handle hub target updates dynamically from sheet JSON
+        if (data.hubs) {
+          let hubHtml = "";
+          data.hubs.forEach(h => {
+            const achStr = h.achieved ? f(h.achieved) : "₦0.00";
+            const pctStr = h.pct ? h.pct : "0.00%";
+            hubHtml += `<tr><td class="wht" style="font-weight:bold;">${h.name}</td><td class="grn">${f(h.target)}</td><td class="grn">${achStr}</td><td class="red" style="font-weight:bold;">${pctStr}</td></tr>`;
+          });
+          const hubBody = document.getElementById('hub-performance-body');
+          if (hubBody) hubBody.innerHTML = hubHtml;
+        }
+
+        const reps = data.report || data.reps || [];
+
+        let t1="", t2="", t3="", t4="", t5="";
+        
+        reps.forEach(r => { 
+          t1 += `<tr><td class="wht">${r.n || ''}</td><td class="grn">${r.tc || 0} Cust / ${f(r.tr || 0)}</td><td>${r.u || '-'}</td></tr>`; 
+          t2 += `<tr><td class="wht">${r.n || ''}</td><td class="grn">${f(r.mt || 0)}</td><td class="grn">${f(r.ma || 0)}</td><td class="${(parseFloat(r.mp)|0)>=50?'grn':'red'}">${r.mp || '0.00%'}</td></tr>`;
+          t3 += `<tr><td class="wht">${r.n || ''}</td><td class="grn">${f(r.ma || 0)}</td><td>${r.mc || 0} Cust</td><td>${r.mu || 0} Units</td></tr>`;
+          t4 += `<tr><td class="wht">${r.n || ''}</td><td class="grn">${f(r.ly || 0)}</td><td class="${(parseFloat(r.lp)|0)>=50?'grn':'red'}">${r.lp || '0.00%'}</td><td class="grn">${f(r.lt || 0)}</td></tr>`;
+          t5 += `<tr><td class="wht">${r.n || ''}</td><td>${r.fbl || '-'} (${r.fbc || 0})</td><td>${r.igl || '-'} (${r.igc || 0})</td><td class="grn">${r.cp || '0.00%'}</td><td class="grn">${r.tc || 0}</td></tr>`;
+        });
+
+        if (document.getElementById('today-table')) document.getElementById('today-table').innerHTML = t1;
+        if (document.getElementById('month-target-table')) document.getElementById('month-target-table').innerHTML = t2;
+        if (document.getElementById('month-run-table')) document.getElementById('month-run-table').innerHTML = t3;
+        if (document.getElementById('lifetime-table')) document.getElementById('lifetime-table').innerHTML = t4;
+        if (document.getElementById('funnel-table')) document.getElementById('funnel-table').innerHTML = t5;
+
+        // Dynamic Pop-in calculation once reps payload is loaded
+        if (reps.length > 0) {
+          const topThree = [...reps].sort((a,b) => (b.ly || 0) - (a.ly || 0)).slice(0, 3);
+          const ranks = ["3RD PLACE 🥉", "2ND PLACE 🥈", "1ST PLACE 🏆"];
+          const displayOrder = [topThree[2] || topThree[0], topThree[1] || topThree[0], topThree[0]];
+          
+          function showPop(index) { 
+            const popEl = document.getElementById('top-reps-pop'); 
+            const rankEl = document.getElementById('pop-rank'); 
+            const nameEl = document.getElementById('pop-name'); 
+            const metricsEl = document.getElementById('pop-metrics'); 
+            const rep = displayOrder[index]; 
+            if(!rep) return;
+            rankEl.textContent = ranks[index]; 
+            nameEl.textContent = rep.n || 'Rep'; 
+            metricsEl.textContent = `Revenue: ${f(rep.ly || 0)} | Closed: ${rep.mc || 0} Cust`; 
+            popEl.classList.add('active'); 
+            setTimeout(() => { popEl.classList.remove('active'); }, 4300); 
+          }
+
+          function startTopRepsLoop() { 
+            if (popInterval) return; 
+            showPop(currentIdx); 
+            popInterval = setInterval(() => { 
+              currentIdx = (currentIdx + 1) % Math.min(3, displayOrder.length); 
+              showPop(currentIdx); 
+            }, 5000); 
+          }
+
+          function stopTopRepsLoop() { 
+            clearInterval(popInterval); 
+            popInterval = null; 
+            document.getElementById('top-reps-pop').classList.remove('active'); 
+          }
+
+          window.addEventListener('scroll', () => { 
+            if (window.scrollY > 150) { startTopRepsLoop(); } else { stopTopRepsLoop(); } 
+          });
+        }
+      })
+      .catch(err => console.error("Error fetching live sales report:", err));
 </script>
 </body>
 </html>
