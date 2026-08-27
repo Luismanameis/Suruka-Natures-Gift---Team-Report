@@ -161,24 +161,28 @@
 </div>
 <script>
     const f = n => n >= 1e6 ? '₦' + (n/1e6).toFixed(2) + 'm' : n >= 1e3 ? '₦' + (n/1e3).toFixed(2) + 'k' : '₦' + n.toFixed(2);
-    const reps = [
-        {n:"Bolu", tc:0, tr:0, mt:22e6, ma:5708600, mp:"25.95%", mc:70, mu:509, ly:73624457, lp:"36.81%", lt:200e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"5", tc_closed:5, cv:"0.00%"}, {n:"Mary", tc:1, tr:161800, mt:30e6, ma:16176600, mp:"53.92%", mc:169, mu:1360, ly:128626065, lp:"42.88%", lt:300e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:5, tc_closed:5, cv:"0.00%"}, {n:"Jaya", tc:0, tr:0, mt:15e6, ma:3330600, mp:"22.20%", mc:62, mu:438, ly:34106740, lp:"22.74%", lt:150e6, fbl:"120 Leads", fbc:"12", igl:"183 Leads", igc:"47", tc_closed:59, cv:"19.47%"},
-        {n:"Lewa", tc:0, tr:0, mt:10e6, ma:4283350, mp:"42.83%", mc:59, mu:453, ly:35647350, lp:"35.65%", lt:100e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"}, {n:"Susan", tc:0, tr:0, mt:10e6, ma:2805911, mp:"28.06%", mc:41, mu:240, ly:34293794, lp:"34.29%", lt:100e6, fbl:"- Leads", fbc:"1", igl:"- Leads", igc:"30", tc_closed:31, cv:"0.00%"}, {n:"Rachel", tc:0, tr:0, mt:15e6, ma:4555800, mp:"30.37%", mc:80, mu:475, ly:40025730, lp:"40.03%", lt:100e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"},
-        {n:"Divine", tc:0, tr:0, mt:10e6, ma:2262400, mp:"22.62%", mc:47, mu:308, ly:27349000, lp:"27.35%", lt:100e6, fbl:"19 Leads", fbc:"8", igl:"217 Leads", igc:"36", tc_closed:44, cv:"18.64%"}, {n:"Fidelia", tc:0, tr:0, mt:5e6, ma:1538600, mp:"30.77%", mc:23, mu:121, ly:4740200, lp:"9.48%", lt:50e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"}, {n:"Chioma", tc:2, tr:186000, mt:5e6, ma:3432800, mp:"68.65%", mc:79, mu:502, ly:3432800, lp:"6.87%", lt:50e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"}
-    ];
-    const adData = [
-        ["January", 6659444, 200000, 1870917.99, 8730361.99, 23156092, 14425730.01, "165.24%"], ["February", 4860000, 500000, 1608298.88, 6968298.88, 19699950, 12731651.12, "182.71%"], ["March", 4138700, 0, 1639893.55, 5778593.55, 19396300, 13617706.45, "235.66%"],
-        ["April", 3030000, 985000, 1482683.98, 5497683.98, 16291450, 10793766.02, "196.33%"], ["May", 1890900, 3700000, 1162229.50, 6753129.50, 16181500, 9428370.50, "139.61%"], ["June", 4114701, 1405000, 2051206.38, 7570907.38, 26378956, 18808048.62, "248.43%"],
-        ["July", 4384000, 150000, 1451500.64, 5985500.64, 19708653, 13723152.36, "229.27%"], ["August", 2418000, 180000, 1287000.00, 3885000.00, 16001400, 12116400.00, "311.88%"],
-        ["September", 0, 0, 0, 0, 0, 0, "0.00%"], ["October", 0, 0, 0, 0, 0, 0, "0.00%"], ["November", 0, 0, 0, 0, 0, 0, "0.00%"], ["December", 0, 0, 0, 0, 0, 0, "0.00%"],
-        ["TOTAL YTD", 31495745, 7120000, 12553730.93, 51169475.93, 156814301, 105644825.07, "206.46%"]
-    ];
+    fetch('data/daily_sales_report.json?t=' + new Date().getTime())
+  .then(response => response.json())
+  .then(data => {
+    // Extracts rep array from JSON payload, defaulting to static payload if missing
+    const reps = data.report || data.reps || [];
+
     let t1="", t2="", t3="", t4="", t5="", tAd="";
-    reps.forEach(r => { t1 += `<tr><td class="wht">${r.n}</td><td class="grn">${r.tc} Cust / ${f(r.tr)}</td><td>-</td></tr>`; t2 += `<tr><td class="wht">${r.n}</td><td>${f(r.mt)}</td><td class="grn">${f(r.ma)}</td><td class="${parseFloat(r.mp)>=50?'grn':'red'}">${r.mp}</td></tr>`; t3 += `<tr><td class="wht">${r.n}</td><td class="grn">${f(r.ma)}</td><td>${r.mc} Cust</td><td>${r.mu} Units</td></tr>`; t4 += `<tr><td class="wht">${r.n}</td><td class="grn">${f(r.ly)}</td><td class="${parseFloat(r.lp)>=50?'grn':'red'}">${r.lp}</td><td>${f(r.lt)}</td></tr>`; t5 += `<tr><td class="wht">${r.n}</td><td>${r.fbl} (${r.fbc})</td><td>${r.igl} (${r.igc})</td><td class="${parseFloat(r.cv)>0?'grn':'red'}">${r.cv}</td><td class="grn">${r.tc_closed} Cust</td></tr>`; });
-    adData.forEach((a, i) => { const isTot = i === adData.length - 1; tAd += `<tr style="${isTot ? 'font-weight:bold; background:var(--surface-2);' : ''}"><td class="wht">${a[0]}</td><td class="red">${f(a[1])}</td><td class="red">${f(a[2])}</td><td class="red">${f(a[3])}</td><td class="red">${f(a[4])}</td><td class="grn">${f(a[5])}</td><td class="grn">${f(a[6])}</td><td class="grn">${a[7]}</td></tr>`; });
-    t1 += `<tr style="font-weight:bold; background:var(--surface-2);"><td class="wht">TOTAL TODAY</td><td class="grn">3 Cust / ₦347.80k</td><td class="grn">20 Units</td></tr>`;
-    document.getElementById('today-table').innerHTML = t1; document.getElementById('month-target-table').innerHTML = t2; document.getElementById('month-run-table').innerHTML = t3;
-    document.getElementById('lifetime-table').innerHTML = t4; document.getElementById('funnel-table').innerHTML = t5; document.getElementById('ad-focus-table').innerHTML = tAd;
+    
+    reps.forEach(r => { 
+      t1 += `<tr><td class="wht">${r.n}</td><td class="grn">${r.tc} Cust / ${f(r.tr)}</td><td>-</td></tr>`; 
+    });
+
+    if (typeof adData !== 'undefined') {
+      adData.forEach((a, i) => { 
+        const isTot = i === adData.length - 1; 
+        tAd += `<tr style="${isTot ? 'font-weight:bold; background:var(--surface-2);' : ''}">...</tr>`;
+      });
+    }
+
+    document.getElementById('today-table').innerHTML = t1;
+  })
+  .catch(err => console.error("Error fetching live sales report:", err));
     function val() { if(document.getElementById('passkey').value === 'sng009') { document.getElementById('lock-screen').style.display = 'none'; document.getElementById('redirect-modal').style.display = 'flex'; } else { document.getElementById('err').style.display = 'block'; } }
     function closeM() { document.getElementById('redirect-modal').style.display = 'none'; }
     // --- Top 3 Sales Rep Pop-in Controller ---
