@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-27T21:32:57.071Z",
+  "updated_at": "2026-08-27T21:53:36.796Z",
   "total_rows_read": 173,
   "report": [
     {
@@ -19,20 +19,17 @@
         {
           "ZONES": "LAGOS",
           "2026 TARGET": "₦500,000,000.00",
-          "ACHIEVED": "₦0.00",
           "% ACHIEVED": "0.00%"
         },
         {
           "ZONES": "BENIN",
           "2026 TARGET": "₦300,000,000.00",
-          "ACHIEVED": "₦119,507,994.00",
-          "% ACHIEVED": "39.84%"
+          "% ACHIEVED": "0.00%"
         },
         {
           "ZONES": "ABUJA",
           "2026 TARGET": "₦200,000,000.00",
-          "ACHIEVED": "₦89,671,703.00",
-          "% ACHIEVED": "44.84%"
+          "% ACHIEVED": "0.00%"
         }
       ]
     },
