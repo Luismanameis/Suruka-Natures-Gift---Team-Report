@@ -1,0 +1,1076 @@
+{
+  "updated_at": "2026-08-27T21:20:33.125Z",
+  "total_rows_read": 173,
+  "report": [
+    {
+      "title": "2026 Team Report",
+      "headers": [
+        "ZONES",
+        "2026 TARGET",
+        "ACHIEVED",
+        "% ACHIEVED",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "ZONES": "LAGOS",
+          "2026 TARGET": "₦500,000,000.00",
+          "ACHIEVED": "₦198,186,112.00",
+          "% ACHIEVED": "39.64%"
+        },
+        {
+          "ZONES": "BENIN",
+          "2026 TARGET": "₦300,000,000.00",
+          "ACHIEVED": "₦119,507,994.00",
+          "% ACHIEVED": "39.84%"
+        },
+        {
+          "ZONES": "ABUJA",
+          "2026 TARGET": "₦200,000,000.00",
+          "ACHIEVED": "₦89,671,703.00",
+          "% ACHIEVED": "44.84%"
+        }
+      ]
+    },
+    {
+      "title": "DIGITAL MEDIUMS",
+      "headers": [
+        "Digital - IG",
+        "₦11,674,200.00",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "Digital - IG": "Digital - Tik Tok",
+          "₦11,674,200.00": "₦0.00"
+        },
+        {
+          "Digital - IG": "Digital - Website",
+          "₦11,674,200.00": "₦196,000.00"
+        },
+        {
+          "Digital - IG": "Digital - Facebook",
+          "₦11,674,200.00": "₦1,104,400.00"
+        },
+        {
+          "Digital - IG": "Digital - Whatsapp Dm",
+          "₦11,674,200.00": "₦825,400.00"
+        },
+        {
+          "Digital - IG": "Digital - Landing Page",
+          "₦11,674,200.00": "₦2,169,400.00"
+        },
+        {
+          "Digital - IG": "TOTAL REVENUE",
+          "₦11,674,200.00": "₦15,969,400.00"
+        }
+      ]
+    },
+    {
+      "title": "Segment 2 - Todays Numbers",
+      "headers": [
+        "Customers",
+        "7 Customers",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "Customers": "Revenue",
+          "7 Customers": "₦515,800"
+        },
+        {
+          "Customers": "Unit Sold",
+          "7 Customers": "50 Units"
+        },
+        {
+          "Customers": "Sales Representatives",
+          "7 Customers": "Customers",
+          "col_3": "Revenue"
+        },
+        {
+          "Customers": "Bolu",
+          "7 Customers": "0",
+          "col_3": "₦0.00"
+        },
+        {
+          "Customers": "Mary",
+          "7 Customers": "3",
+          "col_3": "₦353,000.00"
+        },
+        {
+          "Customers": "Jaya",
+          "7 Customers": "0",
+          "col_3": "₦0.00"
+        },
+        {
+          "Customers": "Lewa",
+          "7 Customers": "2",
+          "col_3": "₦67,200.00"
+        },
+        {
+          "Customers": "Susan",
+          "7 Customers": "0",
+          "col_3": "₦0.00"
+        },
+        {
+          "Customers": "Rachel",
+          "7 Customers": "0",
+          "col_3": "₦0.00"
+        },
+        {
+          "Customers": "Divine",
+          "7 Customers": "2",
+          "col_3": "₦95,600.00"
+        },
+        {
+          "Customers": "Fidelia",
+          "7 Customers": "0",
+          "col_3": "₦0.00"
+        },
+        {
+          "Customers": "Chioma",
+          "7 Customers": "0",
+          "col_3": "₦0.00"
+        }
+      ]
+    },
+    {
+      "title": "Segment 3 - Department Breakdown",
+      "headers": [
+        "Sales Team",
+        "₦22,368,661.00",
+        "227 Customers",
+        "1,758 Units",
+        "49.07%",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "Sales Team": "Digital Marketer",
+          "₦22,368,661.00": "₦15,750,000.00",
+          "227 Customers": "312 Customers",
+          "1,758 Units": "2,084 Units",
+          "49.07%": "34.55%"
+        },
+        {
+          "Sales Team": "Customer Care",
+          "₦22,368,661.00": "₦7,462,750.00",
+          "227 Customers": "111 Customers",
+          "1,758 Units": "762 Units",
+          "49.07%": "16.37%"
+        }
+      ]
+    },
+    {
+      "title": "Segment 4 - Zone Sales Breakdown",
+      "headers": [
+        "Lagos",
+        "₦22,465,211.00",
+        "296 Customers",
+        "2,110 Units",
+        "49.29%",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "Lagos": "Benin",
+          "₦22,465,211.00": "₦12,629,800.00",
+          "296 Customers": "216 Customers",
+          "2,110 Units": "1,441 Units",
+          "49.29%": "27.71%"
+        },
+        {
+          "Lagos": "Abuja",
+          "₦22,465,211.00": "₦10,486,400.00",
+          "296 Customers": "157 Customers",
+          "2,110 Units": "1,053 Units",
+          "49.29%": "23.01%"
+        },
+        {
+          "Lagos": "Ghana",
+          "₦22,465,211.00": "GHS0.00",
+          "296 Customers": "Customers",
+          "2,110 Units": "Units"
+        }
+      ]
+    },
+    {
+      "title": "Segment 5 - Individuals This Month Numbers",
+      "headers": [
+        "Staff",
+        "Revenue",
+        "Customers",
+        "Unit",
+        "Revenue Target",
+        "%",
+        "",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "Staff": "Bolu",
+          "Revenue": "₦6,307,950.00",
+          "Customers": "72 Customers",
+          "Unit": "517 Units",
+          "Revenue Target": "₦22,000,000.00",
+          "%": "28.67%"
+        },
+        {
+          "Staff": "Mary",
+          "Revenue": "₦16,276,200.00",
+          "Customers": "170 Customers",
+          "Unit": "1,434 Units",
+          "Revenue Target": "₦30,000,000.00",
+          "%": "54.25%"
+        },
+        {
+          "Staff": "Jaya",
+          "Revenue": "₦3,330,600.00",
+          "Customers": "62 Customers",
+          "Unit": "438 Units",
+          "Revenue Target": "₦15,000,000.00",
+          "%": "22.20%"
+        },
+        {
+          "Staff": "Lewa",
+          "Revenue": "₦4,588,550.00",
+          "Customers": "64 Customers",
+          "Unit": "496 Units",
+          "Revenue Target": "₦10,000,000.00",
+          "%": "45.89%"
+        },
+        {
+          "Staff": "Susan",
+          "Revenue": "₦2,805,911.00",
+          "Customers": "41 Customers",
+          "Unit": "240 Units",
+          "Revenue Target": "₦10,000,000.00",
+          "%": "28.06%"
+        },
+        {
+          "Staff": "Rachel",
+          "Revenue": "₦4,656,600.00",
+          "Customers": "83 Customers",
+          "Unit": "493 Units",
+          "Revenue Target": "₦15,000,000.00",
+          "%": "31.04%"
+        },
+        {
+          "Staff": "Divine",
+          "Revenue": "₦2,425,200.00",
+          "Customers": "51 Customers",
+          "Unit": "327 Units",
+          "Revenue Target": "₦10,000,000.00",
+          "%": "24.25%"
+        },
+        {
+          "Staff": "Fidelia",
+          "Revenue": "₦1,572,200.00",
+          "Customers": "23 Customers",
+          "Unit": "127 Units",
+          "Revenue Target": "₦5,000,000.00",
+          "%": "31.44%"
+        },
+        {
+          "Staff": "Chioma",
+          "Revenue": "₦3,432,400.00",
+          "Customers": "81 Customers",
+          "Unit": "513 Units",
+          "Revenue Target": "₦5,000,000.00",
+          "%": "68.65%"
+        }
+      ]
+    },
+    {
+      "title": "Segment 6 - Individuals 2026 Numbers",
+      "headers": [
+        "Staff",
+        "Revenue",
+        "% From Target",
+        "Target",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "Staff": "Bolu",
+          "Revenue": "₦74,223,807.00",
+          "% From Target": "37.11%",
+          "Target": "₦200,000,000.00"
+        },
+        {
+          "Staff": "Mary",
+          "Revenue": "₦128,725,665.00",
+          "% From Target": "42.91%",
+          "Target": "₦300,000,000.00"
+        },
+        {
+          "Staff": "Jaya",
+          "Revenue": "₦34,106,740.00",
+          "% From Target": "22.74%",
+          "Target": "₦150,000,000.00"
+        },
+        {
+          "Staff": "Lewa",
+          "Revenue": "₦35,952,550.00",
+          "% From Target": "35.95%",
+          "Target": "₦100,000,000.00"
+        },
+        {
+          "Staff": "Susan",
+          "Revenue": "₦34,293,794.00",
+          "% From Target": "34.29%",
+          "Target": "₦100,000,000.00"
+        },
+        {
+          "Staff": "Rachel",
+          "Revenue": "₦40,126,530.00",
+          "% From Target": "40.13%",
+          "Target": "₦100,000,000.00"
+        },
+        {
+          "Staff": "Divine",
+          "Revenue": "₦27,511,800.00",
+          "% From Target": "27.51%",
+          "Target": "₦100,000,000.00"
+        },
+        {
+          "Staff": "Fidelia",
+          "Revenue": "₦4,773,800.00",
+          "% From Target": "9.55%",
+          "Target": "₦50,000,000.00"
+        },
+        {
+          "Staff": "Chioma",
+          "Revenue": "₦3,432,400.00",
+          "% From Target": "6.86%",
+          "Target": "₦50,000,000.00"
+        }
+      ]
+    },
+    {
+      "title": "Segment 7 - Numbers For This Month",
+      "headers": [
+        "Gross Revenue",
+        "₦45,581,411",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "Gross Revenue": "Customers",
+          "₦45,581,411": "646 Customers"
+        },
+        {
+          "Gross Revenue": "Return Customers",
+          "₦45,581,411": "344 Customers"
+        },
+        {
+          "Gross Revenue": "Return %",
+          "₦45,581,411": "53.25%"
+        },
+        {
+          "Gross Revenue": "Cost Per New Customers",
+          "₦45,581,411": "₦8,054.24"
+        }
+      ]
+    },
+    {
+      "title": "Segment 8 - Sales By Medium For This Month",
+      "headers": [
+        "Instagram Ad",
+        "231 Customers",
+        "₦11,674,200.00",
+        "1,501 Units",
+        "26%",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "Instagram Ad": "Facebook Ad",
+          "231 Customers": "28 Customers",
+          "₦11,674,200.00": "₦1,104,400.00",
+          "1,501 Units": "159 Units",
+          "26%": "2%"
+        },
+        {
+          "Instagram Ad": "Landing Page Ad",
+          "231 Customers": "49 Customers",
+          "₦11,674,200.00": "₦2,169,400.00",
+          "1,501 Units": "327 Units",
+          "26%": "5%"
+        },
+        {
+          "Instagram Ad": "Others",
+          "231 Customers": "338 Customers",
+          "₦11,674,200.00": "₦30,633,411.00",
+          "1,501 Units": "2,617 Units",
+          "26%": "67%"
+        }
+      ]
+    },
+    {
+      "title": "Segment 10 - CS Segment",
+      "headers": [
+        "TODAY",
+        "REP",
+        "TOTAL CONTACTED",
+        "SATISFIED",
+        "NOT SATISFIED",
+        "SATISFIED %",
+        "NOT SATISFIED %",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "TODAY": "27/08/2026",
+          "REP": "LEWA",
+          "TOTAL CONTACTED": "17 Customers",
+          "SATISFIED": "17 Customers",
+          "NOT SATISFIED": "Customers",
+          "SATISFIED %": "100.00%",
+          "NOT SATISFIED %": "0.00%"
+        },
+        {
+          "TODAY": "27/08/2026",
+          "REP": "RAY",
+          "TOTAL CONTACTED": "Customers",
+          "SATISFIED": "Customers",
+          "NOT SATISFIED": "Customers",
+          "SATISFIED %": "0.00%",
+          "NOT SATISFIED %": "0.00%"
+        },
+        {
+          "TODAY": "TOTAL FOR TODAY",
+          "TOTAL CONTACTED": "17 Customers",
+          "SATISFIED": "17 Customers",
+          "NOT SATISFIED": "Customers",
+          "SATISFIED %": "100.00%",
+          "NOT SATISFIED %": "0.00%"
+        },
+        {
+          "TODAY": "CS Segment 2",
+          "REP": "Satisfied",
+          "TOTAL CONTACTED": "Not Satisfied",
+          "SATISFIED": "Total Contacted",
+          "NOT SATISFIED": "Revenue From CS"
+        },
+        {
+          "TODAY": "2023",
+          "REP": "97.42%",
+          "TOTAL CONTACTED": "2.58%",
+          "SATISFIED": "5,687 Customers",
+          "NOT SATISFIED": "₦9,026,308.00"
+        },
+        {
+          "TODAY": "2024",
+          "REP": "96.68%",
+          "TOTAL CONTACTED": "3.32%",
+          "SATISFIED": "8,437 Customers",
+          "NOT SATISFIED": "₦26,522,202.00"
+        },
+        {
+          "TODAY": "2025",
+          "REP": "96.10%",
+          "TOTAL CONTACTED": "3.90%",
+          "SATISFIED": "14,367 Customers",
+          "NOT SATISFIED": "₦90,938,755.00"
+        },
+        {
+          "TODAY": "2026",
+          "REP": "97.95%",
+          "TOTAL CONTACTED": "2.05%",
+          "SATISFIED": "6,937 Customers",
+          "NOT SATISFIED": "₦71,637,480.00"
+        },
+        {
+          "SATISFIED": "35,428 Customers",
+          "NOT SATISFIED": "₦198,124,745.00"
+        }
+      ]
+    },
+    {
+      "title": "Segment 12- IG AND FB SEGMENT",
+      "headers": [
+        "Month",
+        "August",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "Month": "Leads",
+          "August": "539 Leads"
+        },
+        {
+          "Month": "Closed",
+          "August": "148 Customers"
+        },
+        {
+          "Month": "% Closed",
+          "August": "27.46%"
+        }
+      ]
+    },
+    {
+      "title": "IG AND FB SEGMENT - THE TEAM",
+      "headers": [
+        "IG AND FACEBOOK CONVERSION - THIS MONTH",
+        "FB LEADS",
+        "CLOSED",
+        "IG LEADS",
+        "CLOSED",
+        "TOTAL LEADS",
+        "TOTAL CLOSED",
+        "CONVERSION",
+        ""
+      ],
+      "rows": [
+        {
+          "IG AND FACEBOOK CONVERSION - THIS MONTH": "Jaya",
+          "FB LEADS": "120 Leads",
+          "CLOSED": "47 Customers",
+          "IG LEADS": "183 Leads",
+          "TOTAL LEADS": "303 Leads",
+          "TOTAL CLOSED": "59 Customers",
+          "CONVERSION": "19.47%"
+        },
+        {
+          "IG AND FACEBOOK CONVERSION - THIS MONTH": "Susan",
+          "FB LEADS": "Leads",
+          "CLOSED": "30 Customers",
+          "IG LEADS": "Leads",
+          "TOTAL LEADS": "Leads",
+          "TOTAL CLOSED": "31 Customers",
+          "CONVERSION": "0.00%"
+        },
+        {
+          "IG AND FACEBOOK CONVERSION - THIS MONTH": "Divine",
+          "FB LEADS": "19 Leads",
+          "CLOSED": "38 Customers",
+          "IG LEADS": "217 Leads",
+          "TOTAL LEADS": "236 Leads",
+          "TOTAL CLOSED": "46 Customers",
+          "CONVERSION": "19.49%"
+        },
+        {
+          "IG AND FACEBOOK CONVERSION - THIS MONTH": "Bolu",
+          "FB LEADS": "Leads",
+          "CLOSED": "5 Customers",
+          "IG LEADS": "Leads",
+          "TOTAL LEADS": "Leads",
+          "TOTAL CLOSED": "5 Customers",
+          "CONVERSION": "0.00%"
+        },
+        {
+          "IG AND FACEBOOK CONVERSION - THIS MONTH": "Jane",
+          "FB LEADS": "Leads",
+          "CLOSED": "Customers",
+          "IG LEADS": "Leads",
+          "TOTAL LEADS": "Leads",
+          "TOTAL CLOSED": "Customers",
+          "CONVERSION": "0.00%"
+        },
+        {
+          "IG AND FACEBOOK CONVERSION - THIS MONTH": "Mary",
+          "FB LEADS": "Leads",
+          "CLOSED": "4 Customers",
+          "IG LEADS": "Leads",
+          "TOTAL LEADS": "Leads",
+          "TOTAL CLOSED": "4 Customers",
+          "CONVERSION": "0.00%"
+        },
+        {
+          "IG AND FACEBOOK CONVERSION - THIS MONTH": "Fidelia"
+        },
+        {
+          "IG AND FACEBOOK CONVERSION - THIS MONTH": "Chioma"
+        }
+      ]
+    },
+    {
+      "title": "Segment 12 - DAILY AD SEGMENT",
+      "headers": [
+        "2026",
+        "₦36,858,758.00",
+        "832 Customers",
+        "5,291 Units",
+        "₦95,996,823.00",
+        "1,673 Customers",
+        "11,109 Units",
+        "₦15,659,150.00",
+        "316 Customers"
+      ],
+      "rows": [
+        {
+          "₦36,858,758.00": "Revenue",
+          "832 Customers": "Customers",
+          "5,291 Units": "Unit Sold",
+          "₦95,996,823.00": "Revenue",
+          "1,673 Customers": "Customers",
+          "11,109 Units": "Unit Sold",
+          "₦15,659,150.00": "Revenue",
+          "316 Customers": "Customers"
+        },
+        {
+          "2026": "LAST 5 DAYS",
+          "₦36,858,758.00": "₦722,600.00",
+          "832 Customers": "11 Customers",
+          "5,291 Units": "97 Units",
+          "₦95,996,823.00": "₦1,437,400.00",
+          "1,673 Customers": "30 Customers",
+          "11,109 Units": "189 Units",
+          "₦15,659,150.00": "₦100,800.00",
+          "316 Customers": "2 Customers"
+        },
+        {
+          "2026": "Date",
+          "₦36,858,758.00": "LP Revenue",
+          "832 Customers": "Customers",
+          "5,291 Units": "Unit Sold",
+          "₦95,996,823.00": "IG Revenue",
+          "1,673 Customers": "Customers",
+          "11,109 Units": "Unit Sold",
+          "₦15,659,150.00": "FB And TT Revenue",
+          "316 Customers": "Customers"
+        },
+        {
+          "2026": "27/08/2026",
+          "₦36,858,758.00": "₦252,200.00",
+          "832 Customers": "1 Customers",
+          "5,291 Units": "13 Units",
+          "₦95,996,823.00": "₦33,600.00",
+          "1,673 Customers": "1 Customers",
+          "11,109 Units": "6 Units",
+          "₦15,659,150.00": "₦0.00",
+          "316 Customers": "Customers"
+        },
+        {
+          "2026": "26/08/2026",
+          "₦36,858,758.00": "₦0.00",
+          "832 Customers": "Customers",
+          "5,291 Units": "Units",
+          "₦95,996,823.00": "₦542,400.00",
+          "1,673 Customers": "13 Customers",
+          "11,109 Units": "85 Units",
+          "₦15,659,150.00": "₦0.00",
+          "316 Customers": "Customers"
+        },
+        {
+          "2026": "25/08/2026",
+          "₦36,858,758.00": "₦369,600.00",
+          "832 Customers": "8 Customers",
+          "5,291 Units": "66 Units",
+          "₦95,996,823.00": "₦100,800.00",
+          "1,673 Customers": "3 Customers",
+          "11,109 Units": "18 Units",
+          "₦15,659,150.00": "₦0.00",
+          "316 Customers": "Customers"
+        },
+        {
+          "2026": "24/08/2026",
+          "₦36,858,758.00": "₦100,800.00",
+          "832 Customers": "2 Customers",
+          "5,291 Units": "18 Units",
+          "₦95,996,823.00": "₦605,600.00",
+          "1,673 Customers": "11 Customers",
+          "11,109 Units": "78 Units",
+          "₦15,659,150.00": "₦100,800.00",
+          "316 Customers": "2 Customers"
+        },
+        {
+          "2026": "23/08/2026",
+          "₦36,858,758.00": "₦0.00",
+          "832 Customers": "Customers",
+          "5,291 Units": "Units",
+          "₦95,996,823.00": "₦155,000.00",
+          "1,673 Customers": "2 Customers",
+          "11,109 Units": "2 Units",
+          "₦15,659,150.00": "₦0.00",
+          "316 Customers": "Customers"
+        }
+      ]
+    },
+    {
+      "title": "SEGMENT 15 - WALK-IN AND OFFICE PICK UP TREND SEGMENT",
+      "headers": [
+        "January",
+        "2024",
+        "2025",
+        "2026",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "rows": [
+        {
+          "2024": "2,944 Customers",
+          "2025": "1,017 Customers",
+          "2026": "380 Customers",
+          "January": "TOTAL WALK IN AND PICK UP"
+        },
+        {
+          "2024": "11,593 Customers",
+          "2025": "13,530 Customers",
+          "2026": "4,049 Customers",
+          "January": "TOTAL CUSTOMERS"
+        },
+        {
+          "2024": "25.39%",
+          "2025": "7.52%",
+          "2026": "9.39%",
+          "January": "% OF WALK IN AND PICK UP"
+        },
+        {
+          "2024": "2024 ENDING WE STARTED FREE SHIPING",
+          "January": "NOTE"
+        },
+        {
+          "2024": "2024 ENDING WE EXPANDED TO MORE STATES TO WHERE WE USE LOGISTICS COMPANIES TO DO DELIVERIES",
+          "January": "NOTE"
+        }
+      ]
+    },
+    {
+      "title": "SEGMENT 16 - MEDIUM AND COST",
+      "headers": [
+        "Instagram Ad",
+        "₦11,674,200.00",
+        "26%",
+        "231 Customers",
+        "₦1,836,000",
+        "₦1,508,590.74",
+        "₦14,479",
+        "249%",
+        ""
+      ],
+      "rows": [
+        {
+          "Instagram Ad": "Facebook Ad",
+          "₦11,674,200.00": "₦1,104,400.00",
+          "26%": "2%",
+          "231 Customers": "28 Customers",
+          "₦1,836,000": "₦270,000",
+          "₦1,508,590.74": "₦182,859.48",
+          "₦14,479": "₦16,174",
+          "249%": "144%"
+        },
+        {
+          "Instagram Ad": "Landing Page Ad",
+          "₦11,674,200.00": "₦2,169,400.00",
+          "26%": "5%",
+          "231 Customers": "49 Customers",
+          "₦1,836,000": "₦270,000",
+          "₦1,508,590.74": "₦320,004.10",
+          "₦14,479": "₦12,041",
+          "249%": "268%"
+        },
+        {
+          "₦11,674,200.00": "₦14,948,000.00",
+          "26%": "33%",
+          "231 Customers": "308 Customers",
+          "₦1,836,000": "₦2,376,000",
+          "₦1,508,590.74": "₦2,011,454.32",
+          "₦14,479": "₦14,245",
+          "249%": "241%"
+        },
+        {
+          "Instagram Ad": "LTV SEGMENT",
+          "₦11,674,200.00": "2026",
+          "26%": "2025"
+        },
+        {
+          "Instagram Ad": "Unique Customers",
+          "₦11,674,200.00": "4,049",
+          "26%": "13,530"
+        },
+        {
+          "Instagram Ad": "Total Orders",
+          "₦11,674,200.00": "5,642",
+          "26%": "17,636"
+        },
+        {
+          "Instagram Ad": "Sponsored Ad",
+          "₦11,674,200.00": "₦31,453,745",
+          "26%": "₦147,083,580.12"
+        },
+        {
+          "Instagram Ad": "Logistics Expenses",
+          "₦11,674,200.00": "₦28,882,643",
+          "26%": "₦74,474,713.00"
+        },
+        {
+          "Instagram Ad": "TOTAL (AD + LOG)",
+          "₦11,674,200.00": "₦60,336,388",
+          "26%": "₦221,558,293.12"
+        },
+        {
+          "Instagram Ad": "CAC (LOG/AD DIVIDED BY CUSTOMERS)",
+          "₦11,674,200.00": "₦14,902",
+          "26%": "₦16,375.34"
+        },
+        {
+          "Instagram Ad": "Avg Order Value",
+          "₦11,674,200.00": "₦72,202.38",
+          "26%": "₦49,722"
+        },
+        {
+          "Instagram Ad": "Purchase Frequency",
+          "₦11,674,200.00": "1.39",
+          "26%": "1.30"
+        },
+        {
+          "Instagram Ad": "LTV",
+          "₦11,674,200.00": "₦100,608.99",
+          "26%": "₦64,811"
+        },
+        {
+          "Instagram Ad": "STAFF PROFILE",
+          "₦11,674,200.00": "DAILY AVG",
+          "26%": "PROJECTED REVENUE FOR THE REST OF THE YEAR",
+          "231 Customers": "PROJECTED END OF YEAR REVENUE"
+        },
+        {
+          "Instagram Ad": "Anthony Racheal Chat",
+          "₦11,674,200.00": "₦234,658.07",
+          "26%": "₦21,119,226.32",
+          "231 Customers": "₦61,245,756.32"
+        },
+        {
+          "Instagram Ad": "Atanda Faith Boluwatife",
+          "₦11,674,200.00": "₦434,057.35",
+          "26%": "₦39,065,161.58",
+          "231 Customers": "₦113,288,968.58"
+        },
+        {
+          "Instagram Ad": "Ogunleye Ifeoluwa Susan",
+          "₦11,674,200.00": "₦200,548.50",
+          "26%": "₦18,049,365.26",
+          "231 Customers": "₦52,343,159.26"
+        },
+        {
+          "Instagram Ad": "Odubanjo Elizabeth Omolewa",
+          "₦11,674,200.00": "₦210,248.83",
+          "26%": "₦18,922,394.74",
+          "231 Customers": "₦54,874,944.74"
+        },
+        {
+          "Instagram Ad": "Jaisri Nwamaka Agunobi",
+          "₦11,674,200.00": "₦199,454.62",
+          "26%": "₦17,950,915.79",
+          "231 Customers": "₦52,057,655.79"
+        },
+        {
+          "Instagram Ad": "Mary Nsikan Inyang",
+          "₦11,674,200.00": "₦752,781.67",
+          "26%": "₦67,750,350.00",
+          "231 Customers": "₦196,476,015.00"
+        },
+        {
+          "Instagram Ad": "Ehanire Divine Oghogho",
+          "₦11,674,200.00": "₦160,887.72",
+          "26%": "₦14,479,894.74",
+          "231 Customers": "₦41,991,694.74"
+        },
+        {
+          "Instagram Ad": "Fidelia Ene Paul",
+          "₦11,674,200.00": "₦97,424.49",
+          "26%": "₦8,768,204.08",
+          "231 Customers": "₦13,542,004.08"
+        },
+        {
+          "Instagram Ad": "Chioma Joy Okereafor",
+          "₦11,674,200.00": "₦118,358.62",
+          "26%": "₦10,652,275.86",
+          "231 Customers": "₦14,084,675.86"
+        },
+        {
+          "₦11,674,200.00": "₦2,408,419.87",
+          "26%": "₦216,757,788.36",
+          "231 Customers": "₦599,904,874.36"
+        },
+        {
+          "Instagram Ad": "FOCUS ON AD - THIS YEAR",
+          "₦11,674,200.00": "AD EXPENSES",
+          "26%": "CONTENT EXPENSES",
+          "231 Customers": "LOG EXPENSES ON NEW CUSTOMERS",
+          "₦1,836,000": "TOTAL",
+          "₦1,508,590.74": "NEW CUSTOMER REVENUE",
+          "₦14,479": "REV BEFORE OTHER EXPENSES",
+          "249%": "%"
+        },
+        {
+          "Instagram Ad": "January",
+          "₦11,674,200.00": "₦6,659,444.00",
+          "26%": "₦200,000.00",
+          "231 Customers": "₦1,870,917.99",
+          "₦1,836,000": "₦8,730,361.99",
+          "₦1,508,590.74": "₦23,156,092.00",
+          "₦14,479": "₦14,425,730.01",
+          "249%": "165.24%"
+        },
+        {
+          "Instagram Ad": "February",
+          "₦11,674,200.00": "₦4,860,000.00",
+          "26%": "₦500,000.00",
+          "231 Customers": "₦1,608,298.88",
+          "₦1,836,000": "₦6,968,298.88",
+          "₦1,508,590.74": "₦19,699,950.00",
+          "₦14,479": "₦12,731,651.12",
+          "249%": "182.71%"
+        },
+        {
+          "Instagram Ad": "March",
+          "₦11,674,200.00": "₦4,138,700.00",
+          "26%": "₦0.00",
+          "231 Customers": "₦1,639,893.55",
+          "₦1,836,000": "₦5,778,593.55",
+          "₦1,508,590.74": "₦19,396,300.00",
+          "₦14,479": "₦13,617,706.45",
+          "249%": "235.66%"
+        },
+        {
+          "Instagram Ad": "April",
+          "₦11,674,200.00": "₦3,030,000.00",
+          "26%": "₦985,000.00",
+          "231 Customers": "₦1,482,683.98",
+          "₦1,836,000": "₦5,497,683.98",
+          "₦1,508,590.74": "₦16,291,450.00",
+          "₦14,479": "₦10,793,766.02",
+          "249%": "196.33%"
+        },
+        {
+          "Instagram Ad": "May",
+          "₦11,674,200.00": "₦1,890,900.00",
+          "26%": "₦3,700,000.00",
+          "231 Customers": "₦1,162,229.50",
+          "₦1,836,000": "₦6,753,129.50",
+          "₦1,508,590.74": "₦16,181,500.00",
+          "₦14,479": "₦9,428,370.50",
+          "249%": "139.61%"
+        },
+        {
+          "Instagram Ad": "June",
+          "₦11,674,200.00": "₦4,114,701.00",
+          "26%": "₦1,405,000.00",
+          "231 Customers": "₦2,051,206.38",
+          "₦1,836,000": "₦7,570,907.38",
+          "₦1,508,590.74": "₦26,378,956.00",
+          "₦14,479": "₦18,808,048.62",
+          "249%": "248.43%"
+        },
+        {
+          "Instagram Ad": "July",
+          "₦11,674,200.00": "₦4,384,000.00",
+          "26%": "₦150,000.00",
+          "231 Customers": "₦1,451,500.64",
+          "₦1,836,000": "₦5,985,500.64",
+          "₦1,508,590.74": "₦19,708,653.00",
+          "₦14,479": "₦13,723,152.36",
+          "249%": "229.27%"
+        },
+        {
+          "Instagram Ad": "August",
+          "₦11,674,200.00": "₦2,376,000.00",
+          "26%": "₦180,000.00",
+          "231 Customers": "₦1,327,500.00",
+          "₦1,836,000": "₦3,883,500.00",
+          "₦1,508,590.74": "₦16,179,200.00",
+          "₦14,479": "₦12,295,700.00",
+          "249%": "316.61%"
+        },
+        {
+          "Instagram Ad": "September",
+          "₦11,674,200.00": "₦0.00",
+          "26%": "₦0.00",
+          "231 Customers": "₦0.00",
+          "₦1,836,000": "₦0.00",
+          "₦1,508,590.74": "₦0.00",
+          "₦14,479": "₦0.00",
+          "249%": "0.00%"
+        },
+        {
+          "Instagram Ad": "October",
+          "₦11,674,200.00": "₦0.00",
+          "26%": "₦0.00",
+          "231 Customers": "₦0.00",
+          "₦1,836,000": "₦0.00",
+          "₦1,508,590.74": "₦0.00",
+          "₦14,479": "₦0.00",
+          "249%": "0.00%"
+        },
+        {
+          "Instagram Ad": "November",
+          "₦11,674,200.00": "₦0.00",
+          "26%": "₦0.00",
+          "231 Customers": "₦0.00",
+          "₦1,836,000": "₦0.00",
+          "₦1,508,590.74": "₦0.00",
+          "₦14,479": "₦0.00",
+          "249%": "0.00%"
+        },
+        {
+          "Instagram Ad": "December",
+          "₦11,674,200.00": "₦0.00",
+          "26%": "₦0.00",
+          "231 Customers": "₦0.00",
+          "₦1,836,000": "₦0.00",
+          "₦1,508,590.74": "₦0.00",
+          "₦14,479": "₦0.00",
+          "249%": "0.00%"
+        },
+        {
+          "₦11,674,200.00": "₦31,453,745.00",
+          "26%": "₦7,120,000.00",
+          "231 Customers": "₦12,594,230.93",
+          "₦1,836,000": "₦51,167,975.93",
+          "₦1,508,590.74": "₦156,992,101.00",
+          "₦14,479": "₦105,824,125.07",
+          "249%": "206.8%"
+        }
+      ]
+    }
+  ]
+}
