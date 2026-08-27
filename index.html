@@ -7,13 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #080a11; --bg-glow: radial-gradient(circle at 12% -10%, rgba(212,175,55,0.10), transparent 42%), radial-gradient(circle at 100% 0%, rgba(34,197,94,0.05), transparent 35%);
-            --surface: #0f131e; --surface-2: #151a29; --border: #212739;
-            --white: #edf1f7; --muted: #7d879c;
-            --red: #fb5a5a; --green: #22c55e; --gold: #d9b64a; --gold-dim: rgba(217,182,74,0.14);
-            --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
-        }
+        :root { --bg: #080a11; --bg-glow: radial-gradient(circle at 12% -10%, rgba(212,175,55,0.10), transparent 42%), radial-gradient(circle at 100% 0%, rgba(34,197,94,0.05), transparent 35%); --surface: #0f131e; --surface-2: #151a29; --border: #212739; --white: #edf1f7; --muted: #7d879c; --red: #fb5a5a; --green: #22c55e; --gold: #d9b64a; --gold-dim: rgba(217,182,74,0.14); --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-size: 13px; font-family: var(--font-body); }
         body { background-color: var(--bg); background-image: var(--bg-glow); color: var(--muted); padding: 148px 16px 40px 16px; -webkit-font-smoothing: antialiased; }
         .container { max-width: 1400px; margin: 0 auto; }
@@ -57,24 +51,12 @@
         .flex-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(620px, 1fr)); gap: 18px; }
 
         /* Floating Top Sales Performers Widget */
-        #top-reps-pop {
-            position: fixed; bottom: 22px; right: 22px;
-            background: rgba(15, 19, 30, 0.95);
-            border: 1px solid var(--gold); border-left: 4px solid var(--gold);
-            border-radius: 10px; padding: 13px 18px;
-            box-shadow: 0 20px 40px -8px rgba(0,0,0,0.7);
-            backdrop-filter: blur(10px); z-index: 2000;
-            display: flex; align-items: center; gap: 13px;
-            opacity: 0; transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            pointer-events: none;
-        }
+        #top-reps-pop { position: fixed; bottom: 22px; right: 22px; background: rgba(15, 19, 30, 0.95); border: 1px solid var(--gold); border-left: 4px solid var(--gold); border-radius: 10px; padding: 13px 18px; box-shadow: 0 20px 40px -8px rgba(0,0,0,0.7); backdrop-filter: blur(10px); z-index: 2000; display: flex; align-items: center; gap: 13px; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none; }
         #top-reps-pop.active { opacity: 1; transform: translateY(0); }
         .pop-badge { background: var(--gold); color: #0b0a06; font-family: var(--font-display); font-weight: 700; font-size: 10.5px; padding: 5px 9px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
         .pop-info { text-align: left; }
         .pop-title { color: var(--white); font-family: var(--font-display); font-weight: 700; font-size: 13.5px; }
         .pop-sub { color: var(--muted); font-size: 11px; margin-top: 3px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-
         @media (max-width: 800px) { body { padding-top: 205px; } .sticky-container { grid-template-columns: repeat(2, 1fr); } .flex-grid { grid-template-columns: 1fr; } #top-reps-pop { bottom: 10px; right: 10px; left: 10px; } }
     </style>
 </head>
@@ -90,16 +72,8 @@
     </div>
     <div class="ticker-wrap"><div class="ticker"><span>📈 August Gross Revenue: ₦43.64m</span><span>⚡ Total Pipeline Customers: 627</span><span>🔄 Return Cohort Rate: 53.91%</span><span>🎯 Cost Per New Customer: ₦8,454.55</span><span>📊 CS Today: 0 Contacted / 0.00% Satisfied</span><span>📈 August Gross Revenue: ₦43.64m</span><span>⚡ Total Pipeline Customers: 627</span><span>🔄 Return Cohort Rate: 53.91%</span></div></div>
 </div>
-
 <!-- Floating Top Performer Pop-up -->
-<div id="top-reps-pop">
-    <div class="pop-badge" id="pop-rank">3RD PLACE</div>
-    <div class="pop-info">
-        <div class="pop-title" id="pop-name">Rep Name</div>
-        <div class="pop-sub" id="pop-metrics">Revenue: ₦0.00 | Customers: 0</div>
-    </div>
-</div>
-
+<div id="top-reps-pop"><div class="pop-badge" id="pop-rank">3RD PLACE</div><div class="pop-info"><div class="pop-title" id="pop-name">Rep Name</div><div class="pop-sub" id="pop-metrics">Revenue: ₦0.00 | Customers: 0</div></div></div>
 <div class="container">
     <h2>2026 Operations & Financial Dashboard</h2>
     <div style="background: var(--gold-dim); border: 1px solid rgba(217,182,74,0.35); padding: 16px; border-radius: 10px; margin-bottom: 20px;">
@@ -188,105 +162,34 @@
 <script>
     const f = n => n >= 1e6 ? '₦' + (n/1e6).toFixed(2) + 'm' : n >= 1e3 ? '₦' + (n/1e3).toFixed(2) + 'k' : '₦' + n.toFixed(2);
     const reps = [
-        {n:"Bolu", tc:1, tr:33600, mt:22e6, ma:5708600, mp:"25.95%", mc:70, mu:509, ly:73624457, lp:"36.81%", lt:200e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"5", tc_closed:5, cv:"0.00%"},
-        {n:"Mary", tc:5, tr:682350, mt:30e6, ma:15620800, mp:"52.07%", mc:166, mu:1349, ly:128070265, lp:"42.69%", lt:300e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"4", tc_closed:4, cv:"0.00%"},
-        {n:"Jaya", tc:0, tr:0, mt:15e6, ma:3330600, mp:"22.20%", mc:62, mu:438, ly:34106740, lp:"22.74%", lt:150e6, fbl:"120 Leads", fbc:"12", igl:"183 Leads", igc:"47", tc_closed:59, cv:"19.47%"},
-        {n:"Lewa", tc:1, tr:70000, mt:10e6, ma:4283350, mp:"42.83%", mc:59, mu:453, ly:35647350, lp:"35.65%", lt:100e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"},
-        {n:"Susan", tc:0, tr:0, mt:10e6, ma:2805911, mp:"28.06%", mc:41, mu:240, ly:34293794, lp:"34.29%", lt:100e6, fbl:"- Leads", fbc:"1", igl:"- Leads", igc:"30", tc_closed:31, cv:"0.00%"},
-        {n:"Rachel", tc:0, tr:0, mt:15e6, ma:4555800, mp:"30.37%", mc:80, mu:475, ly:40025730, lp:"40.03%", lt:100e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"},
-        {n:"Divine", tc:0, tr:0, mt:10e6, ma:2262400, mp:"22.62%", mc:47, mu:308, ly:27349000, lp:"27.35%", lt:100e6, fbl:"19 Leads", fbc:"8", igl:"217 Leads", igc:"36", tc_closed:44, cv:"18.64%"},
-        {n:"Fidelia", tc:0, tr:0, mt:5e6, ma:1538600, mp:"30.77%", mc:23, mu:121, ly:4740200, lp:"9.48%", lt:50e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"},
-        {n:"Chioma", tc:3, tr:122600, mt:5e6, ma:3247800, mp:"64.96%", mc:77, mu:491, ly:3247800, lp:"6.50%", lt:50e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"}
+        {n:"Bolu", tc:1, tr:33600, mt:22e6, ma:5708600, mp:"25.95%", mc:70, mu:509, ly:73624457, lp:"36.81%", lt:200e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"5", tc_closed:5, cv:"0.00%"}, {n:"Mary", tc:5, tr:682350, mt:30e6, ma:15620800, mp:"52.07%", mc:166, mu:1349, ly:128070265, lp:"42.69%", lt:300e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"4", tc_closed:4, cv:"0.00%"}, {n:"Jaya", tc:0, tr:0, mt:15e6, ma:3330600, mp:"22.20%", mc:62, mu:438, ly:34106740, lp:"22.74%", lt:150e6, fbl:"120 Leads", fbc:"12", igl:"183 Leads", igc:"47", tc_closed:59, cv:"19.47%"},
+        {n:"Lewa", tc:1, tr:70000, mt:10e6, ma:4283350, mp:"42.83%", mc:59, mu:453, ly:35647350, lp:"35.65%", lt:100e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"}, {n:"Susan", tc:0, tr:0, mt:10e6, ma:2805911, mp:"28.06%", mc:41, mu:240, ly:34293794, lp:"34.29%", lt:100e6, fbl:"- Leads", fbc:"1", igl:"- Leads", igc:"30", tc_closed:31, cv:"0.00%"}, {n:"Rachel", tc:0, tr:0, mt:15e6, ma:4555800, mp:"30.37%", mc:80, mu:475, ly:40025730, lp:"40.03%", lt:100e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"},
+        {n:"Divine", tc:0, tr:0, mt:10e6, ma:2262400, mp:"22.62%", mc:47, mu:308, ly:27349000, lp:"27.35%", lt:100e6, fbl:"19 Leads", fbc:"8", igl:"217 Leads", igc:"36", tc_closed:44, cv:"18.64%"}, {n:"Fidelia", tc:0, tr:0, mt:5e6, ma:1538600, mp:"30.77%", mc:23, mu:121, ly:4740200, lp:"9.48%", lt:50e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"}, {n:"Chioma", tc:3, tr:122600, mt:5e6, ma:3247800, mp:"64.96%", mc:77, mu:491, ly:3247800, lp:"6.50%", lt:50e6, fbl:"- Leads", fbc:"0", igl:"- Leads", igc:"0", tc_closed:0, cv:"0.00%"}
     ];
     const adData = [
-        ["January", 6659444, 200000, 1870917.99, 8730361.99, 23156092, 14425730.01, "165.24%"],
-        ["February", 4860000, 500000, 1608298.88, 6968298.88, 19699950, 12731651.12, "182.71%"],
-        ["March", 4138700, 0, 1639893.55, 5778593.55, 19396300, 13617706.45, "235.66%"],
-        ["April", 3030000, 985000, 1482683.98, 5497683.98, 16291450, 10793766.02, "196.33%"],
-        ["May", 1890900, 3700000, 1162229.50, 6753129.50, 16181500, 9428370.50, "139.61%"],
-        ["June", 4114701, 1405000, 2051206.38, 7570907.38, 26378956, 18808048.62, "248.43%"],
-        ["July", 4384000, 150000, 1451500.64, 5985500.64, 19708653, 13723152.36, "229.27%"],
-        ["August", 2418000, 180000, 1287000.00, 3885000.00, 15468400, 11583400.00, "298.16%"],
-        ["September", 0, 0, 0, 0, 0, 0, "0.00%"], ["October", 0, 0, 0, 0, 0, 0, "0.00%"],
-        ["November", 0, 0, 0, 0, 0, 0, "0.00%"], ["December", 0, 0, 0, 0, 0, 0, "0.00%"],
+        ["January", 6659444, 200000, 1870917.99, 8730361.99, 23156092, 14425730.01, "165.24%"], ["February", 4860000, 500000, 1608298.88, 6968298.88, 19699950, 12731651.12, "182.71%"], ["March", 4138700, 0, 1639893.55, 5778593.55, 19396300, 13617706.45, "235.66%"],
+        ["April", 3030000, 985000, 1482683.98, 5497683.98, 16291450, 10793766.02, "196.33%"], ["May", 1890900, 3700000, 1162229.50, 6753129.50, 16181500, 9428370.50, "139.61%"], ["June", 4114701, 1405000, 2051206.38, 7570907.38, 26378956, 18808048.62, "248.43%"],
+        ["July", 4384000, 150000, 1451500.64, 5985500.64, 19708653, 13723152.36, "229.27%"], ["August", 2418000, 180000, 1287000.00, 3885000.00, 15468400, 11583400.00, "298.16%"],
+        ["September", 0, 0, 0, 0, 0, 0, "0.00%"], ["October", 0, 0, 0, 0, 0, 0, "0.00%"], ["November", 0, 0, 0, 0, 0, 0, "0.00%"], ["December", 0, 0, 0, 0, 0, 0, "0.00%"],
         ["TOTAL YTD", 31495745, 7120000, 12553730.93, 51169475.93, 156281301, 105111825.07, "205.40%"]
     ];
     let t1="", t2="", t3="", t4="", t5="", tAd="";
-    reps.forEach(r => {
-        t1 += `<tr><td class="wht">${r.n}</td><td class="grn">${r.tc} Cust / ${f(r.tr)}</td><td>-</td></tr>`;
-        t2 += `<tr><td class="wht">${r.n}</td><td>${f(r.mt)}</td><td class="grn">${f(r.ma)}</td><td class="${parseFloat(r.mp)>=50?'grn':'red'}">${r.mp}</td></tr>`;
-        t3 += `<tr><td class="wht">${r.n}</td><td class="grn">${f(r.ma)}</td><td>${r.mc} Cust</td><td>${r.mu} Units</td></tr>`;
-        t4 += `<tr><td class="wht">${r.n}</td><td class="grn">${f(r.ly)}</td><td class="${parseFloat(r.lp)>=50?'grn':'red'}">${r.lp}</td><td>${f(r.lt)}</td></tr>`;
-        t5 += `<tr><td class="wht">${r.n}</td><td>${r.fbl} (${r.fbc})</td><td>${r.igl} (${r.igc})</td><td class="${parseFloat(r.cv)>0?'grn':'red'}">${r.cv}</td><td class="grn">${r.tc_closed} Cust</td></tr>`;
-    });
-    adData.forEach((a, i) => {
-        const isTot = i === adData.length - 1;
-        tAd += `<tr style="${isTot ? 'font-weight:bold; background:var(--surface-2);' : ''}"><td class="wht">${a[0]}</td><td class="red">${f(a[1])}</td><td class="red">${f(a[2])}</td><td class="red">${f(a[3])}</td><td class="red">${f(a[4])}</td><td class="grn">${f(a[5])}</td><td class="grn">${f(a[6])}</td><td class="grn">${a[7]}</td></tr>`;
-    });
+    reps.forEach(r => { t1 += `<tr><td class="wht">${r.n}</td><td class="grn">${r.tc} Cust / ${f(r.tr)}</td><td>-</td></tr>`; t2 += `<tr><td class="wht">${r.n}</td><td>${f(r.mt)}</td><td class="grn">${f(r.ma)}</td><td class="${parseFloat(r.mp)>=50?'grn':'red'}">${r.mp}</td></tr>`; t3 += `<tr><td class="wht">${r.n}</td><td class="grn">${f(r.ma)}</td><td>${r.mc} Cust</td><td>${r.mu} Units</td></tr>`; t4 += `<tr><td class="wht">${r.n}</td><td class="grn">${f(r.ly)}</td><td class="${parseFloat(r.lp)>=50?'grn':'red'}">${r.lp}</td><td>${f(r.lt)}</td></tr>`; t5 += `<tr><td class="wht">${r.n}</td><td>${r.fbl} (${r.fbc})</td><td>${r.igl} (${r.igc})</td><td class="${parseFloat(r.cv)>0?'grn':'red'}">${r.cv}</td><td class="grn">${r.tc_closed} Cust</td></tr>`; });
+    adData.forEach((a, i) => { const isTot = i === adData.length - 1; tAd += `<tr style="${isTot ? 'font-weight:bold; background:var(--surface-2);' : ''}"><td class="wht">${a[0]}</td><td class="red">${f(a[1])}</td><td class="red">${f(a[2])}</td><td class="red">${f(a[3])}</td><td class="red">${f(a[4])}</td><td class="grn">${f(a[5])}</td><td class="grn">${f(a[6])}</td><td class="grn">${a[7]}</td></tr>`; });
     t1 += `<tr style="font-weight:bold; background:var(--surface-2);"><td class="wht">TOTAL TODAY</td><td class="grn">10 Cust / ₦908.55k</td><td class="grn">65 Units</td></tr>`;
-    document.getElementById('today-table').innerHTML = t1;
-    document.getElementById('month-target-table').innerHTML = t2;
-    document.getElementById('month-run-table').innerHTML = t3;
-    document.getElementById('lifetime-table').innerHTML = t4;
-    document.getElementById('funnel-table').innerHTML = t5;
-    document.getElementById('ad-focus-table').innerHTML = tAd;
-    function val() {
-        if(document.getElementById('passkey').value === 'sng009') {
-            document.getElementById('lock-screen').style.display = 'none';
-            document.getElementById('redirect-modal').style.display = 'flex';
-        } else { document.getElementById('err').style.display = 'block'; }
-    }
+    document.getElementById('today-table').innerHTML = t1; document.getElementById('month-target-table').innerHTML = t2; document.getElementById('month-run-table').innerHTML = t3;
+    document.getElementById('lifetime-table').innerHTML = t4; document.getElementById('funnel-table').innerHTML = t5; document.getElementById('ad-focus-table').innerHTML = tAd;
+    function val() { if(document.getElementById('passkey').value === 'sng009') { document.getElementById('lock-screen').style.display = 'none'; document.getElementById('redirect-modal').style.display = 'flex'; } else { document.getElementById('err').style.display = 'block'; } }
     function closeM() { document.getElementById('redirect-modal').style.display = 'none'; }
-
     // --- Top 3 Sales Rep Pop-in Controller ---
     const topThree = [...reps].sort((a,b) => b.ly - a.ly).slice(0, 3);
     const ranks = ["3RD PLACE 🥉", "2ND PLACE 🥈", "1ST PLACE 🏆"];
     const displayOrder = [topThree[2], topThree[1], topThree[0]]; // 3rd, 2nd, 1st
-
-    let currentIdx = 0;
-    let popInterval = null;
-    let isScrolling = false;
-
-    function showPop(index) {
-        const popEl = document.getElementById('top-reps-pop');
-        const rankEl = document.getElementById('pop-rank');
-        const nameEl = document.getElementById('pop-name');
-        const metricsEl = document.getElementById('pop-metrics');
-
-        const rep = displayOrder[index];
-        rankEl.textContent = ranks[index];
-        nameEl.textContent = rep.n;
-        metricsEl.textContent = `Revenue: ${f(rep.ly)} | Closed: ${rep.mc} Cust`;
-
-        popEl.classList.add('active');
-
-        setTimeout(() => {
-            popEl.classList.remove('active');
-        }, 4300); // Fades out slightly before switching at 5 seconds
-    }
-
-    function startTopRepsLoop() {
-        if (popInterval) return;
-        showPop(currentIdx);
-        popInterval = setInterval(() => {
-            currentIdx = (currentIdx + 1) % 3;
-            showPop(currentIdx);
-        }, 5000);
-    }
-
-    function stopTopRepsLoop() {
-        clearInterval(popInterval);
-        popInterval = null;
-        document.getElementById('top-reps-pop').classList.remove('active');
-    }
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 150) {
-            startTopRepsLoop();
-        } else {
-            stopTopRepsLoop();
-        }
-    });
+    let currentIdx = 0, popInterval = null, isScrolling = false;
+    function showPop(index) { const popEl = document.getElementById('top-reps-pop'); const rankEl = document.getElementById('pop-rank'); const nameEl = document.getElementById('pop-name'); const metricsEl = document.getElementById('pop-metrics'); const rep = displayOrder[index]; rankEl.textContent = ranks[index]; nameEl.textContent = rep.n; metricsEl.textContent = `Revenue: ${f(rep.ly)} | Closed: ${rep.mc} Cust`; popEl.classList.add('active'); setTimeout(() => { popEl.classList.remove('active'); }, 4300); } // Fades out slightly before switching at 5 seconds
+    function startTopRepsLoop() { if (popInterval) return; showPop(currentIdx); popInterval = setInterval(() => { currentIdx = (currentIdx + 1) % 3; showPop(currentIdx); }, 5000); }
+    function stopTopRepsLoop() { clearInterval(popInterval); popInterval = null; document.getElementById('top-reps-pop').classList.remove('active'); }
+    window.addEventListener('scroll', () => { if (window.scrollY > 150) { startTopRepsLoop(); } else { stopTopRepsLoop(); } });
 </script>
 </body>
 </html>
