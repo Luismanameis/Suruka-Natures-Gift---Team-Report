@@ -55,7 +55,27 @@
         th { background: var(--surface-2); color: var(--muted); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600; font-family: var(--font-body); }
         tr:last-child td { border-bottom: none; } tr:hover td { background: rgba(217,182,74,0.03); }
         .flex-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(620px, 1fr)); gap: 18px; }
-        @media (max-width: 800px) { body { padding-top: 205px; } .sticky-container { grid-template-columns: repeat(2, 1fr); } .flex-grid { grid-template-columns: 1fr; } }
+
+        /* Floating Top Sales Performers Widget */
+        #top-reps-pop {
+            position: fixed; bottom: 22px; right: 22px;
+            background: rgba(15, 19, 30, 0.95);
+            border: 1px solid var(--gold); border-left: 4px solid var(--gold);
+            border-radius: 10px; padding: 13px 18px;
+            box-shadow: 0 20px 40px -8px rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px); z-index: 2000;
+            display: flex; align-items: center; gap: 13px;
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+        }
+        #top-reps-pop.active { opacity: 1; transform: translateY(0); }
+        .pop-badge { background: var(--gold); color: #0b0a06; font-family: var(--font-display); font-weight: 700; font-size: 10.5px; padding: 5px 9px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
+        .pop-info { text-align: left; }
+        .pop-title { color: var(--white); font-family: var(--font-display); font-weight: 700; font-size: 13.5px; }
+        .pop-sub { color: var(--muted); font-size: 11px; margin-top: 3px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+        @media (max-width: 800px) { body { padding-top: 205px; } .sticky-container { grid-template-columns: repeat(2, 1fr); } .flex-grid { grid-template-columns: 1fr; } #top-reps-pop { bottom: 10px; right: 10px; left: 10px; } }
     </style>
 </head>
 <body>
@@ -70,6 +90,16 @@
     </div>
     <div class="ticker-wrap"><div class="ticker"><span>📈 August Gross Revenue: ₦43.64m</span><span>⚡ Total Pipeline Customers: 627</span><span>🔄 Return Cohort Rate: 53.91%</span><span>🎯 Cost Per New Customer: ₦8,454.55</span><span>📊 CS Today: 0 Contacted / 0.00% Satisfied</span><span>📈 August Gross Revenue: ₦43.64m</span><span>⚡ Total Pipeline Customers: 627</span><span>🔄 Return Cohort Rate: 53.91%</span></div></div>
 </div>
+
+<!-- Floating Top Performer Pop-up -->
+<div id="top-reps-pop">
+    <div class="pop-badge" id="pop-rank">3RD PLACE</div>
+    <div class="pop-info">
+        <div class="pop-title" id="pop-name">Rep Name</div>
+        <div class="pop-sub" id="pop-metrics">Revenue: ₦0.00 | Customers: 0</div>
+    </div>
+</div>
+
 <div class="container">
     <h2>2026 Operations & Financial Dashboard</h2>
     <div style="background: var(--gold-dim); border: 1px solid rgba(217,182,74,0.35); padding: 16px; border-radius: 10px; margin-bottom: 20px;">
@@ -207,6 +237,56 @@
         } else { document.getElementById('err').style.display = 'block'; }
     }
     function closeM() { document.getElementById('redirect-modal').style.display = 'none'; }
+
+    // --- Top 3 Sales Rep Pop-in Controller ---
+    const topThree = [...reps].sort((a,b) => b.ly - a.ly).slice(0, 3);
+    const ranks = ["3RD PLACE 🥉", "2ND PLACE 🥈", "1ST PLACE 🏆"];
+    const displayOrder = [topThree[2], topThree[1], topThree[0]]; // 3rd, 2nd, 1st
+
+    let currentIdx = 0;
+    let popInterval = null;
+    let isScrolling = false;
+
+    function showPop(index) {
+        const popEl = document.getElementById('top-reps-pop');
+        const rankEl = document.getElementById('pop-rank');
+        const nameEl = document.getElementById('pop-name');
+        const metricsEl = document.getElementById('pop-metrics');
+
+        const rep = displayOrder[index];
+        rankEl.textContent = ranks[index];
+        nameEl.textContent = rep.n;
+        metricsEl.textContent = `Revenue: ${f(rep.ly)} | Closed: ${rep.mc} Cust`;
+
+        popEl.classList.add('active');
+
+        setTimeout(() => {
+            popEl.classList.remove('active');
+        }, 4300); // Fades out slightly before switching at 5 seconds
+    }
+
+    function startTopRepsLoop() {
+        if (popInterval) return;
+        showPop(currentIdx);
+        popInterval = setInterval(() => {
+            currentIdx = (currentIdx + 1) % 3;
+            showPop(currentIdx);
+        }, 5000);
+    }
+
+    function stopTopRepsLoop() {
+        clearInterval(popInterval);
+        popInterval = null;
+        document.getElementById('top-reps-pop').classList.remove('active');
+    }
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 150) {
+            startTopRepsLoop();
+        } else {
+            stopTopRepsLoop();
+        }
+    });
 </script>
 </body>
 </html>
