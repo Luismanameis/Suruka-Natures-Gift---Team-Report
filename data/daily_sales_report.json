@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-27T21:20:33.125Z",
+  "updated_at": "2026-08-27T21:26:00.861Z",
   "total_rows_read": 173,
   "report": [
     {
@@ -19,8 +19,8 @@
         {
           "ZONES": "LAGOS",
           "2026 TARGET": "₦500,000,000.00",
-          "ACHIEVED": "₦198,186,112.00",
-          "% ACHIEVED": "39.64%"
+          "ACHIEVED": "₦0.00",
+          "% ACHIEVED": "0.00%"
         },
         {
           "ZONES": "BENIN",
